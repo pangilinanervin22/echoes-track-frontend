@@ -5,7 +5,7 @@ import "./global.scss";
 import RootLayout from "./pages";
 import Scan from "./pages/Scan/Scan";
 import Search from "./pages/Search/Search";
-import Admin from "./pages/admin/Admin";
+import Admin from "./pages/Admin/Admin";
 
 const router = createBrowserRouter([
   {
