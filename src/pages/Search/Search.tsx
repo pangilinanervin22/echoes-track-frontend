@@ -4,8 +4,11 @@ import style from './Search.module.scss';
 export default function Search() {
 	return (
 		<main className={style.main_wrapper}>
-			<h1>Echoes Tracker</h1>
-			<p>Insert Tagline Here </p>
+			<h1>ECHOES: Search</h1>
+			<p className={style.tagline}>
+				Simplifying Attendance, One Scan at a Time
+			</p>
+
 			<Outlet />
 		</main>
 	);
