@@ -15,6 +15,7 @@ $fs-xl: clamp(2rem, 4vw, 3.5rem);
 // body fonts
 $ff-body: 'Geist', sans-serif;
 $ff-body-bold: 'Geist-Bold', sans-serif;
+$ff-body-light: 'Geist-Light', sans-serif;
 
 // heading fonts
 $ff-heading: 'Satoshi', sans-serif;
@@ -32,15 +33,18 @@ $ff-heading-italic: 'Satoshi-Italic', sans-serif;
 	align-items: center;
 	justify-content: center;
 	// background-color: $foreground;
+	background-color: rgb(24, 23, 23);
 
 	& > h1 {
+		color: rgb(223, 223, 223);
 		font-family: $ff-heading-black;
 		font-size: $fs-xl;
 		text-transform: uppercase;
 	}
 	& > p,
 	a {
-		font-family: $ff-body;
+		color: rgb(223, 223, 223);
+		font-family: $ff-body-light;
 		font-size: $fs-sm;
 	}
 }
