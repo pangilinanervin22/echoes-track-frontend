@@ -47,6 +47,5 @@ h6 {
 /* prevent orphans in supported browsers */
 p,
 li {
-	max-width: var(--p-max-width, 65ch);
 	text-wrap: pretty;
 }

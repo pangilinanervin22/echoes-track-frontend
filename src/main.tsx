@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 // import './global.scss';
+
 import RootLayout from './pages';
 import Scan from './pages/Scan/Scan';
 import Search from './pages/Search/Search';
@@ -9,7 +10,7 @@ import SearchResult from './pages/Search/SearchResult/SearchResult';
 import Admin from './pages/Admin/Admin';
 
 import './assets/reset.scss';
-
+import './assets/font.scss';
 const router = createBrowserRouter([
 	{
 		path: '/',

@@ -1,0 +1,46 @@
+// $clr-light: #fdffc4;
+// $clr-dark: #00332a;
+// $clr-primary: #dbffa2;
+// $clr-secondary: #c3fcf2;
+// $clr-accent: #ff7750;
+
+$fs-xs: clamp(0.75rem, 1.5vw, 1rem);
+$fs-sm: clamp(1rem, 2vw, 1.5rem);
+$fs-m: clamp(1.5rem, 3vw, 2.5rem);
+$fs-xl: clamp(2rem, 4vw, 3.5rem);
+
+// $foreground: $clr-dark;
+// $background: $clr-light;
+
+// body fonts
+$ff-body: 'Geist', sans-serif;
+$ff-body-bold: 'Geist-Bold', sans-serif;
+
+// heading fonts
+$ff-heading: 'Satoshi', sans-serif;
+$ff-heading-bold: 'Satoshi-Bold', sans-serif;
+$ff-heading-black: 'Satoshi-Black', sans-serif;
+$ff-heading-italic: 'Satoshi-Italic', sans-serif;
+
+.main_wrapper {
+	min-height: 100dvh;
+	min-width: 100dvw;
+
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	// background-color: $foreground;
+
+	& > h1 {
+		font-family: $ff-heading-black;
+		font-size: $fs-xl;
+		text-transform: uppercase;
+	}
+	& > p,
+	a {
+		font-family: $ff-body;
+		font-size: $fs-sm;
+	}
+}

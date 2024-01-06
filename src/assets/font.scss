@@ -1,0 +1,39 @@
+$satoshi-path: './fonts/Satoshi';
+$Geist-path: './fonts/Geist';
+
+@font-face {
+	font-family: 'Satoshi';
+	src: url($satoshi-path + '/Satoshi-Regular.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Satoshi-Bold';
+	src: url($satoshi-path + '/Satoshi-Bold.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Satoshi-Italic';
+	src: url($satoshi-path + '/Satoshi-Italic.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Satoshi-Black';
+	src: url($satoshi-path + '/Satoshi-Black.woff2') format('woff2');
+}
+
+// Geist
+
+@font-face {
+	font-family: 'Geist';
+	src: url($Geist-path + '/Geist-Regular.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Geist-Bold';
+	src: url($Geist-path + '/Geist-Bold.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Geist-Black';
+	src: url($Geist-path + '/Geist-Black.woff2') format('woff2');
+}
