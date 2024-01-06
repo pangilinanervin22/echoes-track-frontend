@@ -7,6 +7,7 @@ import RootLayout from './pages';
 import Scan from './pages/Scan/Scan';
 import Search from './pages/Search/Search';
 import SearchResult from './pages/Search/SearchResult/SearchResult';
+import SearchHome from './pages/Search/SearchHome/SearchHome';
 import Admin from './pages/Admin/Admin';
 
 import './assets/reset.scss';
@@ -24,7 +25,10 @@ const router = createBrowserRouter([
 			{
 				path: '/search',
 				element: <Search />,
-				children: [{ path: 'result', element: <SearchResult /> }],
+				children: [
+					{ path: 'home', element: <SearchHome /> },
+					{ path: 'result', element: <SearchResult /> },
+				],
 			},
 			{
 				path: '/admin',
