@@ -1,11 +1,12 @@
 import style from './SearchHome.module.scss';
 import { useState } from 'react';
+import SearchBar from '../../../Components/Search/SearchBar/SearchBar';
 
 export default function SearchHome() {
 	const [isActive, setIsActive] = useState(true);
 
 	return (
-		<>
+		<div className="main_wrapper">
 			<h1>ECHOES: Search</h1>
 			<p className={style.tagline}>
 				Simplifying Attendance, One Scan at a Time
@@ -29,6 +30,8 @@ export default function SearchHome() {
 					</div>
 				</button>
 			</div>
-		</>
+
+			<SearchBar isStudent={isActive} />
+		</div>
 	);
 }

@@ -76,8 +76,8 @@ button.teacher_active {
 	transition: all 0.5s ease-in-out;
 
 	background: #a8ff78; /* fallback for old browsers */
-	background: -webkit-linear-gradient(to right, #78ffd6, #a8ff78);
-	background: linear-gradient(to right, #78ffd6, #a8ff78);
+	background: linear-gradient(to bottom, #e3fb09, #5df70b);
+	background: linear-gradient(to bottom, #e3fb09, #5df70b);
 	div {
 		transition: all 0.5s ease-in-out;
 
@@ -91,7 +91,8 @@ button.teacher_active {
 
 			font-size: var(--fs-sm);
 			font-family: var(--ff-body);
-			background: linear-gradient(to right, #78ffd6, #a8ff78);
+			background: linear-gradient(to bottom, #e3fb09, #5df70b);
+			background: linear-gradient(to bottom, #e3fb09, #5df70b);
 			-webkit-text-fill-color: transparent;
 			-webkit-background-clip: text;
 		}
