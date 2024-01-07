@@ -1,6 +1,10 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+	createBrowserRouter,
+	RouterProvider,
+	Navigate,
+} from 'react-router-dom';
 // import './global.scss';
 
 import RootLayout from './pages';
@@ -26,6 +30,7 @@ const router = createBrowserRouter([
 				path: '/search',
 				element: <Search />,
 				children: [
+					{ path: '', element: <Navigate to="home" replace /> },
 					{ path: 'home', element: <SearchHome /> },
 					{ path: 'result', element: <SearchResult /> },
 				],
