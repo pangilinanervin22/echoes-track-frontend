@@ -23,8 +23,6 @@ p.tagline {
 	border-radius: 50px;
 	background-color: var(--clr-accent);
 	button {
-		transition: all 0.5s ease-in-out;
-
 		width: clamp(100px, 10vw, 150px);
 		height: clamp(30px, 3vw, 50px);
 		outline: none;
@@ -37,7 +35,6 @@ p.tagline {
 		position: relative;
 
 		div {
-			transition: all 0.5s ease-in-out;
 			border-radius: 100px;
 			width: 100%;
 			height: 100%;
@@ -46,7 +43,6 @@ p.tagline {
 			align-items: center;
 			justify-content: center;
 			p {
-				transition: all 0.5s ease-in-out;
 				font-size: var(--fs-sm);
 				font-family: var(--ff-body);
 			}
