@@ -1,2 +1,103 @@
-.poop {
+p.tagline {
+	color: var(--clr-secondary);
+	text-align: center;
+	font-family: var(--ff-body-light);
+}
+
+.search {
+	margin-top: 20px;
+}
+
+.button_wrapper {
+	padding: clamp(8px, 0.5vw, 0px) clamp(10px, 1vw, 15px);
+	margin-top: 10px;
+	font-size: var(--fs-sm);
+	font-family: var(--ff-body);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	column-gap: clamp(10px, 0.5vw, 15px);
+
+	// border: solid 2px var(--clr-primary);
+	border-radius: 50px;
+	background-color: var(--clr-accent);
+	button {
+		transition: all 0.5s ease-in-out;
+
+		width: clamp(100px, 10vw, 150px);
+		height: clamp(30px, 3vw, 50px);
+		outline: none;
+		padding: 2px;
+		border-radius: 50px;
+
+		background-color: transparent;
+		border: none;
+		color: var(--clr-primary);
+		position: relative;
+
+		div {
+			transition: all 0.5s ease-in-out;
+			border-radius: 100px;
+			width: 100%;
+			height: 100%;
+			background-color: transparent;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			p {
+				transition: all 0.5s ease-in-out;
+				font-size: var(--fs-sm);
+				font-family: var(--ff-body);
+			}
+		}
+	}
+
+	button:hover {
+		cursor: pointer;
+	}
+}
+
+button.student_active {
+	transition: all 0.5s ease-in-out;
+
+	background: #7f00ff; /* fallback for old browsers */
+	background: -webkit-linear-gradient(to bottom, #e100ff, #7f00ff);
+	background: linear-gradient(to bottom, #e100ff, #7f00ff);
+	div {
+		transition: all 0.5s ease-in-out;
+		background-color: var(--clr-dark);
+		p {
+			transition: all 0.5s ease-in-out;
+
+			background: linear-gradient(to bottom, #e100ff, #7f00ff);
+			-webkit-text-fill-color: transparent;
+			-webkit-background-clip: text;
+		}
+	}
+}
+button.teacher_active {
+	transition: all 0.5s ease-in-out;
+
+	background: #a8ff78; /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #78ffd6, #a8ff78);
+	background: linear-gradient(to right, #78ffd6, #a8ff78);
+	div {
+		transition: all 0.5s ease-in-out;
+
+		background-color: var(--clr-dark);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		p {
+			transition: all 0.5s ease-in-out;
+
+			font-size: var(--fs-sm);
+			font-family: var(--ff-body);
+			background: linear-gradient(to right, #78ffd6, #a8ff78);
+			-webkit-text-fill-color: transparent;
+			-webkit-background-clip: text;
+		}
+	}
 }

@@ -1,9 +1,3 @@
-// $clr-light: #fdffc4;
-// $clr-dark: #00332a;
-// $clr-primary: #dbffa2;
-// $clr-secondary: #c3fcf2;
-// $clr-accent: #ff7750;
-
 // $foreground: $clr-dark;
 // $background: $clr-light;
 
@@ -12,6 +6,12 @@
 // heading fonts
 
 .main_wrapper {
+	// --clr-light: #dfdfdf;
+	--clr-dark: #181717;
+	--clr-primary: #e0e0e0;
+	--clr-secondary: #bdbdbd;
+	--clr-accent: #2c2b2c;
+
 	--fs-xs: clamp(0.75rem, 1.5vw, 1rem);
 	--fs-sm: clamp(1rem, 2vw, 1.5rem);
 	--fs-m: clamp(1.5rem, 3vw, 2.5rem);
@@ -37,23 +37,19 @@
 	align-items: center;
 	justify-content: center;
 
-	background-color: rgb(24, 23, 23);
+	background-color: var(--clr-dark);
 
 	& > h1 {
-		color: rgb(223, 223, 223);
-		font-family: var(--ff-heading);
+		color: var(--clr-primary);
+		font-family: var(--ff-heading-light);
 		font-size: var(--fs-xxl);
 		text-transform: capitalize;
 		text-align: justify;
 	}
 	& > p,
 	a {
-		color: rgb(223, 223, 223);
+		color: var(--clr-primary);
 		font-family: var(--ff-body);
 		font-size: var(--fs-sm);
 	}
-}
-p.tagline {
-	color: rgb(177, 176, 176);
-	text-align: center;
 }
