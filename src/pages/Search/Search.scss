@@ -36,20 +36,21 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	row-gap: clamp(100px, 20vw, 200px);
 
 	background-color: var(--clr-dark);
 
-	& > h1 {
-		color: var(--clr-primary);
-		font-family: var(--ff-heading-light);
-		font-size: var(--fs-xxl);
-		text-transform: capitalize;
-		text-align: justify;
-	}
-	& > p,
-	a {
+	& > *,
+	& > * > * {
 		color: var(--clr-primary);
 		font-family: var(--ff-body);
 		font-size: var(--fs-sm);
+	}
+
+	& > h1,
+	& > * > h1 {
+		color: var(--clr-primary);
+		font-family: var(--ff-heading-light);
+		font-size: var(--fs-xxl);
 	}
 }

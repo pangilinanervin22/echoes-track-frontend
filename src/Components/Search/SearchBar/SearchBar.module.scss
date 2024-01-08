@@ -15,6 +15,8 @@
 		background-color: transparent;
 		border: 1px solid var(--clr-primary);
 		border-right: none;
+
+		width: clamp(220px, 15vw, 400px);
 	}
 
 	input[type='text']:focus {
@@ -23,6 +25,7 @@
 
 	input[type='text']::placeholder {
 		color: var(--clr-secondary);
+		font-size: var(--fs-xs);
 	}
 
 	input[type='submit'] {

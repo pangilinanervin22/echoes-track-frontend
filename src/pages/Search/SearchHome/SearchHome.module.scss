@@ -4,8 +4,21 @@ p.tagline {
 	font-family: var(--ff-body-light);
 }
 
-.search {
-	margin-top: 20px;
+.heading_wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	text-transform: capitalize;
+	text-align: justify;
+}
+
+.switch_wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin-top: 10px;
 }
 
 .button_wrapper {

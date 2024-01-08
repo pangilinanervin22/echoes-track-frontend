@@ -32,7 +32,7 @@ export default function SearchBar({ isStudent }: SearchBarProps) {
 				value={search}
 				onChange={handleChange}
 			/>
-			<input type="submit" value="Submit" />
+			<input type="submit" value="Search" />
 		</form>
 	);
 }

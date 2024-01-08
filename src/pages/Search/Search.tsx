@@ -3,7 +3,7 @@ import './Search.scss';
 
 export default function Search() {
 	return (
-		<main className="main_wrapper">
+		<main>
 			<Outlet />
 		</main>
 	);
