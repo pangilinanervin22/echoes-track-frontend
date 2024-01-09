@@ -1,9 +1,10 @@
-import style from './Search.module.scss';
+import { Outlet } from 'react-router-dom';
+import './Search.scss';
 
 export default function Search() {
-    return (
-        <main className={style.container}>
-            <h1 className={style.sample}>Search</h1>
-        </main>
-    )
+	return (
+		<main>
+			<Outlet />
+		</main>
+	);
 }
