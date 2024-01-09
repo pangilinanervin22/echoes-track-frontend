@@ -27,6 +27,7 @@ export default function SearchBar({ isStudent }: SearchBarProps) {
 	return (
 		<form className={style.form_wrapper} onSubmit={handleSubmit}>
 			<input
+				autoFocus
 				type="text"
 				placeholder="Insert ID/Name of The Student"
 				value={search}
