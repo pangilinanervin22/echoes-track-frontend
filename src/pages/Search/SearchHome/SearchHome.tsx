@@ -6,7 +6,7 @@ export default function SearchHome() {
 	const [isActive, setIsActive] = useState(true);
 
 	return (
-		<div className="main_wrapper">
+		<div className="main_wrapper home">
 			{/* heading  */}
 			<div className="heading_wrapper">
 				<h1>ECHOES: Search</h1>

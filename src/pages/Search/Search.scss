@@ -29,6 +29,7 @@
 	--ff-body-light: 'Geist-Thin', sans-serif;
 
 	min-height: 100dvh;
+	height: 100dvh;
 	min-width: 100dvw;
 
 	padding: 10px;
@@ -36,7 +37,6 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	row-gap: clamp(100px, 20vw, 200px);
 
 	background-color: var(--clr-dark);
 
@@ -53,4 +53,8 @@
 		font-family: var(--ff-heading-light);
 		font-size: var(--fs-xxl);
 	}
+}
+
+.main_wrapper.home {
+	row-gap: clamp(100px, 20vw, 200px);
 }
