@@ -1,5 +1,4 @@
 import { useSearchParams } from 'react-router-dom';
-import '../Search.scss';
 import style from './SearchResult.module.scss';
 export default function SearchResult() {
 	const [searchParams] = useSearchParams();

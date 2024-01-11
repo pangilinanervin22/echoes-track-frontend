@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import style from './SearchBar.module.scss';
 
 interface SearchBarProps {
-	isStudent: boolean;
+	isStudent?: boolean;
 }
 
 export default function SearchBar({ isStudent }: SearchBarProps) {
@@ -33,7 +33,7 @@ export default function SearchBar({ isStudent }: SearchBarProps) {
 				value={search}
 				onChange={handleChange}
 			/>
-			<input type="submit" value="Search" />
+			<button type="submit">Search</button>
 		</form>
 	);
 }
