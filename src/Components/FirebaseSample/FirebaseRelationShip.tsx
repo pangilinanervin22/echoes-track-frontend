@@ -13,7 +13,7 @@ interface Todo {
     todo: string;
 }
 
-export default function FirebaseSample() {
+export default function FirebaseRelationship() {
     const [userName, setUserName] = useState("");
     const [listUsers, setUsers] = useState<User[]>([]);
     const [todo, setTodo] = useState("");
