@@ -42,9 +42,9 @@ const router = createBrowserRouter([
 				path: '/admin',
 				element: <Admin />,
 				children: [
-					{ path: '*', element: <Navigate to="home" replace /> },
-					{ path: '/rooms', element: <Rooms /> },
-					{ path: '/home', element: <Dashboard /> },
+					{ path: '', element: <Navigate to="dashboard" replace /> },
+					{ path: 'rooms', element: <Rooms /> },
+					{ path: 'dashboard', element: <Dashboard /> },
 				],
 			},
 		],
