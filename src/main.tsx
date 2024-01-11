@@ -12,8 +12,8 @@ import Scan from './pages/Scan/Scan';
 import Search from './pages/Search/Search';
 import SearchResult from './pages/Search/SearchResult/SearchResult';
 import SearchHome from './pages/Search/SearchHome/SearchHome';
-import Dashboard from './pages/admin/Dashboard/Dashboard';
-import Admin from './pages/admin/Admin';
+import Dashboard from './pages/Admin/Dashboard/Dashboard';
+import Admin from './pages/Admin/Admin';
 import './assets/scss/reset.scss';
 import './assets/scss/font.scss';
 import './assets/scss/global.scss';
@@ -42,13 +42,12 @@ const router = createBrowserRouter([
 				path: '/admin',
 				element: <Admin />,
 				children: [
-					{ path: '/rooms', element: <SearchResult /> },
 					{ path: '*', element: <Navigate to="home" replace /> },
+					{ path: '/rooms', element: <SearchResult /> },
 					{ path: '/home', element: <Dashboard /> },
 
 				],
 			},
-
 		],
 	},
 ]);
