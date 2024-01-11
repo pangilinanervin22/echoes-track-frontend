@@ -29,11 +29,11 @@ export default function SearchBar({ isStudent }: SearchBarProps) {
 			<input
 				autoFocus
 				type="text"
-				placeholder="Insert ID/Name of The Student"
+				placeholder="Input the Proctors Name Here"
 				value={search}
 				onChange={handleChange}
 			/>
-			<input type="submit" value="Search" />
+			<button type="submit">Submit</button>
 		</form>
 	);
 }

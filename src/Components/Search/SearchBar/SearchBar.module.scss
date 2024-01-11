@@ -1,0 +1,33 @@
+.form_wrapper {
+	input[type='text'] {
+		font-size: var(--fs-m);
+		background-color: #ccdbea;
+		color: var(--color-primary);
+		border: 3px solid var(--color-primary);
+		border-right: none;
+		padding: 5px 20px;
+		border-radius: 100px 0px 0px 100px;
+	}
+
+	input[type='text']:focus {
+		outline: none;
+	}
+
+	button[type='submit'] {
+		border: none;
+		background-color: var(--color-primary);
+		color: var(--color-accent-2);
+		border-radius: 0px 100px 100px 0px;
+	}
+
+	border-radius: 100px;
+	outline: solid 3px transparent;
+	transition: outline 200ms ease-out;
+
+	&:focus-within {
+		transition: outline 200ms ease-in;
+
+		outline-offset: 5px;
+		outline: solid 3px var(--color-accent-2);
+	}
+}
