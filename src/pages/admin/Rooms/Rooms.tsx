@@ -1,6 +1,8 @@
 
 export default function Rooms() {
     return (
-        <div>Rooms</div>
+        <div>
+            <h1>hello world</h1>
+        </div>
     )
 }
