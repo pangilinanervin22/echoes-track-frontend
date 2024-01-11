@@ -17,7 +17,7 @@ import Admin from './pages/Admin/Admin';
 import './assets/scss/reset.scss';
 import './assets/scss/font.scss';
 import './assets/scss/global.scss';
-
+import Rooms from './pages/Admin/Rooms/Rooms';
 
 const router = createBrowserRouter([
 	{
@@ -43,9 +43,8 @@ const router = createBrowserRouter([
 				element: <Admin />,
 				children: [
 					{ path: '*', element: <Navigate to="home" replace /> },
-					{ path: '/rooms', element: <SearchResult /> },
+					{ path: '/rooms', element: <Rooms /> },
 					{ path: '/home', element: <Dashboard /> },
-
 				],
 			},
 		],
