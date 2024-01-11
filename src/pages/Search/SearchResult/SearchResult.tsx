@@ -7,7 +7,7 @@ export default function SearchResult() {
 	return (
 		<div className="main_wrapper">
 			<h2 className={style.tag}>Results for: "{id}"</h2>
-			<div className={style.card_wrapper}></div>
+			<div className={style.card_wrapper}>test</div>
 		</div>
 	);
 }
