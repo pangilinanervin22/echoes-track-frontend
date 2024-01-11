@@ -17,7 +17,7 @@ import Admin from './pages/Admin/Admin';
 import './assets/scss/reset.scss';
 import './assets/scss/font.scss';
 import './assets/scss/global.scss';
-import Room from './pages/Admin/Rooms/Room';
+import Room from './pages/Admin/Rooms/Rooms';
 import FirebaseSample from './components/FirebaseSample/FirebaseSample';
 
 const router = createBrowserRouter([
