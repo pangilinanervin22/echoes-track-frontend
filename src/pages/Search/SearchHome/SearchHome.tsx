@@ -3,22 +3,20 @@ import SearchBar from '../../../Components/Search/SearchBar/SearchBar';
 
 export default function SearchHome() {
 	return (
-		<div className="main_wrapper">
+		<section className={style.home_container}>
 			{/* heading  */}
-			<div className="heading_wrapper">
-				<h1>ECHOES: Search</h1>
+			<div className={style.title_wrapper}>
+				<h1>
+					ECHOES: <span className={style.accent}> Search</span>
+				</h1>
 				<p className={style.tagline}>
 					Simplifying Attendance, One Scan at a Time
 				</p>
 			</div>
-
-			{/* button switch */}
-			<div className={style.switch_wrapper}>
-				<p>Search by:</p>
-
-				{/* search bar */}
+			{/* search bar */}
+			<div className={style.searchbar_wrapper}>
 				<SearchBar />
 			</div>
-		</div>
+		</section>
 	);
 }

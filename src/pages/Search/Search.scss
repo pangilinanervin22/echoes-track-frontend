@@ -1,0 +1,30 @@
+.main_wrapper {
+	--color-primary: var(--clr-blue-200);
+	--color-secondary: var(--clr-blue-100);
+	--color-background: var(--clr-white);
+	--color-accent: var(--clr-yellow-100);
+	--color-accent-2: var(--clr-yellow-200);
+
+	* {
+		font-family: var(--ff-regular);
+	}
+
+	h1 {
+		font-family: var(--ff-bold);
+		color: var(--color-primary);
+		font-size: var(--fs-xxl);
+	}
+	p {
+		font-size: var(--fs-sm);
+	}
+
+	width: 100dvw;
+	height: 100dvh;
+	min-height: 100dvh;
+	min-width: 100dvw;
+
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	flex-direction: column;
+}
