@@ -1,5 +1,4 @@
 $satoshi-path: './fonts/Satoshi';
-$Geist-path: './fonts/Geist';
 
 // Satoshi
 @font-face {
@@ -25,20 +24,4 @@ $Geist-path: './fonts/Geist';
 @font-face {
 	font-family: 'Satoshi-Light';
 	src: url($satoshi-path + '/Satoshi-Light.woff2') format('woff2');
-}
-
-// Geist
-@font-face {
-	font-family: 'Geist';
-	src: url($Geist-path + '/Geist-Regular.otf') format('opentype');
-}
-
-@font-face {
-	font-family: 'Geist-Bold';
-	src: url($Geist-path + '/Geist-Bold.otf') format('opentype');
-}
-
-@font-face {
-	font-family: 'Geist-Thin';
-	src: url($Geist-path + '/Geist-Thin.otf') format('opentype');
 }

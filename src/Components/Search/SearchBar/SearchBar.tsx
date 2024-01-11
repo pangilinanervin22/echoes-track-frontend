@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import style from './SearchBar.module.scss';
 
 interface SearchBarProps {
-	isStudent: boolean;
+	isStudent?: boolean;
 }
 
 export default function SearchBar({ isStudent }: SearchBarProps) {
