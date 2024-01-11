@@ -14,8 +14,10 @@ import SearchResult from './pages/Search/SearchResult/SearchResult';
 import SearchHome from './pages/Search/SearchHome/SearchHome';
 import Admin from './pages/Admin/Admin';
 
-import './assets/reset.scss';
-import './assets/font.scss';
+import './assets/scss/reset.scss';
+import './assets/scss/font.scss';
+import './assets/scss/global.scss';
+
 const router = createBrowserRouter([
 	{
 		path: '/',
