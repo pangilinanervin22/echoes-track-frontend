@@ -5,7 +5,6 @@ function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const auth = getAuth();
-    console.log(auth, auth.currentUser);
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -14,9 +13,7 @@ function Login() {
             console.log(res.user, res);
 
             alert("Login success");
-
         } catch (e) {
-            console.log(e);
             alert("Wrong email or password");
         }
     };
