@@ -1,6 +1,6 @@
 import style from './SearchHome.module.scss';
 import SearchBar from '../../../Components/Search/SearchBar/SearchBar';
-
+import collage from '../../../assets/images/collage.svg';
 export default function SearchHome() {
 	return (
 		<section className={style.home_container}>
@@ -17,6 +17,7 @@ export default function SearchHome() {
 			<div className={style.searchbar_wrapper}>
 				<SearchBar />
 			</div>
+			<img className={style.picture} src={collage} alt="Students Chatting" />
 		</section>
 	);
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import style from './SearchBar.module.scss';
+import SearchBarIcon from './SearchBarIcon';
 
 interface SearchBarProps {
 	isStudent?: boolean;
@@ -29,11 +30,13 @@ export default function SearchBar({ isStudent }: SearchBarProps) {
 			<input
 				autoFocus
 				type="text"
-				placeholder="Input the Proctors Name Here"
+				placeholder="Type the proctor's name here"
 				value={search}
 				onChange={handleChange}
 			/>
-			<button type="submit">Submit</button>
+			<button type="submit">
+				<SearchBarIcon></SearchBarIcon>
+			</button>
 		</form>
 	);
 }

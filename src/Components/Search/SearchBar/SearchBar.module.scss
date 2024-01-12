@@ -1,12 +1,19 @@
 .form_wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
 	input[type='text'] {
 		font-size: var(--fs-m);
 		background-color: #ccdbea;
 		color: var(--color-primary);
 		border: 3px solid var(--color-primary);
 		border-right: none;
-		padding: 5px 20px;
+		padding-block: 5px;
+		padding-inline: 20px 0px;
 		border-radius: 100px 0px 0px 100px;
+		height: var(--fs-xxl);
+		width: clamp(20rem, 50vw, 40rem);
 	}
 
 	input[type='text']:focus {
@@ -14,20 +21,46 @@
 	}
 
 	button[type='submit'] {
+		transition: background-color 200ms ease-in-out;
+
+		height: var(--fs-xxl);
+		width: var(--fs-xxl);
 		border: none;
 		background-color: var(--color-primary);
 		color: var(--color-accent-2);
 		border-radius: 0px 100px 100px 0px;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		&:hover {
+			transition: background-color 200ms ease-in-out;
+
+			cursor: pointer;
+			background-color: var(--color-accent-2);
+			& > svg {
+				transition: fill 200ms ease-in-out;
+				fill: var(--color-primary);
+			}
+		}
 	}
 
 	border-radius: 100px;
 	outline: solid 3px transparent;
-	transition: outline 200ms ease-out;
 
 	&:focus-within {
-		transition: outline 200ms ease-in;
+		transition: outline-color 200ms ease-in-out;
 
 		outline-offset: 5px;
 		outline: solid 3px var(--color-accent-2);
+	}
+
+	.search_icon {
+		fill: var(--color-accent-2);
+		transition: fill 200ms ease-in-out;
+
+		height: var(--fs-l);
+		width: var(--fs-l);
 	}
 }

@@ -3,8 +3,9 @@
 	font-family: var(--ff-bold);
 }
 
-.tagline {
+p.tagline {
 	color: var(--color-secondary);
+	font-size: var(--fs-m);
 }
 
 .title_wrapper {
@@ -15,7 +16,6 @@
 }
 
 .searchbar_wrapper {
-	margin-top: clamp(1rem, 5vw, 2rem);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -29,4 +29,9 @@
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
+	row-gap: clamp(0.75rem, 2vw, 1rem);
+}
+
+.picture {
+	height: clamp(10rem, 25vw, 25rem);
 }
