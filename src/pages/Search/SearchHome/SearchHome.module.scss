@@ -23,13 +23,22 @@ p.tagline {
 }
 
 .home_container {
-	width: 100%;
+	container-type: inline-size;
+	width: 60dvw;
 	height: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
 	row-gap: clamp(0.75rem, 2vw, 1rem);
+
+	background-color: var(--color-background);
+}
+
+@media screen and (max-width: 768px) {
+	.home_container {
+		width: 100%;
+	}
 }
 
 .picture {
