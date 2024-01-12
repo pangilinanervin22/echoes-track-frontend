@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import style from './SearchNavBar.module.scss';
 
 export default function SearchNavBar() {
