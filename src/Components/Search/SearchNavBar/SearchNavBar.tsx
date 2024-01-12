@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import style from './SearchNavBar.module.scss';
+import DateIcon from './DateIcon';
+import TimeIcon from './TimeIcon';
 
 export default function SearchNavBar() {
 	const [time, setTime] = useState(new Date());
@@ -29,9 +31,11 @@ export default function SearchNavBar() {
 			<ul>
 				<li>logo</li>
 				<li className={style.time_wrapper}>
-					<div>Date: {formatDate(time)}</div>
 					<div>
-						Time:{' '}
+						<DateIcon /> {formatDate(time)}
+					</div>
+					<div>
+						<TimeIcon />{' '}
 						{time.toLocaleTimeString([], {
 							hour: '2-digit',
 							minute: '2-digit',

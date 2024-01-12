@@ -17,8 +17,8 @@ import Admin from './pages/Admin/Admin';
 import './assets/scss/reset.scss';
 import './assets/scss/font.scss';
 import './assets/scss/global.scss';
-// import Room from './pages/Admin/Rooms/Rooms';
-// import FirebaseSample from './components/FirebaseSample/FirebaseSample';
+import Room from './pages/Admin/Rooms/Rooms';
+import FirebaseSample from './Components/FirebaseSample/FirebaseSample';
 
 const router = createBrowserRouter([
 	{
@@ -39,19 +39,19 @@ const router = createBrowserRouter([
 					{ path: 'result', element: <SearchResult /> },
 				],
 			},
-			// {
-			// 	path: '/admin',
-			// 	element: <Admin />,
-			// 	children: [
-			// 		{ path: '', element: <Navigate to="dashboard" replace /> },
-			// 		{ path: 'room', element: <Room /> },
-			// 		{ path: 'dashboard', element: <Dashboard /> },
-			// 	],
-			// },
-			// {
-			// 	path: '/sample',
-			// 	element: <FirebaseSample />,
-			// },
+			{
+				path: '/admin',
+				element: <Admin />,
+				children: [
+					{ path: '', element: <Navigate to="dashboard" replace /> },
+					{ path: 'room', element: <Room /> },
+					{ path: 'dashboard', element: <Dashboard /> },
+				],
+			},
+			{
+				path: '/sample',
+				element: <FirebaseSample />,
+			},
 		],
 	},
 ]);
