@@ -18,7 +18,7 @@ import './assets/scss/reset.scss';
 import './assets/scss/font.scss';
 import './assets/scss/global.scss';
 import Room from './pages/Admin/Rooms/Rooms';
-import FirebaseSample from './components/FirebaseSample/FirebaseSample';
+import FirebaseSample from './Components/FirebaseSample/FirebaseSample';
 
 const router = createBrowserRouter([
 	{
@@ -50,7 +50,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: '/sample',
-				element: <FirebaseSample />
+				element: <FirebaseSample />,
 			},
 		],
 	},
