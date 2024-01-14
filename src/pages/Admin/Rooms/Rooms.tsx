@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { Room, useDeleteRoom, useGetRooms } from "./useRooms";
-import { Outlet, useNavigate } from "react-router-dom";
 import AddRoom from "./AddRoom";
 import EditRoom from "./EditRoom";
 
 export default function Room() {
     const rooms = useGetRooms();
-    const { deleteRoom, status: deleteStatus } = useDeleteRoom();
+    const { deleteRoom } = useDeleteRoom();
     const [modifyStatus, setModifyStatus] = useState('all');
     const [selectedRoom, setSelectedRoom] = useState({} as Room);
     const [searchRoomName, setSearchRoomName] = useState('');
