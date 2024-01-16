@@ -24,7 +24,7 @@ export function useGetRooms() {
     return () => unsubscribe();
   }, []);
 
-  return rooms;
+  return rooms.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 export function useAddRoom() {
