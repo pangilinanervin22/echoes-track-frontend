@@ -19,6 +19,9 @@ import './assets/scss/font.scss';
 import './assets/scss/global.scss';
 import Room from './pages/Admin/Rooms/Rooms';
 import FirebaseSample from './Components/FirebaseSample/FirebaseSample';
+import Schedule from './pages/Admin/Schedules/Schedules';
+import AddSchedule from './pages/Admin/Schedules/AddSchedule';
+import EditSchedule from './pages/Admin/Schedules/EditSchedule';
 
 const router = createBrowserRouter([
 	{
@@ -45,6 +48,13 @@ const router = createBrowserRouter([
 				children: [
 					{ path: '', element: <Navigate to="dashboard" replace /> },
 					{ path: 'room', element: <Room />, },
+					{
+						path: 'schedule', element: <Schedule />,
+						children: [
+							{ path: 'add', element: <AddSchedule /> },
+							{ path: ':id', element: <EditSchedule />, },
+						]
+					},
 					{ path: 'dashboard', element: <Dashboard /> },
 				],
 			},
