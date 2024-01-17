@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { addDoc, collection, deleteDoc, doc, getDoc, onSnapshot, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, query, updateDoc, where, writeBatch } from 'firebase/firestore';
 import { firebaseDB } from '../../../config/firebase';
 
 export interface Room {
@@ -20,7 +20,6 @@ export function useGetRooms() {
       setRooms(data as Room[]);
     });
 
-    // Cleanup function
     return () => unsubscribe();
   }, []);
 
@@ -45,9 +44,9 @@ export function useAddRoom() {
   return { status, addRoom };
 }
 
-
 export function useUpdateRoom() {
   const [status, setStatus] = useState('idle');
+
   const updateRoom = async (updatedRoom: Room) => {
     if (!updatedRoom || !updatedRoom.id) {
       console.error('Room or room ID is undefined');
@@ -55,9 +54,20 @@ export function useUpdateRoom() {
     }
 
     setStatus('loading');
+
     try {
       const roomRef = doc(firebaseDB, 'rooms', updatedRoom.id);
       await updateDoc(roomRef, { name: updatedRoom.name });
+      console.log('Room updated', roomRef.id, roomRef, updatedRoom);
+
+      const scheduleRef = query(collection(firebaseDB, 'schedules'), where('room_ref', '==', roomRef));
+      const scheduleSnapshot = await getDocs(scheduleRef);
+
+      scheduleSnapshot.forEach(async (scheduleDoc) => {
+        console.log('Updating schedule', scheduleDoc.id, scheduleDoc.ref);
+        await updateDoc(scheduleDoc.ref, { room: updatedRoom.name });
+      });
+
       setStatus('success');
     } catch (e) {
       console.log(e);
@@ -75,7 +85,19 @@ export function useDeleteRoom() {
     setStatus("loading");
 
     try {
-      await deleteDoc(doc(firebaseDB, "rooms", id));
+      const roomRef = doc(firebaseDB, "rooms", id);
+      await deleteDoc(roomRef);
+
+      const schedulesRef = collection(firebaseDB, 'schedules');
+      const schedulesSnapshot = await getDocs(query(schedulesRef, where('room_ref', '==', roomRef)));
+
+      const batch = writeBatch(firebaseDB);
+      schedulesSnapshot.docs.forEach((scheduleDoc) => {
+        const scheduleRef = doc(firebaseDB, 'schedules', scheduleDoc.id);
+        batch.delete(scheduleRef);
+      });
+
+      await batch.commit();
       setStatus("success");
     } catch (e) {
       console.log(e);
@@ -85,4 +107,3 @@ export function useDeleteRoom() {
 
   return { status, deleteRoom };
 }
-
