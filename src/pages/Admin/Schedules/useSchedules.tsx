@@ -1,20 +1,20 @@
 import { useState, useEffect } from 'react';
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, query, updateDoc, where } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, query, updateDoc, where, DocumentReference } from 'firebase/firestore';
 import { firebaseDB } from '../../../config/firebase';
 
 export interface Schedule {
-  day: string
-  room: string
-  section: string
-  start: string
-  end: string
-  subject: string
+  day: string;
+  room: string;
+  section: string;
+  start: string;
+  end: string;
+  subject: string;
   id?: string;
-  room_ref?: any
+  room_ref?: DocumentReference;
 }
 
 export function useGetSchedules() {
-  const [schedule, setSchedules] = useState<Schedule[]>([]);
+  const [schedules, setSchedules] = useState<Schedule[]>([]);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(firebaseDB, "schedules"), (snapshot) => {
@@ -30,7 +30,7 @@ export function useGetSchedules() {
     return () => unsubscribe();
   }, []);
 
-  return schedule;
+  return schedules;
 }
 
 export function useSchedule() {
@@ -51,11 +51,10 @@ export function useSchedule() {
   return { status, addSchedule };
 }
 
-
 export function useAddSchedule() {
   const [status, setStatus] = useState("idle");
 
-  const addSchedules = async (schedule: Schedule) => {
+  const addSchedule = async (schedule: Schedule) => {
     setStatus("loading");
 
     try {
@@ -63,14 +62,10 @@ export function useAddSchedule() {
       const querySnapshot = await getDocs(q);
       if (querySnapshot.empty) {
         alert('No matching rooms found.');
-        return
+        return;
       }
 
-      querySnapshot.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data());
-      });
       schedule.room_ref = doc(firebaseDB, "rooms", querySnapshot.docs[0].id);
-      console.log(schedule);
       await addDoc(collection(firebaseDB, "schedules"), schedule);
       setStatus("success");
     } catch (e) {
@@ -79,7 +74,7 @@ export function useAddSchedule() {
     }
   };
 
-  return { status, addSchedule: addSchedules };
+  return { status, addSchedule };
 }
 
 export function useGetSchedule(id: string) {
@@ -98,7 +93,6 @@ export function useGetSchedule(id: string) {
           setError("Schedule not found");
         }
       } catch (error) {
-        console.log(error);
         setError("An error occurred while fetching the schedule");
       }
     };
@@ -123,12 +117,7 @@ export function useUpdateSchedule() {
         return;
       }
 
-      querySnapshot.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data());
-      });
-
       schedule.room_ref = doc(firebaseDB, "rooms", querySnapshot.docs[0].id);
-      console.log(schedule);
       const scheduleRef = doc(firebaseDB, "schedules", id);
       await updateDoc(scheduleRef, {
         day: schedule.day,
@@ -137,9 +126,8 @@ export function useUpdateSchedule() {
         start: schedule.start,
         end: schedule.end,
         subject: schedule.subject,
-        room_ref: schedule.room_ref
+        room_ref: schedule.room_ref,
       });
-
 
       setStatus("success");
     } catch (e) {
@@ -150,7 +138,6 @@ export function useUpdateSchedule() {
 
   return { status, updateSchedule };
 }
-
 
 export function useDeleteSchedule() {
   const [status, setStatus] = useState("idle");
@@ -170,13 +157,11 @@ export function useDeleteSchedule() {
   return { status, deleteSchedule };
 }
 
-// non react hooks 
+// non-react hooks
 
 export function isScheduleValid(schedule: Schedule) {
   for (const key in schedule) {
-    if (schedule[key as keyof Schedule] === '') {
-      console.log(key, schedule[key as keyof Schedule]);
-
+    if (schedule[key as keyof Schedule] === "") {
       return false;
     }
   }
@@ -186,8 +171,6 @@ export function isScheduleValid(schedule: Schedule) {
 export async function getSchedule(id: string) {
   const docRef = doc(firebaseDB, "schedules", id || "");
   const docSnap = await getDoc(docRef);
-
-  console.log(docSnap.data());
 
   if (docSnap.exists()) {
     return docSnap.data();
