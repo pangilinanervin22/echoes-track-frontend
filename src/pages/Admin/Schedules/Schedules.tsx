@@ -5,6 +5,7 @@ export default function Schedule() {
     const navigate = useNavigate();
     const schedules = useGetSchedules();
     const { deleteSchedule, status } = useDeleteSchedule();
+
     return (
         <>
             <div>Schedule</div>
