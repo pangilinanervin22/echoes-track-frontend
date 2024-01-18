@@ -4,7 +4,6 @@ import { Outlet } from "react-router-dom";
 import { firebaseAuth, firebaseDB } from "../../config/firebase";
 import Login from "./Login";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import adminStyle from './LoginStyle.module.scss'
 
 export default function Admin() {
     const [isAuthorized, setIsAuthorized] = useState(false);
@@ -24,12 +23,12 @@ export default function Admin() {
     }, [isAuthorized]);
 
     return (
-        <main className={adminStyle.mainContainer}>
+        <>
             <nav>
                 {isAuthorized && <button onClick={() => firebaseAuth.signOut()}>Logout</button>}
             </nav>
             {isAuthorized ? <Outlet /> : <Login />}
-        </main>
+        </>
     )
 }
 
