@@ -4,7 +4,7 @@ import AddRoom from "./AddRoom";
 import EditRoom from "./EditRoom";
 
 export default function Room() {
-    const rooms = useGetRooms();
+    const { rooms, isLoading } = useGetRooms();
     const { deleteRoom } = useDeleteRoom();
     const [modifyStatus, setModifyStatus] = useState('all');
     const [selectedRoom, setSelectedRoom] = useState({} as Room);
@@ -63,6 +63,3 @@ export default function Room() {
         </main>
     )
 }
-
-
-

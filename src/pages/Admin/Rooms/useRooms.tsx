@@ -9,6 +9,7 @@ export interface Room {
 
 export function useGetRooms() {
   const [rooms, setRooms] = useState<Room[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(firebaseDB, "rooms"), (snapshot) => {
@@ -18,12 +19,13 @@ export function useGetRooms() {
       }));
 
       setRooms(data as Room[]);
+      setIsLoading(false); // Set loading to false after data is received
     });
 
     return () => unsubscribe();
   }, []);
 
-  return rooms.sort((a, b) => a.name.localeCompare(b.name));
+  return { rooms: rooms.sort((a, b) => a.name.localeCompare(b.name)), isLoading };
 }
 
 export function useAddRoom() {
