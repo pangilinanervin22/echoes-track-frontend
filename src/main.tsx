@@ -5,7 +5,6 @@ import {
 	RouterProvider,
 	Navigate,
 } from 'react-router-dom';
-// import './global.scss';
 
 import RootLayout from './pages';
 import Scan from './pages/Scan/Scan';
@@ -17,11 +16,14 @@ import Admin from './pages/Admin/Admin';
 import './assets/scss/reset.scss';
 import './assets/scss/font.scss';
 import './assets/scss/global.scss';
-import Room from './pages/Admin/Rooms/Rooms';
+import Room, { RoomWithMui } from './pages/Admin/Rooms/Rooms';
 import FirebaseSample from './Components/FirebaseSample/FirebaseSample';
 import Schedule from './pages/Admin/Schedules/Schedules';
-import AddSchedule from './pages/Admin/Schedules/AddSchedule';
-import EditSchedule from './pages/Admin/Schedules/EditSchedule';
+import AddSchedule from './pages/Admin/Schedules/AddSchedule/AddSchedule';
+import EditSchedule from './pages/Admin/Schedules/EditSchedule/EditSchedule';
+import Users from './pages/Admin/Users/Users';
+import EditUser from './pages/Admin/Users/EditUser/EditUser';
+import AddUser from './pages/Admin/Users/AddUser/AddUser';
 
 const router = createBrowserRouter([
 	{
@@ -47,6 +49,7 @@ const router = createBrowserRouter([
 				element: <Admin />,
 				children: [
 					{ path: '', element: <Navigate to="dashboard" replace /> },
+					{ path: 'dashboard', element: <Dashboard /> },
 					{ path: 'room', element: <Room />, },
 					{
 						path: 'schedule', element: <Schedule />,
@@ -55,13 +58,24 @@ const router = createBrowserRouter([
 							{ path: ':id', element: <EditSchedule />, },
 						]
 					},
-					{ path: 'dashboard', element: <Dashboard /> },
+					{
+						path: 'user',
+						element: <Users />,
+						children: [
+							{ path: 'add', element: <AddUser /> },
+							{ path: ':id', element: <EditUser />, },
+						]
+					}
 				],
 			},
 			{
 				path: '/sample',
 				element: <FirebaseSample />,
 			},
+			{
+				path: '/mui',
+				element: <RoomWithMui />
+			}
 		],
 	},
 ]);
