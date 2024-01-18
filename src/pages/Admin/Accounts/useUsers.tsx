@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { addDoc, collection, deleteDoc, doc, onSnapshot, updateDoc, DocumentReference } from 'firebase/firestore';
 import { firebaseDB } from '../../../config/firebase';
 
-export interface Bat {
+export interface User {
     id?: string;
     name: string;
     rfid: number;
@@ -12,33 +12,33 @@ export interface Bat {
     room_ref?: DocumentReference;
 }
 
-export function useGetBats() {
-    const [bats, setBats] = useState<Bat[]>([]);
+export function useGetUsers() {
+    const [users, setUsers] = useState<User[]>([]);
 
     useEffect(() => {
-        const unsubscribe = onSnapshot(collection(firebaseDB, "bats"), (snapshot) => {
+        const unsubscribe = onSnapshot(collection(firebaseDB, "users"), (snapshot) => {
             const data = snapshot.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data(),
             }));
 
-            setBats(data as Bat[]);
+            setUsers(data as User[]);
         });
 
         return unsubscribe;
     }, []);
 
-    return bats.sort((a, b) => a.name.localeCompare(b.name));
+    return users.sort((a, b) => a.name.localeCompare(b.name));
 }
 
-export function useAddBat() {
+export function useAddUser() {
     const [status, setStatus] = useState("idle");
 
-    const addBat = async (bat: Bat) => {
+    const addUser = async (user: User) => {
         setStatus("loading");
 
         try {
-            await addDoc(collection(firebaseDB, "bats"), bat);
+            await addDoc(collection(firebaseDB, "users"), user);
             setStatus("success");
         } catch (e) {
             console.log(e);
@@ -46,24 +46,24 @@ export function useAddBat() {
         }
     };
 
-    return { status, addBat };
+    return { status, addUser };
 }
 
-export function useUpdateBat() {
+export function useUpdateUser() {
     const [status, setStatus] = useState('idle');
 
-    const updateBat = async (updatedBat: Bat) => {
-        if (!updatedBat || !updatedBat.id) {
-            console.error('Bat or bat ID is undefined');
+    const updateUser = async (updatedUser: User) => {
+        if (!updatedUser || !updatedUser.id) {
+            console.error('User or user ID is undefined');
             return;
         }
 
         setStatus('loading');
 
         try {
-            const batRef = doc(firebaseDB, 'bats', updatedBat.id);
-            await updateDoc(batRef, { name: updatedBat.name });
-            console.log('Bat updated', batRef.id, batRef, updatedBat);
+            const userRef = doc(firebaseDB, 'users', updatedUser.id);
+            await updateDoc(userRef, { name: updatedUser.name });
+            console.log('User updated', userRef.id, userRef, updatedUser);
             setStatus('success');
         } catch (e) {
             console.log(e);
@@ -71,18 +71,18 @@ export function useUpdateBat() {
         }
     };
 
-    return { status, updateBat };
+    return { status, updateUser };
 }
 
-export function useDeleteBat() {
+export function useDeleteUser() {
     const [status, setStatus] = useState("idle");
 
-    const deleteBat = async (id: string) => {
+    const deleteUser = async (id: string) => {
         setStatus("loading");
 
         try {
-            const batRef = doc(firebaseDB, "bats", id);
-            await deleteDoc(batRef);
+            const userRef = doc(firebaseDB, "users", id);
+            await deleteDoc(userRef);
 
             setStatus("success");
         } catch (e) {
@@ -91,5 +91,5 @@ export function useDeleteBat() {
         }
     };
 
-    return { status, deleteBat };
+    return { status, deleteUser };
 }
