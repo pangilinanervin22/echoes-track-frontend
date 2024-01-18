@@ -5,7 +5,7 @@ import { firebaseDB } from '../../../config/firebase';
 export interface User {
     id?: string;
     name: string;
-    rfid: number;
+    rfid: string;
     role: string;
     room: string;
     section: string;
@@ -14,6 +14,7 @@ export interface User {
 
 export function useGetUsers() {
     const [users, setUsers] = useState<User[]>([]);
+    const [loading, setLoading] = useState(true); // Add loading state
 
     useEffect(() => {
         const unsubscribe = onSnapshot(collection(firebaseDB, "users"), (snapshot) => {
@@ -23,12 +24,13 @@ export function useGetUsers() {
             }));
 
             setUsers(data as User[]);
+            setLoading(false); // Update loading state
         });
 
         return unsubscribe;
     }, []);
 
-    return users.sort((a, b) => a.name.localeCompare(b.name));
+    return { users: users.sort((a, b) => a.name.localeCompare(b.name)), loading }; // Return loading state
 }
 
 export function useAddUser() {
@@ -72,6 +74,33 @@ export function useUpdateUser() {
     };
 
     return { status, updateUser };
+}
+
+export function useGetUser(id: string) {
+    const [user, setUser] = useState<User | null>(null);
+    const [loading, setLoading] = useState(true); // Add loading state
+    const [error, setError] = useState<string | null>(null); // Add error state
+
+    useEffect(() => {
+        const unsubscribe = onSnapshot(doc(firebaseDB, "users", id), (doc) => {
+            if (doc.exists()) {
+                setUser(doc.data() as User);
+                setError(null); // Clear error state
+            } else {
+                setUser(null);
+                setError("User not found"); // Set error state
+            }
+            setLoading(false); // Update loading state
+        }, (error) => {
+            console.log(error);
+            setError("Error fetching user"); // Set error state
+            setLoading(false); // Update loading state
+        });
+
+        return unsubscribe;
+    }, [id]);
+
+    return { user, loading, error }; // Return user, loading, and error state
 }
 
 export function useDeleteUser() {
