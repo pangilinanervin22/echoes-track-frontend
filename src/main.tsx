@@ -16,7 +16,7 @@ import Admin from './pages/Admin/Admin';
 import './assets/scss/reset.scss';
 import './assets/scss/font.scss';
 import './assets/scss/global.scss';
-import Room, { RoomWithMui } from './pages/Admin/Rooms/Rooms';
+import Room from './pages/Admin/Rooms/Rooms';
 import FirebaseSample from './Components/FirebaseSample/FirebaseSample';
 import Schedule from './pages/Admin/Schedules/Schedules';
 import AddSchedule from './pages/Admin/Schedules/AddSchedule/AddSchedule';
@@ -24,6 +24,8 @@ import EditSchedule from './pages/Admin/Schedules/EditSchedule/EditSchedule';
 import Users from './pages/Admin/Users/Users';
 import EditUser from './pages/Admin/Users/EditUser/EditUser';
 import AddUser from './pages/Admin/Users/AddUser/AddUser';
+import { RoomWithMui } from './Components/TestUI/TestUI';
+import ScanRoom from './pages/Scan/ScanRoom/ScanRoom';
 
 const router = createBrowserRouter([
 	{
@@ -34,6 +36,9 @@ const router = createBrowserRouter([
 			{
 				path: '/scan',
 				element: <Scan />,
+				children: [
+					{ path: ':id', element: <ScanRoom /> },
+				],
 			},
 			{
 				path: '/search',
