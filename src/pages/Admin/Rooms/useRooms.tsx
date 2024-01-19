@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, query, updateDoc, where, writeBatch } from 'firebase/firestore';
 import { firebaseDB } from '../../../config/firebase';
+import { Schedule } from '../Schedules/useSchedules';
 
 export interface Room {
   id: string;
@@ -109,3 +110,115 @@ export function useDeleteRoom() {
 
   return { status, deleteRoom };
 }
+
+export function useGetRoomByName() {
+  const [room, setRoom] = useState<Room | null>(null);
+  const [schedules, setSchedules] = useState<Schedule[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const getRoomByName = async (roomName: string) => {
+    setIsLoading(true);
+
+    try {
+      const snapshot = await getDocs(collection(firebaseDB, "rooms"));
+      const foundRoom = snapshot.docs.find((doc) => doc.data().name === roomName);
+
+      if (foundRoom) {
+        setRoom(foundRoom.data() as Room);
+
+        const scheduleRef = query(collection(firebaseDB, 'schedules'), where('room_ref', '==', foundRoom.ref));
+        const scheduleSnapshot = await getDocs(scheduleRef);
+        const schedules = scheduleSnapshot.docs.map((scheduleDoc) => scheduleDoc.data() as Schedule);
+
+        setSchedules(schedules);
+      } else {
+        console.log("No such room!");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    setIsLoading(false);
+  };
+
+  return { room, schedules, isLoading, getRoomByName };
+}
+
+export function useGetRoomByNameRealTime() {
+  const [room, setRoom] = useState<Room | null>(null);
+  const [schedules, setSchedules] = useState<Schedule[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const getRoomByName = (roomName: string) => {
+    setIsLoading(true);
+
+    const unsubscribeFromRoom = onSnapshot(query(collection(firebaseDB, "rooms"), where('name', '==', roomName)),
+      (snapshot) => {
+        const foundRoom = snapshot.docs[0];
+
+        if (foundRoom) {
+          setRoom(foundRoom.data() as Room);
+
+          const unsubscribeFromSchedules = onSnapshot(query(collection(firebaseDB, 'schedules'), where('room_ref', '==', foundRoom.ref)),
+            (scheduleSnapshot) => {
+              const schedules = scheduleSnapshot.docs.map((scheduleDoc) => scheduleDoc.data() as Schedule);
+              setSchedules(schedules);
+              setIsLoading(false);
+            },
+            (error) => {
+              console.log(error);
+              setIsLoading(false);
+            }
+          );
+
+          // Clean up function to unsubscribe from schedules when room changes or component unmounts
+          return () => unsubscribeFromSchedules();
+        } else {
+          console.log("No such room!");
+          setIsLoading(false);
+        }
+      },
+      (error) => {
+        console.log(error);
+        setIsLoading(false);
+      }
+    );
+
+    // Clean up function to unsubscribe from room when component unmounts
+    return () => unsubscribeFromRoom();
+  };
+
+  // Call getRoomByName whenever roomName changes
+  useEffect(() => {
+    const unsubscribe = getRoomByName(room?.name || '');
+    console.log('useEffect', room?.name);
+    return unsubscribe;
+  }, []);
+
+  return { room, schedules, isLoading, getRoomByName };
+}
+
+
+export async function getRoomByName(roomName: string): Promise<{ room: Room | null, schedules: Schedule[] }> {
+  try {
+    const snapshot = await getDocs(collection(firebaseDB, "rooms"));
+    const foundRoom = snapshot.docs.find((doc) => doc.data().name === roomName);
+
+    if (foundRoom) {
+      const room = foundRoom.data() as Room;
+
+      const scheduleRef = query(collection(firebaseDB, 'schedules'), where('room_ref', '==', foundRoom.ref));
+      const scheduleSnapshot = await getDocs(scheduleRef);
+      const schedules = scheduleSnapshot.docs.map((scheduleDoc) => scheduleDoc.data() as Schedule);
+
+      return { room, schedules };
+    } else {
+      console.log("No such room!");
+      return { room: null, schedules: [] };
+    }
+  } catch (e) {
+    console.log(e);
+    return { room: null, schedules: [] };
+  }
+}
+
