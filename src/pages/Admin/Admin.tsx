@@ -15,7 +15,6 @@ export default function Admin() {
             if (user) {
                 const userData = await getUser(user.uid);
                 console.log(userData);
-
             }
         });
 
@@ -24,21 +23,20 @@ export default function Admin() {
     }, [isAuthorized]);
 
     return (
-        <main>
+        <>
             <nav>
-                <h1>Admin</h1>
                 {isAuthorized && <button onClick={() => firebaseAuth.signOut()}>Logout</button>}
             </nav>
             {isAuthorized ? <Outlet /> : <Login />}
-        </main>
+        </>
     )
 }
 
 
 async function getUser(uid: string) {
     try {
-        const usersRef = collection(firebaseDB, 'users');
-        const q = query(usersRef, where("user_id", "==", uid));
+        const usersRef = collection(firebaseDB, 'accounts');
+        const q = query(usersRef, where("auth_id", "==", uid));
         const querySnapshot = await getDocs(q);
 
         if (!querySnapshot.empty) {
