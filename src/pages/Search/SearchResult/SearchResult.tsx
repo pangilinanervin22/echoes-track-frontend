@@ -6,10 +6,8 @@ export default function SearchResult() {
 
 	return (
 		<div className="main_wrapper">
-			<h2 className={style.tag}>Results for: "{id}"</h2>
+			<h1>Search results: {id}</h1>
 			<div className={style.card_wrapper}>test</div>
-
-			<h1>SearchResult: {id}</h1>
 		</div>
 	);
 }
