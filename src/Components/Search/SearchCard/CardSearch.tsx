@@ -1,5 +1,16 @@
 import style from './CardSearch.module.scss';
-export default function CardSearch() {
+import React from 'react';
+interface User {
+	fName: string;
+	lName: string;
+	room: string;
+}
+
+interface CardSearchProps {
+	user: User;
+}
+
+export default function CardSearch({ user }: CardSearchProps) {
 	return (
 		<div className={style.SearchCard_wrapper}>
 			<div className={style.img_wrapper}>
@@ -13,11 +24,11 @@ export default function CardSearch() {
 			<div className={style.card_container}>
 				<div className={style.super_wrapper}>
 					<h2>
-						Lue Kely <br /> Anunciacion
+						{user.fName} <br /> {user.lName}
 					</h2>
 					<div className={style.info_wrapper}>
 						<p>Current Room:</p>
-						<h1>304</h1>
+						<h1>{user.room}</h1>
 					</div>
 				</div>
 			</div>
