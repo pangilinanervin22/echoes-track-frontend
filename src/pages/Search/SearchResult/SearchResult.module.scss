@@ -1,5 +1,4 @@
-.home_container {
-	container-type: inline-size;
+.result-container {
 	width: 60dvw;
 	height: 100%;
 	display: flex;
@@ -7,14 +6,16 @@
 	justify-content: start;
 	flex-direction: column;
 	// row-gap: clamp(0.75rem, 2vw, 1rem);
-
-	background-color: var(--color-background);
-
-	h1 {
-	}
 }
 
 .accent {
 	color: var(--color-accent);
 	font-family: var(--ff-bold);
+}
+.cards_container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	column-gap: 1em;
 }
