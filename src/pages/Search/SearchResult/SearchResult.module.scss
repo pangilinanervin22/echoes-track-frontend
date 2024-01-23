@@ -1,0 +1,12 @@
+.home_container {
+	container-type: inline-size;
+	width: 60dvw;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: start;
+	flex-direction: column;
+	// row-gap: clamp(0.75rem, 2vw, 1rem);
+
+	background-color: var(--color-background);
+}

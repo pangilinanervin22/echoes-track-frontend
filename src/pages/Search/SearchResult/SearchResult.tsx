@@ -1,13 +1,20 @@
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 import style from './SearchResult.module.scss';
+
 export default function SearchResult() {
 	const [searchParams] = useSearchParams();
 	const id = searchParams.get('id');
 
 	return (
-		<div className="main_wrapper">
-			<h1>Search results: {id}</h1>
+		<section className="result-container">
+			<h1>
+				Results for: <span>{id}</span>
+			</h1>
+
+			{/* contain za card */}
 			<div className={style.card_wrapper}>test</div>
-		</div>
+
+			<Link to="/search/home">Go back </Link>
+		</section>
 	);
 }
