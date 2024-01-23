@@ -8,7 +8,7 @@ export default function SearchResult() {
 	return (
 		<section className="result-container">
 			<h1>
-				Results for: <span>{id}</span>
+				Results for: <span className={style.accent}>{id}</span>
 			</h1>
 
 			{/* contain za card */}
