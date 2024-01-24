@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import CardSearch from '../../../Components/Search/SearchCard/CardSearch';
@@ -12,26 +12,22 @@ export default function SearchResult() {
 
 	// dummy data
 	const [data, setData] = useState([
-		{ fName: 'test', lName: 'guadalupe', room: 'test' },
-		{ fName: 'test2', lName: 'ignacio', room: 'test2' },
+		{ fName: 'A', lName: 'guadalupe', room: 'test' },
+		{ fName: 'B', lName: 'ignacio', room: 'test2' },
+		{ fName: 'C', lName: 'ignacio', room: 'test2' },
 	]);
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(false);
 
-	// here is where you put your firebase magic
-	useEffect(() => {
-		// const db = firebase.database();
-		// db.ref(`your-data-path/${id}`)
-		// 	.once('value')
-		// 	.then(snapshot => {
-		// 		const data = snapshot.val();
-		// 		setData(data);
-		// 		setLoading(false);
-		// 	})
-		// 	.catch(error => {
-		// 		console.error('There was an error!', error);
-		// 		setLoading(false);
-		// 	});
-	}, [id]);
+	const [selectedOption, setSelectedOption] = useState('');
+
+	const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
+		setSelectedOption(event.target.value);
+		if (event.target.value === 'ascending') {
+			setData(data.sort((a, b) => a.fName.localeCompare(b.fName)));
+		} else if (event.target.value === 'descending') {
+			setData(data.sort((a, b) => b.fName.localeCompare(a.fName)));
+		}
+	};
 
 	const renderList = data.map((item, index) => {
 		return <CardSearch user={item} />;
@@ -42,10 +38,21 @@ export default function SearchResult() {
 			<h1>
 				Results for: <span className={style.accent}>{id}</span>
 			</h1>
-			<Link to="/search/home">Go back </Link>
-			{/* contain za card */}
 
-			<select></select>
+			<div className={style.navigation_wrapper}>
+				<Link to="/search/home">Go back </Link>
+				<div className={style.selection_wrapper}>
+					<p>Filter By: </p>
+					<select value={selectedOption} onChange={handleChange} id="cars">
+						<option value="" selected>
+							None
+						</option>
+						<option value="ascending">A-Z</option>
+						<option value="descending">Z-A</option>
+					</select>
+				</div>
+			</div>
+
 			<div className={style.cards_container}>
 				{loading ? 'Loading...' : renderList.length ? renderList : 'Not Found'}
 			</div>

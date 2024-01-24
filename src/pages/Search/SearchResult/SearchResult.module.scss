@@ -6,6 +6,11 @@
 	justify-content: start;
 	flex-direction: column;
 	// row-gap: clamp(0.75rem, 2vw, 1rem);
+	h1 {
+		font-size: var(--fs-xl);
+	}
+	a {
+	}
 }
 
 .accent {
@@ -18,4 +23,25 @@
 	justify-content: center;
 	align-items: center;
 	column-gap: 1em;
+}
+
+.navigation_wrapper {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	font-size: var(--fs-xs);
+}
+
+.selection_wrapper {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	font-size: var(--fs-xs);
+	column-gap: 10px;
+
+	p {
+		font-size: var(--fs-xs);
+	}
 }
