@@ -45,3 +45,12 @@
 		font-size: var(--fs-xs);
 	}
 }
+
+.selection {
+	border: 1px solid #7b92ff;
+	background-color: #e7efff;
+	border-radius: 5px;
+	padding: 0.2em;
+	color: var(--color-primary);
+	font-family: var(--ff-bold);
+}

@@ -10,16 +10,33 @@ export default function SearchResult() {
 	const [searchParams] = useSearchParams();
 	const id = searchParams.get('id');
 
+	// here is where you put your firebase magic
+	useEffect(() => {
+		// const db = firebase.database();
+		// db.ref(`your-data-path/${id}`)
+		// 	.once('value')
+		// 	.then(snapshot => {
+		// 		const data = snapshot.val();
+		// 		setData(data);
+		// 		setLoading(false);
+		// 	})
+		// 	.catch(error => {
+		// 		console.error('There was an error!', error);
+		// 		setLoading(false);
+		// 	});
+	}, [id]);
+
 	// dummy data
 	const [data, setData] = useState([
-		{ fName: 'A', lName: 'guadalupe', room: 'test' },
-		{ fName: 'B', lName: 'ignacio', room: 'test2' },
+		{ fName: 'D', lName: 'guadalupe', room: 'test' },
+		{ fName: 'A', lName: 'ignacio', room: 'test2' },
 		{ fName: 'C', lName: 'ignacio', room: 'test2' },
 	]);
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(true);
 
 	const [selectedOption, setSelectedOption] = useState('');
 
+	// handle the changes of the filter
 	const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
 		setSelectedOption(event.target.value);
 		if (event.target.value === 'ascending') {
@@ -42,19 +59,31 @@ export default function SearchResult() {
 			<div className={style.navigation_wrapper}>
 				<Link to="/search/home">Go back </Link>
 				<div className={style.selection_wrapper}>
-					<p>Filter By: </p>
-					<select value={selectedOption} onChange={handleChange} id="cars">
+					<p>Sort By: </p>
+					<select
+						className={style.selection}
+						value={selectedOption}
+						onChange={handleChange}
+					>
 						<option value="" selected>
 							None
 						</option>
-						<option value="ascending">A-Z</option>
-						<option value="descending">Z-A</option>
+						<option className={style.option} value="ascending">
+							Ascending Order
+						</option>
+						<option value="descending">Descending Order</option>
 					</select>
 				</div>
 			</div>
 
 			<div className={style.cards_container}>
-				{loading ? 'Loading...' : renderList.length ? renderList : 'Not Found'}
+				{loading ? (
+					<div>hello</div>
+				) : renderList.length ? (
+					renderList
+				) : (
+					'Not Found'
+				)}
 			</div>
 		</section>
 	);
