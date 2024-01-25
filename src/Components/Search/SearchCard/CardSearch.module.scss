@@ -39,10 +39,16 @@
 	object-position: center;
 }
 .SearchCard_wrapper {
+	transition: filter 0.3s ease-in-out;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+}
+.SearchCard_wrapper:hover {
+	transition: filter 0.3s ease-in-out;
+
+	filter: drop-shadow(0px 0px 20px #ffb7008e);
 }
 
 .info_wrapper {

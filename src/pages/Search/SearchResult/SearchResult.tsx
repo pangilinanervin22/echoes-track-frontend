@@ -56,19 +56,32 @@ export default function SearchResult() {
 			<h1>
 				Results for: <span className={style.accent}>{id}</span>
 			</h1>
-
 			<div className={style.navigation_wrapper}>
 				<Link className={style.back_wrapper} to="/search/home">
-					<Icon
-						icon="lets-icons:back"
-						color="#163aeb"
-						width="1.5rem"
-						height="1.5rem"
-					/>{' '}
-					<p> Go Back</p>
+					<div>
+						<Icon
+							icon="lets-icons:back"
+							color="#163aeb"
+							width="2rem"
+							height="2rem"
+						/>
+						<p> Go Back</p>
+					</div>
+
+					<hr className={style.line} />
 				</Link>
+
 				<div className={style.selection_wrapper}>
-					<p>Sort By: </p>
+					<div className={style.sort_wrapper}>
+						<Icon
+							icon="flowbite:sort-outline"
+							color="#5b86eb"
+							width="2rem"
+							height="1.5rem"
+						/>
+						<p>Sort By: </p>
+					</div>
+
 					<select
 						className={style.selection}
 						value={selectedOption}

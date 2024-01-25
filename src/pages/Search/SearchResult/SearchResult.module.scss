@@ -3,8 +3,10 @@
 	height: 100%;
 	display: flex;
 	align-items: center;
-	justify-content: start;
+	justify-content: flex-start;
 	flex-direction: column;
+
+	padding-top: 10px;
 	// row-gap: clamp(0.75rem, 2vw, 1rem);
 	h1 {
 		font-size: var(--fs-xl);
@@ -18,9 +20,11 @@
 	font-family: var(--ff-bold);
 }
 .cards_container {
+	padding: 1em;
+	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
 	column-gap: 1em;
 }
@@ -56,20 +60,40 @@
 }
 
 .back_wrapper {
+	overflow: hidden;
+	text-decoration: none;
+	div {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		column-gap: 10px;
+
+		p {
+			font-size: var(--fs-sm);
+			color: var(--color-primary);
+			font-family: var(--ff-bold);
+		}
+	}
+	hr {
+		transition: transform 0.3s ease-in-out;
+		color: var(--color-primary);
+		transform: translateX(100%);
+	}
+}
+
+.back_wrapper:hover > hr {
+	transition: transform 0.3s ease-in-out;
+	transform: translateX(0);
+}
+
+.sort_wrapper {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	column-gap: 10px;
-	text-decoration: none;
+	column-gap: 5px;
 
 	p {
-		font-size: var(--fs-xs);
-		color: var(--color-primary);
-		font-family: var(--ff-bold);
+		font-size: var(--fs-sm);
+		color: var(--color-secondary);
 	}
-
-	border: 1px solid #7b92ff;
-	background-color: #e7efff;
-	border-radius: 5px;
-	padding: 0.2em 10px;
 }
