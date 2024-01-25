@@ -1,11 +1,15 @@
 import { useState, useEffect, ChangeEvent } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Icon } from '@iconify/react';
+
 import firebase from 'firebase/app';
 import 'firebase/database';
+
 import CardSearch from '../../../Components/Search/SearchCard/CardSearch';
-import { useSearchParams } from 'react-router-dom';
-import style from './SearchResult.module.scss';
+import SearchLoading from '../../../Components/Search/SearchLoading/SearchLoading';
 import { Link } from 'react-router-dom';
+
+import style from './SearchResult.module.scss';
 
 export default function SearchResult() {
 	const [searchParams] = useSearchParams();
@@ -33,7 +37,7 @@ export default function SearchResult() {
 		{ fName: 'A', lName: 'ignacio', room: 'test2' },
 		{ fName: 'C', lName: 'ignacio', room: 'test2' },
 	]);
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(true);
 
 	const [selectedOption, setSelectedOption] = useState('');
 
@@ -100,7 +104,7 @@ export default function SearchResult() {
 
 			<div className={style.cards_container}>
 				{loading ? (
-					<div>hello</div>
+					<SearchLoading></SearchLoading>
 				) : renderList.length ? (
 					renderList
 				) : (
