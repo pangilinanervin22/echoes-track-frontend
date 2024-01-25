@@ -54,3 +54,22 @@
 	color: var(--color-primary);
 	font-family: var(--ff-bold);
 }
+
+.back_wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	column-gap: 10px;
+	text-decoration: none;
+
+	p {
+		font-size: var(--fs-xs);
+		color: var(--color-primary);
+		font-family: var(--ff-bold);
+	}
+
+	border: 1px solid #7b92ff;
+	background-color: #e7efff;
+	border-radius: 5px;
+	padding: 0.2em 10px;
+}

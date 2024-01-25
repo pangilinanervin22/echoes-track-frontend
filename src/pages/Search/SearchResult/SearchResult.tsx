@@ -1,4 +1,5 @@
 import { useState, useEffect, ChangeEvent } from 'react';
+import { Icon } from '@iconify/react';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import CardSearch from '../../../Components/Search/SearchCard/CardSearch';
@@ -32,7 +33,7 @@ export default function SearchResult() {
 		{ fName: 'A', lName: 'ignacio', room: 'test2' },
 		{ fName: 'C', lName: 'ignacio', room: 'test2' },
 	]);
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(false);
 
 	const [selectedOption, setSelectedOption] = useState('');
 
@@ -57,7 +58,15 @@ export default function SearchResult() {
 			</h1>
 
 			<div className={style.navigation_wrapper}>
-				<Link to="/search/home">Go back </Link>
+				<Link className={style.back_wrapper} to="/search/home">
+					<Icon
+						icon="lets-icons:back"
+						color="#163aeb"
+						width="1.5rem"
+						height="1.5rem"
+					/>{' '}
+					<p> Go Back</p>
+				</Link>
 				<div className={style.selection_wrapper}>
 					<p>Sort By: </p>
 					<select
@@ -69,9 +78,9 @@ export default function SearchResult() {
 							None
 						</option>
 						<option className={style.option} value="ascending">
-							Ascending Order
+							A-Z
 						</option>
-						<option value="descending">Descending Order</option>
+						<option value="descending">Z-A</option>
 					</select>
 				</div>
 			</div>
