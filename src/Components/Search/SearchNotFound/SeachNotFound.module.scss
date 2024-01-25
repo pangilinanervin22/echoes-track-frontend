@@ -1,0 +1,17 @@
+.found_wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+
+	width: 100%;
+
+	text-align: center;
+
+	row-gap: 10px;
+
+	p {
+		color: var(--color-secondary);
+	}
+}

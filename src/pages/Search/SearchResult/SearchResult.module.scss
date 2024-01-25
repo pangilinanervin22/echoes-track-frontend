@@ -1,4 +1,5 @@
 .result-container {
+	background-color: var(--color-background);
 	width: 60dvw;
 	height: 100%;
 	display: flex;
@@ -35,7 +36,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-
+	padding-inline: 20px;
 	font-size: var(--fs-xs);
 }
 

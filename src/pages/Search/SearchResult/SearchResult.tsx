@@ -5,6 +5,7 @@ import { Icon } from '@iconify/react';
 import firebase from 'firebase/app';
 import 'firebase/database';
 
+import SearchNotFound from '../../../Components/Search/SearchNotFound/SearchNotFound';
 import CardSearch from '../../../Components/Search/SearchCard/CardSearch';
 import SearchLoading from '../../../Components/Search/SearchLoading/SearchLoading';
 import { Link } from 'react-router-dom';
@@ -32,12 +33,20 @@ export default function SearchResult() {
 	}, [id]);
 
 	// dummy data
-	const [data, setData] = useState([
+	interface UserData {
+		fName: string;
+		lName: string;
+		room: string;
+	}
+
+	const [data, setData] = useState<UserData[]>([
+		// comment the data below if you want to see the
+		// not found component
 		{ fName: 'D', lName: 'guadalupe', room: 'test' },
 		{ fName: 'A', lName: 'ignacio', room: 'test2' },
 		{ fName: 'C', lName: 'ignacio', room: 'test2' },
 	]);
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(false);
 
 	const [selectedOption, setSelectedOption] = useState('');
 
@@ -108,7 +117,7 @@ export default function SearchResult() {
 				) : renderList.length ? (
 					renderList
 				) : (
-					'Not Found'
+					<SearchNotFound />
 				)}
 			</div>
 		</section>
