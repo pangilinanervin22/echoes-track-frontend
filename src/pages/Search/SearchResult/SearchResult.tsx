@@ -37,14 +37,19 @@ export default function SearchResult() {
 		fName: string;
 		lName: string;
 		room: string;
+		url: string;
 	}
+	// delete this if you want to pareh
+	const dummyName =
+		'https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg';
 
 	const [data, setData] = useState<UserData[]>([
 		// comment the data below if you want to see the
 		// not found component
-		{ fName: 'D', lName: 'guadalupe', room: 'test' },
-		{ fName: 'A', lName: 'ignacio', room: 'test2' },
-		{ fName: 'C', lName: 'ignacio', room: 'test2' },
+		{ fName: 'Lue Kely', lName: 'Anunigga', room: 'test', url: dummyName },
+		{ fName: 'Ervin', lName: 'Panginigga', room: 'test2', url: dummyName },
+		{ fName: 'Jojo', lName: 'Manigga', room: 'test2', url: dummyName },
+		{ fName: 'Jojo', lName: 'Manigga', room: 'test2', url: dummyName },
 	]);
 	const [loading, setLoading] = useState(false);
 
