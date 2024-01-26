@@ -46,12 +46,12 @@ export default function SearchResult() {
 	const [data, setData] = useState<UserData[]>([
 		// comment the data below if you want to see the
 		// not found component
-		{ fName: 'Lue Kely', lName: 'Anunigga', room: 'test', url: dummyName },
-		{ fName: 'Ervin', lName: 'Panginigga', room: 'test2', url: dummyName },
-		{ fName: 'Jojo', lName: 'Manigga', room: 'test2', url: dummyName },
-		{ fName: 'Jojo', lName: 'Manigga', room: 'test2', url: dummyName },
+		// { fName: 'Lue Kely', lName: 'Anunigga', room: '302', url: dummyName },
+		// { fName: 'Ervin', lName: 'Panginigga', room: '303', url: dummyName },
+		// { fName: 'Jojo', lName: 'Manigga', room: '304', url: dummyName },
+		// { fName: 'Ernest', lName: 'Montinigga', room: 'CL3', url: dummyName },
 	]);
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(true);
 
 	const [selectedOption, setSelectedOption] = useState('');
 
@@ -74,6 +74,13 @@ export default function SearchResult() {
 			<h1>
 				Results for: <span className={style.accent}>{id}</span>
 			</h1>
+			<button
+				onClick={() => {
+					setLoading(!loading);
+				}}
+			>
+				Loading
+			</button>
 			<div className={style.navigation_wrapper}>
 				<Link className={style.back_wrapper} to="/search/home">
 					<div>
