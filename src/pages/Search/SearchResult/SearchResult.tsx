@@ -46,10 +46,10 @@ export default function SearchResult() {
 	const [data, setData] = useState<UserData[]>([
 		// comment the data below if you want to see the
 		// not found component
-		// { fName: 'Lue Kely', lName: 'Anunigga', room: '302', url: dummyName },
-		// { fName: 'Ervin', lName: 'Panginigga', room: '303', url: dummyName },
-		// { fName: 'Jojo', lName: 'Manigga', room: '304', url: dummyName },
-		// { fName: 'Ernest', lName: 'Montinigga', room: 'CL3', url: dummyName },
+		{ fName: 'Lue Kely', lName: 'Anunigga', room: '302', url: dummyName },
+		{ fName: 'Ervin', lName: 'Panginigga', room: '303', url: dummyName },
+		{ fName: 'Jojo', lName: 'Manigga', room: '304', url: dummyName },
+		{ fName: 'Ernest', lName: 'Montinigga', room: 'CL3', url: dummyName },
 	]);
 	const [loading, setLoading] = useState(true);
 
@@ -79,7 +79,7 @@ export default function SearchResult() {
 					setLoading(!loading);
 				}}
 			>
-				Loading
+				Switch for Loading
 			</button>
 			<div className={style.navigation_wrapper}>
 				<Link className={style.back_wrapper} to="/search/home">
