@@ -44,6 +44,8 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+
+	animation: fadeIn 0.5s ease-in-out forwards;
 }
 .SearchCard_wrapper:hover {
 	transition: filter 0.3s ease-in-out;
@@ -81,5 +83,14 @@
 		font-family: var(--ff-black);
 		color: var(--color-primary);
 		text-align: center;
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
 	}
 }
