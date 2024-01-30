@@ -27,10 +27,11 @@ export default function Admin() {
         <main className={style.admin_container}>
             {isAuthorized &&
                 <nav className={style.admin_nav}>
-                    <Link to="/dashboard"><button>Dashboard</button></Link>
-                    <Link to="/rooms"><button>Rooms</button></Link>
-                    <Link to="/schedules"><button>Schedules</button></Link>
-                    <Link to="/users"><button>Users</button></Link>
+                    <Link to="/admin/dashboard"><button>Dashboard</button></Link>
+                    <Link to="/admin/room"><button>Rooms</button></Link>
+                    <Link to="/admin/schedule"><button>Schedules</button></Link>
+                    <Link to="/admin/user"><button>Users</button></Link>
+                    <Link to="/admin/attendance"><button>Attendance</button></Link>
                     <div>
                         <button onClick={() => firebaseAuth.signOut()}>Logout</button>
                     </div>

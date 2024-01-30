@@ -26,6 +26,7 @@ import EditUser from './pages/Admin/Users/EditUser/EditUser';
 import AddUser from './pages/Admin/Users/AddUser/AddUser';
 import { RoomWithMui } from './Components/TestUI/TestUI';
 import ScanRoom from './pages/Scan/ScanRoom/ScanRoom';
+import Attendance from './pages/Admin/Attendance/Attendance';
 
 const router = createBrowserRouter([
 	{
@@ -66,6 +67,14 @@ const router = createBrowserRouter([
 					{
 						path: 'user',
 						element: <Users />,
+						children: [
+							{ path: 'add', element: <AddUser /> },
+							{ path: ':id', element: <EditUser />, },
+						]
+					},
+					{
+						path: 'attendance',
+						element: <Attendance />,
 						children: [
 							{ path: 'add', element: <AddUser /> },
 							{ path: ':id', element: <EditUser />, },
