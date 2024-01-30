@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import ScanHeader from '../../Components/Scan/ScanHeader/ScanHeader';
+import styles from './Scan.module.scss';
+import { Outlet } from 'react-router-dom';
 
 export default function Scan() {
-	const navigate = useNavigate();
-
 	return (
-		<main>
-			<h1>Scan</h1>
-			<Outlet />
-		</main>
+		<div className={styles.main_wrapper}>
+			<ScanHeader />
+			<main>
+				<Outlet />
+			</main>
+		</div>
 	);
 }

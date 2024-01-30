@@ -51,32 +51,11 @@ export default function ScanRoom() {
 
 	return (
 		<section>
-			<h1>ScanRoom</h1>
 			<div>Room: {room?.name}</div>
 			{/* <div>Schedules: {schedules.length}</div> */}
-			<CurrentTime />
 		</section>
 	);
 }
-
-// gets time
-export function CurrentTime() {
-	const [currentTime, setCurrentTime] = useState(new Date());
-
-	useEffect(() => {
-		// Update time every second
-		const intervalId = setInterval(() => {
-			setCurrentTime(new Date());
-			console.log(currentTime.getSeconds());
-		}, 1000);
-
-		// Clean up interval on component unmount
-		return () => clearInterval(intervalId);
-	}, [currentTime]);
-
-	return <div>Current time: {format(currentTime, 'h:mm:ss aa')}</div>;
-}
-
 // gets scehdule
 function isCurrentDateInSchedule(schedule: Schedule): boolean {
 	const days = [
