@@ -7,9 +7,7 @@ export default function Scan() {
 	return (
 		<div className={styles.main_wrapper}>
 			<ScanHeader />
-			<main>
-				<Outlet />
-			</main>
+			<Outlet />
 		</div>
 	);
 }

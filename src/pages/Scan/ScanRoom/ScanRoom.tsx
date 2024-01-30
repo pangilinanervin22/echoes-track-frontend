@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import styles from './ScanRoom.module.scss';
 import {
 	useGetRoomByName,
 	useGetRoomByNameRealTime,
 } from '../../Admin/Rooms/useRooms';
 import { Schedule } from '../../Admin/Schedules/useSchedules';
 import { format, getDay, isWithinInterval, parse } from 'date-fns';
+import ScanStatus from '../../../Components/Scan/ScanStatus/ScanStatus';
+import ScanInfo from '../../../Components/Scan/ScanInfo/ScanInfo';
+import ScanTable from '../../../Components/Scan/ScanTable/ScanTable';
 
 export default function ScanRoom() {
 	const params = useParams();
@@ -50,10 +54,17 @@ export default function ScanRoom() {
 	}
 
 	return (
-		<section>
-			<div>Room: {room?.name}</div>
-			{/* <div>Schedules: {schedules.length}</div> */}
-		</section>
+		<main className={styles.wrapper_main}>
+			{/* first column */}
+			<div className={styles.col_wrapper}>
+				<ScanInfo></ScanInfo>
+				<ScanStatus></ScanStatus>
+			</div>
+			{/* second column */}
+			<section className={styles.table_wrapper}>
+				<ScanTable></ScanTable>
+			</section>
+		</main>
 	);
 }
 // gets scehdule

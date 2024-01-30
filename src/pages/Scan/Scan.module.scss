@@ -4,7 +4,7 @@
 	--clr-background: var(--clr-white);
 	--clr-accent: var(--clr-yellow-100);
 	--clr-accent-2: var(--clr-yellow-200);
-	--clr-blue-3: #dfe7fd;
+	--clr-blue-3: #eceafe;
 	* {
 		font-family: var(--ff-regular);
 	}
@@ -21,5 +21,10 @@
 	width: 100dvw;
 	height: 100dvh;
 
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
 	padding: 20px;
+	row-gap: 10px;
 }

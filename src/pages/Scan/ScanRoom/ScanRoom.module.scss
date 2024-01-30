@@ -1,0 +1,26 @@
+.wrapper_main {
+	display: flex;
+	width: 100%;
+	flex: 1;
+	column-gap: 10px;
+}
+.col_wrapper {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	row-gap: 10px;
+}
+
+.table_wrapper {
+	background-color: var(--clr-blue-3);
+	flex: 2.5;
+	overflow: hidden;
+	border-radius: 10px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid var(--clr-primary);
+}
