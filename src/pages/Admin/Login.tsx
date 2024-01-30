@@ -17,16 +17,12 @@ function Login() {
         try {
             const res = await signInWithEmailAndPassword(auth, email, password);
             console.log(res.user, res);
-
-            alert("Login success");
-
         } catch (e) {
             console.log(e);
             alert("Wrong email or password");
         }
     };
 
-    // feel free to change the jsx
     return (
         <main className={loginStyle.mainContainer}>
             <section className={loginStyle.section}>

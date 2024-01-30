@@ -1,9 +1,10 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { firebaseAuth, firebaseDB } from "../../config/firebase";
-import Login from "./Login";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import Login from "./Login";
+import style from './Admin.module.scss';
 
 export default function Admin() {
     const [isAuthorized, setIsAuthorized] = useState(false);
@@ -23,12 +24,22 @@ export default function Admin() {
     }, [isAuthorized]);
 
     return (
-        <>
-            <nav>
-                {isAuthorized && <button onClick={() => firebaseAuth.signOut()}>Logout</button>}
-            </nav>
-            {isAuthorized ? <Outlet /> : <Login />}
-        </>
+        <main className={style.admin_container}>
+            {isAuthorized &&
+                <nav className={style.admin_nav}>
+                    <Link to="/dashboard"><button>Dashboard</button></Link>
+                    <Link to="/rooms"><button>Rooms</button></Link>
+                    <Link to="/schedules"><button>Schedules</button></Link>
+                    <Link to="/users"><button>Users</button></Link>
+                    <div>
+                        <button onClick={() => firebaseAuth.signOut()}>Logout</button>
+                    </div>
+                </nav>
+            }
+            <article className={style.admin_content}>
+                {isAuthorized ? <Outlet /> : <Login />}
+            </article>
+        </main>
     )
 }
 
