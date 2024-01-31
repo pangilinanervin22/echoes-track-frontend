@@ -1,6 +1,44 @@
-.sample{
-    color: red;
+* {
+    font-family: var(--ff-regular);
 }
-.wow{
-    color: yellow;
+
+h1 {
+    font-family: var(--ff-bold);
+    color: var(--color-primary);
+}
+
+p {
+    font-size: var(--fs-sm);
+}
+
+.centered {
+    width: 80%;
+    height: 80vh;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 25px;
+    padding: 5%;
+    overflow-y: auto;
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+}
+
+table {
+    margin-top: 20px;
+    width: 100%;
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+    background-color: grey;
+    color: black;
+}
+
+
+td {
+    border: 1px solid black;
 }

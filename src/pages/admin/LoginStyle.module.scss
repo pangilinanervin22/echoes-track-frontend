@@ -5,7 +5,7 @@
 }
 
 .mainContainer {
-    width: 100%;
+    width: 100dvw;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -79,7 +79,7 @@
                 width: 16px;
             }
 
-            .lockIcon{
+            .lockIcon {
                 width: 21px;
             }
         }
