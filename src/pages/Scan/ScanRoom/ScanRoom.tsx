@@ -77,7 +77,7 @@ export default function ScanRoom() {
 			<div className={styles.col_wrapper}>
 				<ScanInfo roomInfo={roomInfo} />
 				<button onClick={addStudent}>add students</button>
-				<ScanStatus></ScanStatus>
+				<ScanStatus statusCode={3}></ScanStatus>
 			</div>
 			{/* second column */}
 			<section className={styles.table_wrapper}>

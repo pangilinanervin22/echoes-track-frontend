@@ -15,18 +15,18 @@
 	flex-direction: column;
 	h2 {
 		font-size: var(--fs-l);
-		font-family: var(--ff-black);
+		font-family: var(--ff-bold);
 
 		span {
 			font-size: var(--fs-l);
-			font-family: var(--ff-black);
+			font-family: var(--ff-bold);
 			color: var(--clr-accent);
 		}
 	}
 }
 
 .student_container {
-	width: 275px;
+	width: clamp(180px, 50%, 275px);
 	aspect-ratio: 1/1;
 	border: 4px solid var(--clr-primary);
 	border-radius: 800px;
@@ -34,6 +34,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	column-gap: 5px;
 }
 
 .course_wrapper {
@@ -44,7 +45,7 @@
 
 	h3 {
 		font-size: var(--fs-m);
-		font-family: var(--ff-black);
+		font-family: var(--ff-bold);
 		color: var(--clr-accent);
 	}
 }

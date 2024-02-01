@@ -1,0 +1,58 @@
+.pulse_wrapper {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+}
+
+.pulse {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	border-radius: 500px;
+	border: solid 1px transparent;
+	animation: pulse 2.5s infinite ease-in-out;
+	animation-fill-mode: forwards;
+	// animation-delay: 5s;
+}
+.pulse:nth-child(2) {
+	animation: pulse 2.5s infinite ease-in-out;
+	animation-delay: 500ms;
+}
+
+.pulse:nth-child(3) {
+	animation: pulse 2.5s infinite ease-in-out;
+	animation-delay: 1000ms;
+}
+
+.pulse:nth-child(4) {
+	animation: pulse 2.5s infinite ease-in-out;
+	animation-delay: 1500ms;
+}
+
+.pulse:nth-child(5) {
+	animation: pulse 2.5s infinite ease-in-out;
+	animation-delay: 2000ms;
+}
+
+.pulse:nth-child(6) {
+	animation: pulse 2.5s infinite ease-in-out;
+	animation-delay: 2500ms;
+}
+
+@keyframes pulse {
+	from {
+		// transform: scale(1);
+
+		width: 5px;
+		height: 5px;
+		border-color: var(--color-primary);
+	}
+	to {
+		width: 150px;
+		height: 150px;
+		border-color: transparent;
+	}
+}
