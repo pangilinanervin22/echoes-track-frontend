@@ -11,6 +11,12 @@ import ScanStatus from '../../../Components/Scan/ScanStatus/ScanStatus';
 import ScanInfo from '../../../Components/Scan/ScanInfo/ScanInfo';
 import ScanTable from '../../../Components/Scan/ScanTable/ScanTable';
 
+interface ScanInfoProps {
+	course: string;
+	room: string;
+	student: number;
+}
+
 export default function ScanRoom() {
 	const params = useParams();
 	const { getRoomByName, isLoading, room, schedules } =
@@ -18,6 +24,18 @@ export default function ScanRoom() {
 	const [currentSchedule, setCurrentSchedule] = useState<
 		Schedule | undefined
 	>();
+
+	const [roomInfo, setRoomInfo] = useState<ScanInfoProps>({
+		course: 'COSC 85',
+		room: '303',
+		student: 20,
+	});
+
+	function addStudent() {
+		setRoomInfo((prev) => {
+			return { ...prev, student: prev.student + 1 };
+		});
+	}
 
 	useEffect(() => {
 		getRoomByName(params.id || '');
@@ -57,7 +75,8 @@ export default function ScanRoom() {
 		<main className={styles.wrapper_main}>
 			{/* first column */}
 			<div className={styles.col_wrapper}>
-				<ScanInfo></ScanInfo>
+				<ScanInfo roomInfo={roomInfo} />
+				<button onClick={addStudent}>add students</button>
 				<ScanStatus></ScanStatus>
 			</div>
 			{/* second column */}

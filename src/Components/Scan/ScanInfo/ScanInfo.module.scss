@@ -1,8 +1,50 @@
 .info_container {
+	padding-top: 10px;
 	background-color: var(--clr-blue-3);
 	width: 100%;
 	flex: 2;
-	border-radius: 10px;
 
+	overflow: hidden;
+
+	border-radius: 10px;
 	border: 1px solid var(--clr-primary);
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-direction: column;
+	h2 {
+		font-size: var(--fs-l);
+		font-family: var(--ff-black);
+
+		span {
+			font-size: var(--fs-l);
+			font-family: var(--ff-black);
+			color: var(--clr-accent);
+		}
+	}
+}
+
+.student_container {
+	width: 275px;
+	aspect-ratio: 1/1;
+	border: 4px solid var(--clr-primary);
+	border-radius: 800px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.course_wrapper {
+	padding: 10px;
+	text-align: center;
+	background-color: rgb(71, 101, 184);
+	width: 100%;
+
+	h3 {
+		font-size: var(--fs-m);
+		font-family: var(--ff-black);
+		color: var(--clr-accent);
+	}
 }

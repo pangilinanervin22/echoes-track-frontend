@@ -1,5 +1,4 @@
 import style from './CardSearch.module.scss';
-import React from 'react';
 interface User {
 	fName: string;
 	lName: string;
