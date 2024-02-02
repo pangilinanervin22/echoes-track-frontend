@@ -7,5 +7,20 @@
 	justify-content: center;
 	column-gap: 10px;
 
+	p {
+		font-size: var(--fs-m);
+		font-family: var(--ff-bold);
+	}
 	color: #d43921;
+	animation: fadeIn 500ms ease-in-out forwards;
+}
+
+// create a fade in animation
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }

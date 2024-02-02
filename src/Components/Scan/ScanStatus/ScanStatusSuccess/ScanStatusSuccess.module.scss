@@ -6,6 +6,20 @@
 	align-items: center;
 	justify-content: center;
 	column-gap: 10px;
-
+	p {
+		font-size: var(--fs-l);
+		font-family: var(--ff-bold);
+	}
 	color: rgb(62, 212, 32);
+	animation: fadeIn 500ms ease-in-out forwards;
+}
+
+// create a fade in animation
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }

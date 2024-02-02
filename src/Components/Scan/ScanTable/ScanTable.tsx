@@ -11,7 +11,7 @@ function tableRows(students: ScanTableProps[]) {
 	const rows = [];
 	for (let i = 0; i < students.length; i++) {
 		rows.push(
-			<tr>
+			<tr key={i}>
 				<td className={style.img}>
 					<img src={students[i].imgUrl} alt="" />
 				</td>
@@ -32,13 +32,15 @@ export default function ScanTable({
 	return (
 		<div className={style.table_wrapper}>
 			<table cellSpacing={0} className={style.table_container}>
-				<tr>
-					<th>Image</th>
-					<th>Name</th>
-					<th>Student #</th>
-					<th>time-in</th>
-				</tr>
-				{tableRows(students)}
+				<tbody>
+					<tr>
+						<th>Image</th>
+						<th>Name</th>
+						<th>Student #</th>
+						<th>time-in</th>
+					</tr>
+					{tableRows(students)}
+				</tbody>
 			</table>
 		</div>
 	);

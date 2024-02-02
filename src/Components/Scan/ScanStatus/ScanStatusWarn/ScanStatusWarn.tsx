@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react/dist/iconify.js';
 export default function ScanStatusWarn() {
 	return (
 		<div className={style.warn_wrapper}>
-			<Icon icon="mi:circle-warning" width={'2rem'} /> <p>Please Scan Again</p>
+			<Icon icon="mi:circle-warning" width={'3rem'} /> <p>An Error Occured</p>
 		</div>
 	);
 }

@@ -5,6 +5,8 @@ import {
 	useGetRoomByName,
 	useGetRoomByNameRealTime,
 } from '../../Admin/Rooms/useRooms';
+
+import SearchLoading from '../../../Components/Search/SearchLoading/SearchLoading';
 import { Schedule } from '../../Admin/Schedules/useSchedules';
 import { format, getDay, isWithinInterval, parse } from 'date-fns';
 import ScanStatus from '../../../Components/Scan/ScanStatus/ScanStatus';
@@ -39,7 +41,7 @@ export default function ScanRoom() {
 		section: 'CS 3-2',
 	});
 
-	const students: ScanTableProps[] = [
+	const [students, setStudents] = useState<ScanTableProps[]>([
 		{
 			studentNo: 202111830,
 			name: 'John Doe',
@@ -47,14 +49,16 @@ export default function ScanRoom() {
 				'https://www.ripponmedicalservices.co.uk/images/easyblog_articles/89/b2ap3_large_ee72093c-3c01-433a-8d25-701cca06c975.jpg',
 			timeIn: '12:00',
 		},
-	];
+	]);
 
-	function addStudent() {
-		setRoomInfo((prev) => {
-			return { ...prev, student: prev.student + 1 };
-		});
-	}
+	// DONT REMOVE
+	// function addStudent() {
+	// 	setRoomInfo((prev) => {
+	// 		return { ...prev, student: prev.student + 1 };
+	// 	});
+	// }
 
+	// Get room by name
 	useEffect(() => {
 		getRoomByName(params.id || '');
 		console.log('render');
@@ -62,6 +66,7 @@ export default function ScanRoom() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [params.id]);
 
+	// update current schedule
 	useEffect(() => {
 		// Function to update current schedule
 		const updateCurrentSchedule = () => {
@@ -78,8 +83,29 @@ export default function ScanRoom() {
 		return () => clearInterval(intervalId);
 	}, [schedules]);
 
+	// RFID Scanner
+	useEffect(() => {
+		const handleKeyPress = (event: KeyboardEvent) => {
+			// Check for RFID data in the keyboard input
+			const scannedData: string = event.key;
+
+			// Assuming the Enter key indicates the end of an RFID scan
+			if (event.key === 'Enter') {
+				console.log('RFID Scanned:', scannedData);
+
+				// Handle or process the scanned data as needed
+			}
+		};
+
+		window.addEventListener('keypress', handleKeyPress);
+
+		return () => {
+			window.removeEventListener('keypress', handleKeyPress);
+		};
+	}, []);
+
 	if (isLoading) {
-		return <div>Loading...</div>;
+		return <SearchLoading />;
 	}
 
 	if (currentSchedule) {

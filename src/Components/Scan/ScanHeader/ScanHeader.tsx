@@ -10,7 +10,7 @@ export function CurrentTime() {
 		// Update date and time every second
 		const intervalId = setInterval(() => {
 			setCurrentDateTime(new Date());
-			console.log(currentDateTime.getSeconds());
+			// console.log(currentDateTime.getSeconds());
 		}, 1000);
 
 		// Clean up interval on component unmount
