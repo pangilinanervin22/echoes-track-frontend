@@ -15,6 +15,7 @@ interface ScanInfoProps {
 	course: string;
 	room: string;
 	student: number;
+	section: string;
 }
 interface ScanTableProps {
 	imgUrl: string;
@@ -35,6 +36,7 @@ export default function ScanRoom() {
 		course: 'COSC 85',
 		room: '303',
 		student: 20,
+		section: 'CS 3-2',
 	});
 
 	const students: ScanTableProps[] = [
@@ -92,7 +94,7 @@ export default function ScanRoom() {
 			{/* first column */}
 			<div className={styles.col_wrapper}>
 				<ScanInfo roomInfo={roomInfo} />
-				<button onClick={addStudent}>add students</button>
+
 				<ScanStatus statusCode={3}></ScanStatus>
 			</div>
 			{/* second column */}

@@ -5,6 +5,7 @@ interface ScanInfoProps {
 		course: string;
 		room: string;
 		student: number;
+		section: string;
 	};
 }
 
@@ -20,6 +21,7 @@ export default function ScanInfo({ roomInfo }: ScanInfoProps) {
 			</div>
 			<div className={styles.course_wrapper}>
 				<h3>{roomInfo.course}</h3>
+				<h3>{roomInfo.section}</h3>
 			</div>
 		</section>
 	);
