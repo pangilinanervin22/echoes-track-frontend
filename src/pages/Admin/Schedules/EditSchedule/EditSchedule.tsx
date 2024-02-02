@@ -3,7 +3,7 @@ import { Schedule, isScheduleValid, useGetSchedule, useUpdateSchedule } from "..
 import { useGetRooms } from "../../Rooms/useRooms";
 import { useNavigate, useParams } from 'react-router-dom';
 import TimePicker from "../TimePicker";
-import style from './AddSchedule.module.css';
+import editschedStyle from './EditSchedule.module.scss';
 
 function EditSchedule() {
     const { id } = useParams<{ id: string }>();
@@ -56,11 +56,9 @@ function EditSchedule() {
 
     return (
         <>
-            <button onClick={() => { navigate("/admin/schedule") }}>back to table</button>
-            <p>Edit Schedule</p>
+            <h1>Edit Schedule</h1>
             <form onSubmit={handleSubmit}>
-                <label>
-                    Room:
+               
                     <select name="room" value={formSchedule.room} onChange={handleChange}
                         required>
                         <option value="" disabled> Select Room  </option>
@@ -68,17 +66,14 @@ function EditSchedule() {
                             <option key={room.id} value={room.name}>{room.name}</option>
                         ))}
                     </select>
-                </label>
-                <label>
-                    Subject:
+                
                     <input type="text" name="subject" value={formSchedule.subject} onChange={handleChange} required />
-                </label>
-                <label>
-                    Section:
+              
+              
+               
                     <input type="text" name="section" value={formSchedule.section} onChange={handleChange} required />
-                </label>
-                <label>
-                    Day:
+              
+             
                     <select name="day" value={formSchedule.day} onChange={handleChange} required>
                         <option value="">Select a day</option>
                         <option value="Monday">Monday</option>
@@ -89,7 +84,7 @@ function EditSchedule() {
                         <option value="Saturday">Saturday</option>
                         <option value="Sunday">Sunday</option>
                     </select>
-                </label>
+            
                 <TimePicker
                     changeInTime={(timeString: string) =>
                         setFormSchedule(prevSchedule => ({ ...prevSchedule, start: timeString }))
@@ -100,7 +95,10 @@ function EditSchedule() {
                     initialInTime={formSchedule.start}
                     initialOutTime={formSchedule.end}
                 />
-                <button type="submit">Edit Schedule</button>
+                <div className={editschedStyle.wow}>
+                <button className={editschedStyle.editBtn} type="submit">Edit Schedule</button>
+                <button className={editschedStyle.backBtn} onClick={() => { navigate("/admin/schedule") }}>back to table</button>
+                </div>
             </form>
         </>
     );

@@ -42,7 +42,6 @@ const TimePicker: React.FC<Props> = ({ changeInTime, changeOutTime, initialInTim
 
     return (
         <div>
-            <label htmlFor="inTimePicker">Select In Time:</label>
             <select id="inTimePicker" value={initialInTime} onChange={handleInTimeChange} required>
                 <option value="" disabled>
                     Select a Time
@@ -56,7 +55,6 @@ const TimePicker: React.FC<Props> = ({ changeInTime, changeOutTime, initialInTim
                 )}
             </select>
 
-            <label htmlFor="outTimePicker">Select Out Time:</label>
             <select id="outTimePicker" value={initialOutTime} onChange={handleOutTimeChange} required>
                 <option value="" disabled>
                     Select a Time

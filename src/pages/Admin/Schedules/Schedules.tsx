@@ -1,7 +1,7 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useDeleteSchedule, useGetSchedules } from "./useSchedules";
 import MainTable, { TableStructure } from "../../../Components/Table/TableStructure";
-
+import scheduleStyle from "./scheduleStyle.module.scss"
 
 const content: TableStructure = {
     id: "id",
@@ -23,9 +23,8 @@ export default function Schedule() {
 
 
     return (
-        <main>
-            <div>Schedule</div>
-            <div>
+        <main className={scheduleStyle.mainContainer}>
+            <div className={scheduleStyle.centered}>
                 {path.pathname.endsWith("/admin/schedule") ? <MainTable
                     data={schedules}
                     isEditable={true}
