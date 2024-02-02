@@ -1,0 +1,25 @@
+* {
+    font-family: var(--ff-regular);
+}
+
+h1 {
+    font-family: var(--ff-bold);
+    color: var(--color-primary);
+}
+
+p {
+    font-size: var(--fs-sm);
+}
+
+.mainContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+}
+.centered {
+    width: 80%;
+    padding: 50px;
+    background-color: white;
+    border-radius: 25px;
+}
