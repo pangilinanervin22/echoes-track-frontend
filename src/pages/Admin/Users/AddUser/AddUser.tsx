@@ -1,8 +1,11 @@
 import React from "react";
 import { User, useAddUser } from "../useUsers";
+import { useNavigate } from "react-router-dom";
+import adduserStyle from "../AddUser/adduserStyle.module.scss"
 
 export default function AddUser() {
     const { addUser } = useAddUser();
+    const navigate = useNavigate();
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
@@ -26,28 +29,28 @@ export default function AddUser() {
     };
 
     return (
-        <div>
-            <h1>Add User</h1>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Name:
-                    <input id="name" name="name" type="text" />
-                </label>
-                <label>
-                    RFID:
-                    <input id="rfid" name="rfid" type="number" />
-                </label>
-                <label>
-                    Role:
-                    <select id="role" name="role">
-                        <option value="student">Student</option>
-                        <option value="teacher">Teacher</option>
-                        <option value="employee">Employee   </option>
-                        <option value="visitor">Visitor</option>
-                    </select>
-                </label>
-                <button type="submit">Add User</button>
-            </form>
-        </div>
+            <div className={adduserStyle.center}>
+                <div className={adduserStyle.anotherCenter}>
+                    <h1>Add User</h1>
+                    <form onSubmit={handleSubmit}>
+                            <input id="name" placeholder="Name" name="name" type="text" />
+
+                            <input id="rfid" placeholder="RFID" name="rfid" type="number" />
+                        <label>
+                            <h1>Role</h1>
+                            <select id="role" name="role">
+                                <option value="student">Student</option>
+                                <option value="teacher">Teacher</option>
+                                <option value="employee">Employee   </option>
+                                <option value="visitor">Visitor</option>
+                            </select>
+                        </label>
+                        <div className={adduserStyle.wow}>
+                            <button className={adduserStyle.addBtn} type="submit">Confirm</button>
+                            <button className={adduserStyle.backBtn} onClick={() => { navigate("/admin/user")}}>Back</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
     );
 }

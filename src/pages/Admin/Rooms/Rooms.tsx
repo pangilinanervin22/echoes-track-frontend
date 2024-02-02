@@ -3,6 +3,17 @@ import { Room, useDeleteRoom, useGetRooms } from "./useRooms";
 import AddRoom from "./AddRoom";
 import EditRoom from "./EditRoom";
 import room from "./Rooms.module.scss"
+import MainTable, { TableStructure } from "../../../Components/Table/TableStructure";
+
+const content: TableStructure = {
+    id: "id",
+    title: "Room",
+    searchPath: "name",
+    structure: [
+        { label: "ID", path: "id", width: "300px", fontSize: "16px" },
+        { label: "Name ", path: "name", width: "200px", fontSize: "16px" },
+    ]
+};
 
 export default function Room() {
     const { rooms, isLoading } = useGetRooms();
@@ -11,6 +22,8 @@ export default function Room() {
     const [selectedRoom, setSelectedRoom] = useState({} as Room);
     const [searchRoomName, setSearchRoomName] = useState('');
 
+    console.log(rooms);
+    
     const filteredRooms = rooms
         .filter(room => room.name && room.name.toLowerCase().includes(searchRoomName.toLowerCase()))
         .sort((a, b) => a.name.localeCompare(b.name));
@@ -23,46 +36,30 @@ export default function Room() {
     return (
         <main className={room.mainContainer}>
             <div className={room.centered}>
-                <div className={room.inputCont}>
-                    <input
-                        type="text"
-                        placeholder="Search..."
-                        value={searchRoomName}
-                        onChange={event => setSearchRoomName(event.target.value)}
-                    />
-                    <button onClick={() => setModifyStatus("isAdding")}>Add Room</button>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {filteredRooms.map((room) => (
-                            <tr key={room.id}>
-                                <td>{room.id}</td>
-                                <td>{room.name}</td>
-                                <td>
-                                    <button
-                                        onClick={() => {
-                                            setSelectedRoom(room);
-                                            setModifyStatus("isEditing");
-                                        }}>
-                                        Edit
-                                    </button>
-                                    <button
-                                        onClick={() => { deleteRoom(room.id) }}>
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+               <MainTable
+                data={rooms}
+                isEditable={true}
+                structure={content}
+                handleUpdate={onHandleUpdate}
+                handleDelete={onHandleDelete}
+                handleAdd={onHandleAdd}
+            />
             </div>
-        </main>
-    )
+            </main>
+        
+    );
+
+    function onHandleDelete(data: any) {
+        deleteRoom(data.id)
+
+    }
+
+    function onHandleAdd() {
+        setModifyStatus("isAdding")
+    }
+
+    function onHandleUpdate(data: any) {
+        setSelectedRoom(data);
+                                            setModifyStatus("isEditing");
+    }
 }
