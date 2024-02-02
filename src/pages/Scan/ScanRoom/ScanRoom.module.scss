@@ -2,6 +2,7 @@
 	color: var(--clr-primary);
 	display: flex;
 	width: 100%;
+
 	flex: 1;
 	column-gap: 10px;
 }
@@ -16,12 +17,15 @@
 
 .table_wrapper {
 	background-color: var(--clr-blue-3);
+	width: 100%;
+	height: 100%;
+
 	flex: 2.5;
-	overflow: hidden;
+
 	border-radius: 10px;
 
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
 	border: 1px solid var(--clr-primary);
 }

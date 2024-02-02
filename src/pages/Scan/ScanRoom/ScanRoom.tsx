@@ -16,6 +16,12 @@ interface ScanInfoProps {
 	room: string;
 	student: number;
 }
+interface ScanTableProps {
+	imgUrl: string;
+	name: string;
+	studentNo: number;
+	timeIn: string;
+}
 
 export default function ScanRoom() {
 	const params = useParams();
@@ -30,6 +36,16 @@ export default function ScanRoom() {
 		room: '303',
 		student: 20,
 	});
+
+	const students: ScanTableProps[] = [
+		{
+			studentNo: 202111830,
+			name: 'John Doe',
+			imgUrl:
+				'https://www.ripponmedicalservices.co.uk/images/easyblog_articles/89/b2ap3_large_ee72093c-3c01-433a-8d25-701cca06c975.jpg',
+			timeIn: '12:00',
+		},
+	];
 
 	function addStudent() {
 		setRoomInfo((prev) => {
@@ -81,7 +97,7 @@ export default function ScanRoom() {
 			</div>
 			{/* second column */}
 			<section className={styles.table_wrapper}>
-				<ScanTable></ScanTable>
+				<ScanTable students={students}></ScanTable>
 			</section>
 		</main>
 	);
