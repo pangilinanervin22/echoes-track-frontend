@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { Schedule, isScheduleValid, useGetSchedule, useUpdateSchedule } from "../useSchedules";
 import { useGetRooms } from "../../Rooms/useRooms";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import TimePicker from "../TimePicker";
 import style from './AddSchedule.module.css';
 
 function EditSchedule() {
     const { id } = useParams<{ id: string }>();
+    const navigate = useNavigate();
     const { rooms } = useGetRooms();
     const { schedule: initialData, error } = useGetSchedule(id || "");
     const { updateSchedule } = useUpdateSchedule();
@@ -53,7 +54,7 @@ function EditSchedule() {
 
     return (
         <>
-            <br />
+            <button onClick={() => { navigate("/admin/schedule")}}>back to table</button>
             <p>Edit Schedule</p>
             <form onSubmit={handleSubmit}>
                 <label>

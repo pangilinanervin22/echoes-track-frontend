@@ -1,0 +1,41 @@
+* {
+    font-family: var(--ff-regular);
+}
+
+h1 {
+    font-family: var(--ff-bold);
+    color: var(--color-primary);
+}
+
+p {
+    font-size: var(--fs-sm);
+}
+
+
+.editBtn{
+    flex-basis: 50%;
+    border: none;
+    background-color: #6FA6EA;
+    padding: 10px 25px;
+    cursor: pointer;
+}
+.backBtn{
+    flex-basis: 50%;
+    background-color: #FF5757;
+    border: none;
+    color: black;
+    cursor: pointer;
+    padding: 10px 25px;
+}
+.wow{
+    display: flex;
+    gap: 10px;
+    button{
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: rgb(58, 53, 53);
+    }
+}
+h1{
+    font-size: 1.4rem;
+}

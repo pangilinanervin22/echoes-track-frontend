@@ -1,0 +1,234 @@
+* {
+    font-family: var(--ff-regular);
+}
+.container_table {
+    padding: 20px;
+
+    table {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        border-collapse: collapse;
+        table-layout: fixed;
+        text-align: center;
+
+        svg{
+            fill: black;
+        }
+
+        thead {
+            width: 100%;
+            color: black;
+            background: #FFC727;
+            padding: 10px;
+
+            tr {
+                display: flex;
+                justify-content: space-evenly;
+                width: 100%;
+                overflow: hidden;
+                align-items: center;
+            }
+
+            th {
+               display: flex;
+                font-weight: 600;
+                font-size: 22px;
+                padding: 4px;
+                cursor: pointer;
+                text-align: center;
+                justify-content: center;
+            }
+        }
+
+        tbody {
+            width: 100%;
+            margin-top: 8px;
+
+            tr {
+                display: flex;
+                width: 100%;
+                justify-content: space-evenly;
+                background: white;
+                box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+                margin-block: 8px;
+                padding-block: 8px;
+                align-items: center;
+            }
+
+            tr:last-child {
+                border-bottom: 5px solidrgba(0, 0, 0, 0.25);
+            }
+
+            td {
+                padding-inline: 16px;
+
+                >img {
+                    object-fit: cover;
+                }
+            }
+        }
+    }
+}
+
+.button_update {
+    background: #6fa6ea;
+    color: #F3EEE8;
+    border: none;
+
+}
+
+.button_delete {
+    border: none;
+    background: #ff5757;
+    color: #F3EEE8;
+}
+
+.button_update,
+.button_delete {
+    border-radius: 5px;
+    padding: 5px 20px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+
+    &:active {
+        box-shadow: 0 0 10px black;
+    }
+
+    &:hover {
+        cursor: pointer;
+        scale: 1.05;
+        box-shadow: 0 0 5px black;
+    }
+}
+
+.tool_table {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+
+    .search {
+        display: flex;
+        align-items: center;
+        width: 70%;
+        height: 40px;
+        max-width: 560px;
+        border: none;
+
+        >:first-child {
+            width: 50%;
+            height: 100%;
+            padding: 10px;
+            border: 1px solid black;
+        }
+
+        >:last-child {
+            width: 30px;
+            position: relative;
+            right: 50px;
+            fill: black;
+            opacity: 0.8;
+        }
+    }
+
+    .add_button {
+        display: flex;
+        align-items: center;
+        width: 180px;
+        height: 40px;
+        border: 1px solid black;
+        border-radius: 25px;
+        margin-block: 8px;
+        cursor: pointer;
+
+        >:last-child {
+            background: none;
+            border: none;
+            margin-left: 10px;
+            font-size: 18px;
+            font-family: var(--ff-regular);
+        }
+
+        >:first-child {
+            height: 24px;
+            margin-left: 30px;
+        }
+
+        &:active {
+            background: #F3EEE8;
+        }
+    }
+}
+
+.tool_table_noAdd {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    >:first-child {
+        display: flex;
+        align-items: center;
+        width: 40%;
+        height: 40px;
+
+        >:first-child {
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        >:last-child {
+            width: 30px;
+            height: 30px;
+            position: relative;
+            right: 50px;
+            fill: rgb(109, 98, 94);
+        }
+    }
+}
+
+
+.paginate_table {
+    display: flex;
+    justify-content: flex-end;
+    height: 10px;
+    margin-top: 15px;
+
+
+    div>* {
+        margin-inline: 10px;
+        fill: black;
+        height: 20px;
+
+        &:hover {
+            cursor: pointer;
+            scale: 1.05;
+        }
+
+        &:active {
+            scale: 1.1;
+        }
+    }
+
+    .disable {
+        fill: black;
+        opacity: 0.5;
+
+        &:hover {
+            cursor: none;
+        }
+    }
+
+}
+
+.arrow_keys>* {
+    margin-left: 10px;
+    height: 25px;
+    fill: white;
+}

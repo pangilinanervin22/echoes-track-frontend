@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { User, useGetUser, useUpdateUser } from "../useUsers";
+import usereditStyle from "./edituserStyle.module.scss"
 
 export default function EditUser() {
     const params = useParams();
+    const navigate = useNavigate();
     const { user, loading } = useGetUser(params.id || "");
     const { updateUser } = useUpdateUser();
 
@@ -32,21 +34,18 @@ export default function EditUser() {
 
     return (
         <div>
-            <h1>Edit User {params.id}</h1>
+            <h1>Edit User: {params.id}</h1>
             <form onSubmit={handleSubmit}>
-                <label>
-                    Name:
-                    <input id="name" type="text" value={name} onChange={e => setName(e.target.value)} />
-                </label>
-                <label>
-                    Role:
-                    <input id="role" type="text" value={role} onChange={e => setRole(e.target.value)} />
-                </label>
-                <label>
-                    RFID:
-                    <input id="rfid" type="text" value={rfid} onChange={e => setRfid(e.target.value)} /> {/* Add input for RFID */}
-                </label>
-                <button type="submit">Update User</button>
+                    <input id="name" type="text" value={name} onChange={e => setName(e.target.value)} required />
+               
+                    <input id="role" type="text" value={role} onChange={e => setRole(e.target.value)}  required/>
+         
+               
+                    <input id="rfid" type="text" value={rfid} onChange={e => setRfid(e.target.value)} required/> {/* Add input for RFID */}
+                <div className={usereditStyle.wow}>
+                    <button className={usereditStyle.editBtn} type="submit">Confirm</button>
+                    <button className={usereditStyle.backBtn} onClick={() => { navigate("/admin/user")}}>Back</button>
+                </div>
             </form>
         </div>
     );

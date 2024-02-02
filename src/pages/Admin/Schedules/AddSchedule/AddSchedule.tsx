@@ -2,9 +2,10 @@ import { useState } from "react";
 import { useGetRooms } from "../../Rooms/useRooms";
 import TimePicker from "../TimePicker";
 import { Schedule, isScheduleValid, useAddSchedule } from "../useSchedules";
-import style from './AddSchedule.module.css';
+import { useNavigate } from "react-router-dom";
 
 function AddSchedule() {
+  const navigate = useNavigate();
   const { rooms } = useGetRooms();
   const { addSchedule } = useAddSchedule();
   const [schedule, setSchedule] = useState<Schedule>({
@@ -44,7 +45,8 @@ function AddSchedule() {
 
   return (
     <>
-      <br />
+      <button onClick={() => { navigate("/admin/user") }}>back to table</button>
+
       <p>Add Schedule</p>
       <form onSubmit={handleSubmit}>
         <label>

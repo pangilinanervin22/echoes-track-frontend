@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, query, updateDoc, where, DocumentReference } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, query, updateDoc, where, DocumentReference, writeBatch } from 'firebase/firestore';
 import { firebaseDB } from '../../../config/firebase';
 
 export interface Schedule {
@@ -22,7 +22,7 @@ export function useGetSchedules() {
         id: doc.id,
         ...doc.data(),
       }));
-
+      
       setSchedules(data as Schedule[]);
     });
 
@@ -139,6 +139,16 @@ export function useUpdateSchedule() {
   return { status, updateSchedule };
 }
 
+
+export function isScheduleValid(schedule: Schedule) {
+  for (const key in schedule) {
+    if (schedule[key as keyof Schedule] === "") {
+      return false;
+    }
+  }
+  return true;
+}
+
 export function useDeleteSchedule() {
   const [status, setStatus] = useState("idle");
 
@@ -146,7 +156,9 @@ export function useDeleteSchedule() {
     setStatus("loading");
 
     try {
-      await deleteDoc(doc(firebaseDB, "schedules", id));
+      const ref = doc(firebaseDB, "schedules", id);
+      await deleteDoc(ref);
+
       setStatus("success");
     } catch (e) {
       console.log(e);
@@ -158,15 +170,6 @@ export function useDeleteSchedule() {
 }
 
 // non-react hooks
-
-export function isScheduleValid(schedule: Schedule) {
-  for (const key in schedule) {
-    if (schedule[key as keyof Schedule] === "") {
-      return false;
-    }
-  }
-  return true;
-}
 
 export async function getSchedule(id: string) {
   const docRef = doc(firebaseDB, "schedules", id || "");
