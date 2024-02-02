@@ -28,7 +28,7 @@ function AddSchedule() {
     e.preventDefault();
     // Add your logic to save the schedule here
 
-    if (isScheduleValid(schedule))
+    if (isScheduleValid(schedule)) {
       addSchedule({
         day: schedule.day,
         room: schedule.room,
@@ -37,6 +37,8 @@ function AddSchedule() {
         end: schedule.end,
         subject: schedule.subject
       });
+      navigate("/admin/schedule")
+    }
     else {
       alert("Invalid Schedule");
       return;
@@ -45,7 +47,7 @@ function AddSchedule() {
 
   return (
     <>
-      <button onClick={() => { navigate("/admin/user") }}>back to table</button>
+      <button onClick={() => { navigate("/admin/schedule") }}>back to table</button>
 
       <p>Add Schedule</p>
       <form onSubmit={handleSubmit}>

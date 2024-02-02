@@ -25,7 +25,7 @@ function EditSchedule() {
         e.preventDefault();
         // Add your logic to save the schedule here
 
-        if (isScheduleValid(formSchedule))
+        if (isScheduleValid(formSchedule)) {
             updateSchedule(id || "",
                 {
                     day: formSchedule.day,
@@ -35,6 +35,8 @@ function EditSchedule() {
                     end: formSchedule.end,
                     subject: formSchedule.subject
                 });
+            navigate("/admin/schedule")
+        }
         else {
             alert("Invalid Schedule");
             return;
@@ -54,7 +56,7 @@ function EditSchedule() {
 
     return (
         <>
-            <button onClick={() => { navigate("/admin/schedule")}}>back to table</button>
+            <button onClick={() => { navigate("/admin/schedule") }}>back to table</button>
             <p>Edit Schedule</p>
             <form onSubmit={handleSubmit}>
                 <label>

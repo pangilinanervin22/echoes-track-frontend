@@ -5,13 +5,12 @@ import MainTable, { TableStructure } from "../../../Components/Table/TableStruct
 
 const content: TableStructure = {
     id: "id",
-    title: "Room",
+    title: "Schedule",
     searchPath: "room",
     structure: [
         { label: "ID", path: "id", width: "300px", fontSize: "16px" },
-
-        {label: "Room ", path: "room", width: "200px", fontSize: "16px" },
-        {label: "Subject",  path: "subject",  width: "200px", fontSize: "16px"}, 
+        { label: "Room ", path: "room", width: "200px", fontSize: "16px" },
+        { label: "Subject", path: "subject", width: "200px", fontSize: "16px" },
     ]
 };
 
@@ -22,25 +21,23 @@ export default function Schedule() {
     const schedules = useGetSchedules();
     const { deleteSchedule } = useDeleteSchedule();
 
-    console.log(schedules);
-    
 
     return (
         <main>
             <div>Schedule</div>
             <div>
-            {path.pathname.endsWith("/admin/user") ?  <MainTable
+                {path.pathname.endsWith("/admin/schedule") ? <MainTable
                     data={schedules}
                     isEditable={true}
                     structure={content}
                     handleUpdate={onHandleUpdate}
                     handleDelete={onHandleDelete}
                     handleAdd={onHandleAdd}
-                   />  :         
-                   <Outlet /> 
+                /> :
+                    <Outlet />
                 }
             </div>
-            
+
         </main>
     );
 
