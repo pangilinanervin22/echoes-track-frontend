@@ -1,4 +1,5 @@
 import { Room, useUpdateRoom } from "./useRooms";
+import addStylee from "./addRoomStyle.module.scss"
 
 interface Props {
     room: Room;
@@ -23,18 +24,24 @@ export default function EditRoom({ room, changeStatus }: Props) {
         return <div>Room not found</div>
 
     return (
-        <div>
-            <button onClick={() => { changeStatus("all") }}>
-                back to rooms
-            </button>
-            <h1>Edit Room</h1>
-            <form onSubmit={handleSubmit}>
-                <input id="name" type="text" placeholder="Name"
-                    min={1} max={100}
-                    required
-                    defaultValue={room.name} />
-                <button type="submit">Update</button>
-            </form>
+        <div className={addStylee.mainContainer}>
+            <div className={addStylee.center}>
+                <div className={addStylee.anotherCenter}>
+                <h1>Edit Room</h1>
+                <form onSubmit={handleSubmit}>
+                    <input id="name" type="text" placeholder="Name"
+                        min={1} max={100}
+                        required
+                        defaultValue={room.name} />
+                        <div>
+                        <button className={addStylee.addBtn} type="submit">Update</button>
+                        <button className={addStylee.backBtn} onClick={() => { changeStatus("all") }}>
+                            back to rooms
+                        </button>
+                        </div>
+                </form>
+                </div>
+            </div>
         </div>
     )
 }

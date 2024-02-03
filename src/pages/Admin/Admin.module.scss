@@ -1,0 +1,106 @@
+.admin_container {
+    display: flex;
+    height: 100dvh;
+    width: 100dvw;
+
+
+
+    * {
+        font-family: var(--ff-regular);
+    }
+
+    h1 {
+        font-family: var(--ff-bold);
+        color: var(--color-primary);
+    }
+
+    p {
+        font-size: var(--fs-sm);
+    }
+
+}
+
+.admin_nav {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #163aeb;
+    min-width: 260px;
+    width: 20%;
+}
+
+.second {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background: inherit;
+    border: none;
+    border-top: 2px solid #FFC727;
+
+
+}
+
+.second button {
+    font-size: 1rem;
+    border: none;
+    color: white;
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+    padding: 20px 20px;
+
+
+}
+
+.wow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 15%;
+    width: 100%;
+    border: none;
+}
+
+.wow img {
+    width: 75px;
+    margin-right: 10px;
+}
+
+.wow h1 {
+    color: #FFC727;
+    font-size: 1.4rem;
+}
+
+.iconCont {
+    display: flex;
+    align-items: center;
+    padding: 10px 40px;
+    text-decoration: none;
+    transition: 0.3s;
+
+    &:hover {
+        background-color: #788bea;
+
+        &>button {
+            color: #3b4574;
+        }
+    }
+}
+
+
+
+
+.admin_content {
+    height: 100%;
+    width: 80%;
+    background: url(../../assets/images/cvsuBG.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+
+.active {
+    background: gray;
+}

@@ -2,9 +2,12 @@ import { useState } from "react";
 import { useGetRooms } from "../../Rooms/useRooms";
 import TimePicker from "../TimePicker";
 import { Schedule, isScheduleValid, useAddSchedule } from "../useSchedules";
-import style from './AddSchedule.module.css';
+import { useNavigate } from "react-router-dom";
+import addschedStyle from './AddSchedule.module.scss'
+import { ClassNames } from "@emotion/react";
 
 function AddSchedule() {
+  const navigate = useNavigate();
   const { rooms } = useGetRooms();
   const { addSchedule } = useAddSchedule();
   const [schedule, setSchedule] = useState<Schedule>({
@@ -27,7 +30,7 @@ function AddSchedule() {
     e.preventDefault();
     // Add your logic to save the schedule here
 
-    if (isScheduleValid(schedule))
+    if (isScheduleValid(schedule)) {
       addSchedule({
         day: schedule.day,
         room: schedule.room,
@@ -36,6 +39,8 @@ function AddSchedule() {
         end: schedule.end,
         subject: schedule.subject
       });
+      navigate("/admin/schedule")
+    }
     else {
       alert("Invalid Schedule");
       return;
@@ -43,12 +48,12 @@ function AddSchedule() {
   };
 
   return (
-    <>
-      <br />
-      <p>Add Schedule</p>
+    <div className={addschedStyle.center}>
+      <div className={addschedStyle.anotherCenter}>
+      
+      <h1>Add Schedule</h1>
       <form onSubmit={handleSubmit}>
-        <label>
-          Room:
+      
           <select name="room" value={schedule.room} onChange={handleChange}
             required>
             <option value="" disabled> Select Room  </option>
@@ -56,17 +61,14 @@ function AddSchedule() {
               <option key={room.id} value={room.name}>{room.name}</option>
             ))}
           </select>
-        </label>
-        <label>
-          Subject:
-          <input type="text" name="subject" value={schedule.subject} onChange={handleChange} required />
-        </label>
-        <label>
-          Section:
-          <input type="text" name="section" value={schedule.section} onChange={handleChange} required />
-        </label>
-        <label>
-          Day:
+       
+       
+          <input type="text" placeholder="Subject" name="subject" value={schedule.subject} onChange={handleChange} required />
+       
+        
+          <input type="text" placeholder="Section" name="section" value={schedule.section} onChange={handleChange} required />
+
+         
           <select name="day" value={schedule.day} onChange={handleChange} required>
             <option value="">Select a day</option>
             <option value="Monday">Monday</option>
@@ -77,7 +79,6 @@ function AddSchedule() {
             <option value="Saturday">Saturday</option>
             <option value="Sunday">Sunday</option>
           </select>
-        </label>
         <TimePicker
           changeInTime={(timeString: string) =>
             setSchedule(prevSchedule => ({ ...prevSchedule, start: timeString }))
@@ -88,9 +89,13 @@ function AddSchedule() {
           initialInTime={schedule.start}
           initialOutTime={schedule.end}
         />
-        <button type="submit">Add Schedule</button>
+        <div className={addschedStyle.wow}>
+        <button className={addschedStyle.addBtn} type="submit">Add Schedule</button>
+        <button className={addschedStyle.backBtn} onClick={() => { navigate("/admin/schedule") }}>back to table</button>
+        </div>
       </form>
-    </>
+      </div>
+    </div>
   );
 }
 

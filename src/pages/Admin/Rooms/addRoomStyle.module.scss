@@ -1,30 +1,26 @@
-* {
-    font-family: var(--ff-regular);
+.mainContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 85vh;
 }
-
-h1 {
-    font-family: var(--ff-bold);
-    color: var(--color-primary);
-}
-
-p {
-    font-size: var(--fs-sm);
-}
-
 .center{
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 25px;
     padding: 20px;
-    background-color: transparent;
-    width: 100%;
-    height: 100%;
+    background: white;
+    width: 40%;
+    height: 25vh;
 }
 
 .anotherCenter{
     border-radius: 10px;
     width: 100%;
+    padding: 20px;
+    flex-direction: column;
     background: transparent;
 
     h1{
@@ -49,30 +45,19 @@ input{
     border-radius: 8px;
     margin: 20px 0px;
 }
-select{
-    width: 100%;
-    border: 2px solid black;
-    padding: 14px;
-    border-radius: 8px;
-    margin: 10px 0 20px 0;
-}
 
 .addBtn{
-    flex-basis: 50%;
+    width: 50%;
     border: none;
     background-color: #6FA6EA;
     padding: 10px 25px;
     cursor: pointer;
 }
 .backBtn{
-    flex-basis: 50%;
+    width: 50%;
     background-color: #FF5757;
     border: none;
     color: black;
     cursor: pointer;
     padding: 10px 25px;
-}
-.wow{
-    display: flex;
-    gap: 10px;
 }

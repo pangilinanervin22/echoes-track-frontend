@@ -1,50 +1,59 @@
-import { Outlet, useNavigate } from "react-router-dom";
-import { useGetUsers } from "./useUsers";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
+import { useDeleteUser, useGetUsers } from "./useUsers";
+import MainTable, { TableStructure } from "../../../Components/Table/TableStructure";
+import { ClassNames } from "@emotion/react";
+import userStyle from "./userStyle.module.scss"
+
+const content: TableStructure = {
+    id: "id",
+    title: "Users",
+    searchPath: "name",
+    structure: [
+        { label: "Rfid", path: "rfid", width: "300px", fontSize: "16px" },
+        { label: "Name ", path: "name", width: "200px", fontSize: "16px" },
+        { label: "Role", path: "role", width: "200px", fontSize: "16px" },
+    ]
+};
 
 export default function Users() {
     const navigate = useNavigate();
     const { users, loading } = useGetUsers();
+    const { deleteUser } = useDeleteUser();
+    const path = useLocation();
+
+    console.log(users, path);
+
 
     if (loading) {
         return <div>Loading...</div>;
     }
 
     return (
-        <>
-            <div>
-                <h1>Accounts</h1>
-                <div>
-                    <button onClick={() => { navigate("/admin/user/add"); }}>Add User</button>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>RFID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Section</th>
-                            <th>Room</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {users.map((user) => (
-                            <tr key={user.rfid}>
-                                <td>{user.id}</td>
-                                <td>{user.name}</td>
-                                <td>{user.role}</td>
-                                <td>{user.section}</td>
-                                <td>{user.room}</td>
-                                <td>
-                                    <button onClick={() => navigate("/admin/user/" + user.id)}>Edit</button>
-                                    {/* <button onClick={() => handleDelete(user.id)}>Delete</button>  */}
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+        <div className={userStyle.mainContainer}>
+            <div className={userStyle.centeredd}>
+                {path.pathname.endsWith("/admin/user") ?  <MainTable
+                    data={users}
+                    isEditable={true}
+                    structure={content}
+                    handleUpdate={onHandleUpdate}
+                    handleDelete={onHandleDelete}
+                    handleAdd={onHandleAdd}
+                   />  :         
+                   <Outlet /> 
+                }
             </div>
-            <Outlet />
-        </>
+        </div>
     );
+
+    function onHandleDelete(data: any) {
+        deleteUser(data.id);
+    }
+
+    function onHandleAdd() {
+        navigate("/admin/user/add");
+    }
+
+    function onHandleUpdate(data: any) {
+        navigate(`/admin/user/${data.id}`);
+    }
 }

@@ -105,20 +105,20 @@ export function useGetUser(id: string) {
 
 export function useDeleteUser() {
     const [status, setStatus] = useState("idle");
-
+  
     const deleteUser = async (id: string) => {
-        setStatus("loading");
-
-        try {
-            const userRef = doc(firebaseDB, "users", id);
-            await deleteDoc(userRef);
-
-            setStatus("success");
-        } catch (e) {
-            console.log(e);
-            setStatus("error");
-        }
+      setStatus("loading");
+  
+      try {
+        const ref = doc(firebaseDB, "users", id);
+        await deleteDoc(ref);
+  
+        setStatus("success");
+      } catch (e) {
+        console.log(e);
+        setStatus("error");
+      }
     };
-
-    return { status, deleteUser };
-}
+  
+    return { status,  deleteUser };
+  }
