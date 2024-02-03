@@ -7,7 +7,7 @@ interface Props {
 }
 
 export default function AddRoom({ changeStatus }: Props) {
-    const { addRoom, status } = useAddRoom();
+    const { addRoom } = useAddRoom();
     const [name, setName] = useState('');
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -29,10 +29,10 @@ export default function AddRoom({ changeStatus }: Props) {
                         />
                         <div>
 
-                        <button className={addStylee.addBtn} type="submit">Confirm</button>
-                    <button className={addStylee.backBtn} onClick={() => { changeStatus("all") }}>
-                        Back
-                    </button>
+                            <button className={addStylee.addBtn} type="submit">Confirm</button>
+                            <button className={addStylee.backBtn} onClick={() => { changeStatus("all") }}>
+                                Back
+                            </button>
                         </div>
                     </form>
                 </div>

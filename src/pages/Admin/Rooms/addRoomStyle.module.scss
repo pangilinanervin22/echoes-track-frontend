@@ -1,11 +1,12 @@
-.mainContainer{
+.mainContainer {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: 85vh;
 }
-.center{
+
+.center {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,32 +14,30 @@
     padding: 20px;
     background: white;
     width: 40%;
-    height: 25vh;
 }
 
-.anotherCenter{
+.anotherCenter {
     border-radius: 10px;
     width: 100%;
     padding: 20px;
     flex-direction: column;
     background: transparent;
 
-    h1{
+    h1 {
         text-align: center;
         font-size: 1.8rem;
     }
-    button{
+
+    button {
         font-size: 1.3rem;
         font-weight: 600;
         color: rgb(58, 53, 53);
     }
 }
-form{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-input{
+
+
+
+input {
     width: 100%;
     border: 2px solid black;
     padding: 16px;
@@ -46,14 +45,15 @@ input{
     margin: 20px 0px;
 }
 
-.addBtn{
+.addBtn {
     width: 50%;
     border: none;
     background-color: #6FA6EA;
     padding: 10px 25px;
     cursor: pointer;
 }
-.backBtn{
+
+.backBtn {
     width: 50%;
     background-color: #FF5757;
     border: none;

@@ -48,15 +48,10 @@ export function useAddRoom() {
 }
 
 export function useUpdateRoom() {
-  const [status, setStatus] = useState('idle');
-
   const updateRoom = async (updatedRoom: Room) => {
     if (!updatedRoom || !updatedRoom.id) {
-      console.error('Room or room ID is undefined');
-      return;
+      return { error: true, message: "Invalid room id" };
     }
-
-    setStatus('loading');
 
     try {
       const roomRef = doc(firebaseDB, 'rooms', updatedRoom.id);
@@ -71,21 +66,18 @@ export function useUpdateRoom() {
         await updateDoc(scheduleDoc.ref, { room: updatedRoom.name });
       });
 
-      setStatus('success');
+      return { ok: true, message: "Room updated successfully" };
     } catch (e) {
-      console.log(e);
-      setStatus('error');
+      console.error(e);
+      return { error: true, message: "Error updating room" };
     }
   };
 
-  return { status, updateRoom };
+  return { updateRoom };
 }
 
 export function useDeleteRoom() {
-  const [status, setStatus] = useState("idle");
-
   const deleteRoom = async (id: string) => {
-    setStatus("loading");
 
     try {
       const roomRef = doc(firebaseDB, "rooms", id);
@@ -101,24 +93,20 @@ export function useDeleteRoom() {
       });
 
       await batch.commit();
-      setStatus("success");
+      return { ok: true, message: `Room deleted successfully` };
     } catch (e) {
-      console.log(e);
-      setStatus("error");
+      return { error: true, message: "Error deleting room" };
     }
   };
 
-  return { status, deleteRoom };
+  return { deleteRoom };
 }
 
 export function useGetRoomByName() {
   const [room, setRoom] = useState<Room | null>(null);
   const [schedules, setSchedules] = useState<Schedule[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const getRoomByName = async (roomName: string) => {
-    setIsLoading(true);
-
     try {
       const snapshot = await getDocs(collection(firebaseDB, "rooms"));
       const foundRoom = snapshot.docs.find((doc) => doc.data().name === roomName);
@@ -138,10 +126,9 @@ export function useGetRoomByName() {
       console.log(e);
     }
 
-    setIsLoading(false);
   };
 
-  return { room, schedules, isLoading, getRoomByName };
+  return { room, schedules, getRoomByName };
 }
 
 export function useGetRoomByNameRealTime() {
@@ -193,7 +180,7 @@ export function useGetRoomByNameRealTime() {
     const unsubscribe = getRoomByName(room?.name || '');
     console.log('useEffect', room?.name);
     return unsubscribe;
-  }, []);
+  }, [room?.name]);
 
   return { room, schedules, isLoading, getRoomByName };
 }

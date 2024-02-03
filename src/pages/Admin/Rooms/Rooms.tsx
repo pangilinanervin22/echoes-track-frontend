@@ -4,6 +4,10 @@ import AddRoom from "./AddRoom";
 import EditRoom from "./EditRoom";
 import room from "./Rooms.module.scss"
 import MainTable, { TableStructure } from "../../../Components/Table/TableStructure";
+import Dialog from "../../../Components/Dialog/Dialog";
+import { useNavigate } from "react-router-dom";
+import { User } from "../Users/useUsers";
+import { toast } from "react-toastify";
 
 const content: TableStructure = {
     id: "id",
@@ -16,18 +20,12 @@ const content: TableStructure = {
 };
 
 export default function Room() {
-    const { rooms, isLoading } = useGetRooms();
+    const navigate = useNavigate();
+    const [currentDeleteId, setCurrentDeleteId] = useState<any>("");
+    const { rooms } = useGetRooms();
     const { deleteRoom } = useDeleteRoom();
     const [modifyStatus, setModifyStatus] = useState('all');
     const [selectedRoom, setSelectedRoom] = useState({} as Room);
-    const [searchRoomName, setSearchRoomName] = useState('');
-
-    console.log(rooms);
-    
-    const filteredRooms = rooms
-        .filter(room => room.name && room.name.toLowerCase().includes(searchRoomName.toLowerCase()))
-        .sort((a, b) => a.name.localeCompare(b.name));
-
 
     if (!rooms.length) return <div>No room available</div>
     if (modifyStatus === "isAdding") return <AddRoom changeStatus={setModifyStatus} />
@@ -35,23 +33,39 @@ export default function Room() {
 
     return (
         <main className={room.mainContainer}>
+            <Dialog onClose={() => { }} onOk={async () => {
+                const loading = toast("Deleting room...");
+                const res = await deleteRoom(currentDeleteId);
+
+                if (res.ok)
+                    toast.update(loading, { type: "success", render: res.message });
+                else if (res.error)
+                    toast.update(loading, { type: "error", render: res.message });
+                else
+                    toast.update(loading, { type: "error", render: "Something went wrong!" });
+            }}>
+                <div>
+                    <h4>Are you sure want to delete?</h4>
+                    <p>This will room will delete. You cannot undo this action.</p>
+                </div>
+            </Dialog>
             <div className={room.centered}>
-               <MainTable
-                data={rooms}
-                isEditable={true}
-                structure={content}
-                handleUpdate={onHandleUpdate}
-                handleDelete={onHandleDelete}
-                handleAdd={onHandleAdd}
-            />
+                <MainTable
+                    data={rooms}
+                    isEditable={true}
+                    structure={content}
+                    handleUpdate={onHandleUpdate}
+                    handleDelete={onHandleDelete}
+                    handleAdd={onHandleAdd}
+                />
             </div>
-            </main>
-        
+        </main>
+
     );
 
-    function onHandleDelete(data: any) {
-        deleteRoom(data.id)
-
+    function onHandleDelete(data: User) {
+        setCurrentDeleteId(data.id);
+        navigate("/admin/room?showDialog=y");
     }
 
     function onHandleAdd() {
@@ -60,6 +74,6 @@ export default function Room() {
 
     function onHandleUpdate(data: any) {
         setSelectedRoom(data);
-                                            setModifyStatus("isEditing");
+        setModifyStatus("isEditing");
     }
 }
