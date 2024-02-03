@@ -24,9 +24,10 @@ import EditSchedule from './pages/Admin/Schedules/EditSchedule/EditSchedule';
 import Users from './pages/Admin/Users/Users';
 import EditUser from './pages/Admin/Users/EditUser/EditUser';
 import AddUser from './pages/Admin/Users/AddUser/AddUser';
-import { RoomWithMui } from './Components/TestUI/TestUI';
 import ScanRoom from './pages/Scan/ScanRoom/ScanRoom';
 import Attendance from './pages/Admin/Attendance/Attendance';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 const router = createBrowserRouter([
 	{
@@ -86,10 +87,6 @@ const router = createBrowserRouter([
 				path: '/sample',
 				element: <FirebaseSample />,
 			},
-			{
-				path: '/mui',
-				element: <RoomWithMui />
-			}
 		],
 	},
 ]);
@@ -97,5 +94,10 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
 		<RouterProvider router={router} />
+		<ToastContainer
+			position='bottom-center'
+			autoClose={2000}
+			limit={3}
+		/>
 	</React.StrictMode>
 );
