@@ -84,12 +84,7 @@ export default function SearchResult() {
 			<div className={style.navigation_wrapper}>
 				<Link className={style.back_wrapper} to="/search/home">
 					<div>
-						<Icon
-							icon="lets-icons:back"
-							color="#163aeb"
-							width="2rem"
-							height="2rem"
-						/>
+						<Icon icon="lets-icons:back" color="#163aeb" width="5rem" />
 						<p> Go Back</p>
 					</div>
 
@@ -98,12 +93,7 @@ export default function SearchResult() {
 
 				<div className={style.selection_wrapper}>
 					<div className={style.sort_wrapper}>
-						<Icon
-							icon="flowbite:sort-outline"
-							color="#5b86eb"
-							width="2rem"
-							height="1.5rem"
-						/>
+						<Icon icon="flowbite:sort-outline" color="#5b86eb" width="3rem" />
 						<p>Sort By: </p>
 					</div>
 
