@@ -1,77 +1,115 @@
-* {
-    font-family: var(--ff-regular);
-}
-
-h1 {
-    font-family: var(--ff-bold);
-    color: var(--color-primary);
-}
-
-p {
-    font-size: var(--fs-sm);
-}
-.center{
+.form_add_user {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 25px;
-    padding: 20px;
-    background-color: transparent;
-    width: 100%;
-    height: 100%;
-}
+    flex-direction: row;
+    justify-content: space-between;
 
-.anotherCenter{
-    border-radius: 10px;
-    width: 100%;
-    background: transparent;
+    .input_image {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+        width: 30%;
+        height: inherit;
+        gap: 32px;
 
-    h1{
-        text-align: center;
-        font-size: 1.8rem;
+        img {
+            width: 100%;
+            height: 280px;
+            border-radius: 50%;
+        }
+
+        input {
+            border: none;
+            display: none;
+        }
+
+        .file_upload_button {
+            padding: 10px 20px;
+            background-color: dodgerblue;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .file_upload_button:hover {
+            opacity: 0.9;
+        }
+
+
+        .image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
     }
-    button{
-        font-size: 1.3rem;
-        font-weight: 600;
-        color: rgb(58, 53, 53);
-    }
-}
-form{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-input{
-    width: 100%;
-    border: 2px solid black;
-    padding: 16px;
-    border-radius: 8px;
-    margin: 20px 0px;
-}
-select{
-    width: 100%;
-    border: 2px solid black;
-    padding: 14px;
-    border-radius: 8px;
-    margin: 10px 0 20px 0;
-}
 
-.addBtn{
-    flex-basis: 50%;
-    border: none;
-    background-color: #6FA6EA;
-    padding: 10px 25px;
-    cursor: pointer;
-}
-.backBtn{
-    flex-basis: 50%;
-    background-color: #FF5757;
-    border: none;
-    color: black;
-    cursor: pointer;
-    padding: 10px 25px;
-}
-.wow{
-    display: flex;
-    gap: 10px;
+    .input_information {
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+        height: inherit;
+        margin-left: 20px;
+
+        .input {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+
+            label {
+                font-size: 1.2rem;
+                margin-bottom: 5px;
+            }
+
+            input {
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 1.2rem;
+            }
+        }
+
+        .input_button {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+
+            button {
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                background: #f1f1f1;
+                font-size: 1.2rem;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .submit {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        width: 100%;
+        height: 50px;
+        gap: 20px;
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: #f1f1f1;
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 50%;
+
+        }
+    }
 }

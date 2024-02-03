@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
 import { addDoc, collection, deleteDoc, doc, onSnapshot, updateDoc, DocumentReference } from 'firebase/firestore';
 import { firebaseDB } from '../../../config/firebase';
+import { deleteObject, getStorage, ref } from 'firebase/storage';
 
 export interface User {
     id?: string;
     name: string;
     rfid: string;
     role: string;
-    room: string;
     section: string;
+    room?: string;
+    image?: string;
     room_ref?: DocumentReference;
 }
 
@@ -52,24 +54,22 @@ export function useAddUser() {
 }
 
 export function useUpdateUser() {
-    const [status, setStatus] = useState('idle');
 
     const updateUser = async (updatedUser: User) => {
+        console.log(updatedUser, "edt");
+
         if (!updatedUser || !updatedUser.id) {
             console.error('User or user ID is undefined');
             return;
         }
 
-        setStatus('loading');
-
         try {
             const userRef = doc(firebaseDB, 'users', updatedUser.id);
-            await updateDoc(userRef, { name: updatedUser.name });
-            console.log('User updated', userRef.id, userRef, updatedUser);
-            setStatus('success');
+            await updateDoc(userRef, { ...updatedUser });
+            return { ok: true, message: "User updated successfully" };
         } catch (e) {
             console.log(e);
-            setStatus('error');
+            return { error: true, message: "Error updating user" };
         }
     };
 
@@ -104,21 +104,23 @@ export function useGetUser(id: string) {
 }
 
 export function useDeleteUser() {
-    const [status, setStatus] = useState("idle");
-  
-    const deleteUser = async (id: string) => {
-      setStatus("loading");
-  
-      try {
-        const ref = doc(firebaseDB, "users", id);
-        await deleteDoc(ref);
-  
-        setStatus("success");
-      } catch (e) {
-        console.log(e);
-        setStatus("error");
-      }
+    const deleteUser = async (id: string, imageUrl: string) => {
+
+        try {
+            const userRef = doc(firebaseDB, "users", id);
+            await deleteDoc(userRef);
+            const storage = getStorage();
+            if (imageUrl !== import.meta.env.VITE_PROFILE_IMAGE) {
+                const deleteImageRef = ref(storage, imageUrl);
+                // Check if the file exists
+                await deleteObject(deleteImageRef);
+            }
+            return { ok: true, message: "User deleted successfully" };
+        } catch (e) {
+            console.log(e);
+            return { error: true, message: "Error deleting user" };
+        }
     };
-  
-    return { status,  deleteUser };
-  }
+
+    return { deleteUser };
+}
