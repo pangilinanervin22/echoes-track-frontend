@@ -121,7 +121,7 @@ export default function ScanRoom() {
 			<div className={styles.col_wrapper}>
 				<ScanInfo roomInfo={roomInfo} />
 
-				<ScanStatus statusCode={3}></ScanStatus>
+				<ScanStatus statusCode={1}></ScanStatus>
 			</div>
 			{/* second column */}
 			<section className={styles.table_wrapper}>
