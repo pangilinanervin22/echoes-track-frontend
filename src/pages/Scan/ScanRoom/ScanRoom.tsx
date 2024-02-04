@@ -83,14 +83,21 @@ export default function ScanRoom() {
 		return () => clearInterval(intervalId);
 	}, [schedules]);
 
+	const arrString: string[] = [];
 	// RFID Scanner
 	useEffect(() => {
 		const handleKeyPress = (event: KeyboardEvent) => {
 			// Check for RFID data in the keyboard input
 			const scannedData: string = event.key;
 
+			if (scannedData !== 'Enter') {
+				arrString.push(scannedData);
+			}
+
 			// Assuming the Enter key indicates the end of an RFID scan
 			if (event.key === 'Enter') {
+				console.log(arrString.join(''));
+
 				console.log('RFID Scanned:', scannedData);
 
 				// Handle or process the scanned data as needed
