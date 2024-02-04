@@ -1,0 +1,136 @@
+.main_wrapper {
+	--color-primary: var(--clr-blue-200);
+	--color-secondary: var(--clr-blue-100);
+	--color-background: var(--clr-white);
+	--color-accent: var(--clr-yellow-100);
+	--color-accent-2: var(--clr-yellow-200);
+	background-color: var(--color-background);
+
+	* {
+		font-family: var(--ff-regular);
+	}
+
+	h1 {
+		font-family: var(--ff-bold);
+		color: var(--color-primary);
+		font-size: var(--fs-xxl);
+	}
+	p {
+		font-size: var(--fs-sm);
+		color: var(--color-primary);
+	}
+
+	width: 100dvw;
+	height: 100dvh;
+	min-height: 100dvh;
+	min-width: 100dvw;
+
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	flex-direction: column;
+
+	section {
+		width: 60dvw;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+
+		row-gap: 10px;
+
+		p {
+			color: var(--color-secondary);
+		}
+
+		img {
+			margin-top: 10px;
+			width: clamp(400px, 20vw, 500px);
+			border-radius: 10px;
+			border: 2px solid var(--color-accent);
+		}
+
+		h1 {
+			font-size: var(--fs-xxl);
+			span {
+				color: var(--color-accent-2);
+				font-family: var(--ff-bold);
+			}
+		}
+	}
+}
+
+.form_wrapper {
+	padding: 0;
+	width: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: row;
+	border-radius: 100px;
+	outline: solid 3px transparent;
+
+	input[type='text'] {
+		margin: 0;
+		font-size: var(--fs-m);
+
+		background-color: #ccdbea;
+		color: var(--color-primary);
+
+		border: 3px solid var(--color-primary);
+		border-right: none;
+		border-radius: 100px 0px 0px 100px;
+
+		padding-block: 5px;
+		padding-inline: 20px 0px;
+
+		height: var(--fs-xxl);
+		width: clamp(25rem, 40vw, 35rem);
+	}
+
+	input[type='text']:focus {
+		outline: none;
+	}
+
+	button[type='submit'] {
+		transition: background-color 200ms ease-in-out;
+
+		height: var(--fs-xxl);
+		width: var(--fs-xxl);
+		border: none;
+		background-color: var(--color-primary);
+		color: var(--color-accent-2);
+		border-radius: 0px 100px 100px 0px;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		&:hover {
+			transition: background-color 200ms ease-in-out;
+
+			cursor: pointer;
+			background-color: var(--color-accent-2);
+			& > svg {
+				transition: fill 200ms ease-in-out;
+				fill: var(--color-primary);
+			}
+		}
+	}
+
+	&:focus-within {
+		transition: outline-color 200ms ease-in-out;
+
+		outline-offset: 5px;
+		outline: solid 3px var(--color-accent-2);
+	}
+
+	.search_icon {
+		fill: var(--color-accent-2);
+		transition: fill 200ms ease-in-out;
+
+		height: var(--fs-l);
+		width: var(--fs-l);
+	}
+}
