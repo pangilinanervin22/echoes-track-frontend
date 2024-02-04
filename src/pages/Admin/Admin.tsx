@@ -32,11 +32,13 @@ export default function Admin() {
         <main className={style.admin_container}>
             {isAuthorized &&
                 <nav className={style.admin_nav}>
-                    <div className={style.wow}>
+                    <div className={style.titleContainer}>
                         <img src={cvsulogo} alt="" />
                         <h1>Echoes Tracker</h1>
                     </div>
                     <div className={style.second}>
+                        <div>
+
                         <Link to="/admin/dashboard" className={`${style.iconCont} ${location.pathname.startsWith("/admin/dashboard") ? style.active : ''}`}>
                             <Icon icon="material-symbols:dashboard" color="white" width="25px" margin-top="70px" display="flex" align-items="center" justify-content="center" />
                             <button>Dashboard</button>
@@ -57,9 +59,12 @@ export default function Admin() {
                             <Icon icon="icon-park-solid:notes" color="white" width="25px" margin-top="70px" display="flex" align-items="center" justify-content="center" />
                             <button>Attendance</button>
                         </Link>
-                        <div className={style.iconCont}>
+                        </div>
+                        <div className="bttm">
+                        <div className={style.iconContt}>
                             <Icon icon="material-symbols:logout" color="white" width="25px" margin-top="70px" display="flex" align-items="center" justify-content="center" />
                             <button onClick={() => firebaseAuth.signOut()}>Logout</button>
+                        </div>
                         </div>
                     </div>
                 </nav>

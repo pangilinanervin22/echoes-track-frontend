@@ -28,7 +28,9 @@
 }
 
 .second {
+    height: 100%;
     display: flex;
+    justify-content: space-between;
     flex-direction: column;
     width: 100%;
     background: inherit;
@@ -46,23 +48,23 @@
     padding: 20px 20px;
 }
 
-.wow {
+.titleContainer {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 15%;
-    width: 100%;
+    height: 13%;
+    width: 90%;
     border: none;
-}
 
-.wow img {
-    width: 75px;
-    margin-right: 10px;
-}
+    img {
+        width: 100px;
+        margin-right: 10px;
+    }
 
-.wow h1 {
-    color: #FFC727;
-    font-size: 1.4rem;
+    h1 {
+        color: #FFC727;
+        font-size: 1.6rem;
+    }
 }
 
 .iconCont {
@@ -80,8 +82,21 @@
         }
     }
 }
+.iconContt {
+    display: flex;
+    align-items: center;
+    padding: 10px 40px;
+    text-decoration: none;
+    transition: 0.3s;
 
+    &:hover {
+        background-color: red;
 
+        &>button {
+            color: white;
+        }
+    }
+}
 
 .admin_content {
     height: 100%;
