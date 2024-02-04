@@ -17,6 +17,7 @@ import './assets/scss/reset.scss';
 import './assets/scss/font.scss';
 import './assets/scss/global.scss';
 import Room from './pages/Admin/Rooms/Rooms';
+import SearchRoom from './pages/SearchRoom/SearchRoom';
 import FirebaseSample from './Components/FirebaseSample/FirebaseSample';
 import Schedule from './pages/Admin/Schedules/Schedules';
 import AddSchedule from './pages/Admin/Schedules/AddSchedule/AddSchedule';
@@ -39,8 +40,13 @@ const router = createBrowserRouter([
 				path: '/scan',
 				element: <Scan />,
 				children: [
+					{ path: '', element: <Navigate to="/room" replace /> },
 					{ path: ':id', element: <ScanRoom /> },
 				],
+			},
+			{
+				path: '/room',
+				element: <SearchRoom />,
 			},
 			{
 				path: '/search',
@@ -57,30 +63,31 @@ const router = createBrowserRouter([
 				children: [
 					{ path: '', element: <Navigate to="dashboard" replace /> },
 					{ path: 'dashboard', element: <Dashboard /> },
-					{ path: 'room', element: <Room />, },
+					{ path: 'room', element: <Room /> },
 					{
-						path: 'schedule', element: <Schedule />,
+						path: 'schedule',
+						element: <Schedule />,
 						children: [
 							{ path: 'add', element: <AddSchedule /> },
-							{ path: ':id', element: <EditSchedule />, },
-						]
+							{ path: ':id', element: <EditSchedule /> },
+						],
 					},
 					{
 						path: 'user',
 						element: <Users />,
 						children: [
 							{ path: 'add', element: <AddUser /> },
-							{ path: ':id', element: <EditUser />, },
-						]
+							{ path: ':id', element: <EditUser /> },
+						],
 					},
 					{
 						path: 'attendance',
 						element: <Attendance />,
 						children: [
 							{ path: 'add', element: <AddUser /> },
-							{ path: ':id', element: <EditUser />, },
-						]
-					}
+							{ path: ':id', element: <EditUser /> },
+						],
+					},
 				],
 			},
 			{
@@ -94,10 +101,6 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
 		<RouterProvider router={router} />
-		<ToastContainer
-			position='bottom-center'
-			autoClose={2000}
-			limit={3}
-		/>
+		<ToastContainer position="bottom-center" autoClose={2000} limit={3} />
 	</React.StrictMode>
 );
