@@ -1,0 +1,40 @@
+.main {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+
+	column-gap: 10px;
+
+	.students_wrapper {
+		flex: 1;
+		width: 100%;
+		height: 100%;
+		border-radius: 10px;
+		background-color: var(--clr-blue-3);
+		border: 1px solid var(--clr-primary);
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+
+		color: var(--clr-primary);
+
+		* {
+			font-size: var(--fs-xl);
+		}
+	}
+}
+
+.noOfStudents {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.no {
+	color: var(--clr-primary);
+	font-family: var(--ff-bold);
+}

@@ -29,6 +29,8 @@ import ScanRoom from './pages/Scan/ScanRoom/ScanRoom';
 import Attendance from './pages/Admin/Attendance/Attendance';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import Entrance from './pages/Scan/Entrance/Entrance';
+import Exit from './pages/Scan/Entrance/Exit';
 
 const router = createBrowserRouter([
 	{
@@ -42,6 +44,8 @@ const router = createBrowserRouter([
 				children: [
 					{ path: '', element: <Navigate to="/room" replace /> },
 					{ path: ':id', element: <ScanRoom /> },
+					{ path: 'entrance', element: <Entrance /> },
+					{ path: 'exit', element: <Exit /> },
 				],
 			},
 			{
