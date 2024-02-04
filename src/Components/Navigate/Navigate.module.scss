@@ -1,3 +1,14 @@
+.wrap {
+	width: 100dvw;
+	height: 100dvh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-image: url('/bluecvsu.webp');
+	background-position: center;
+	background-size: cover;
+}
+
 .main {
 	--clr-primary: var(--clr-blue-200);
 	--clr-secondary: var(--clr-blue-100);
@@ -5,29 +16,88 @@
 	--clr-accent: var(--clr-yellow-100);
 	--clr-accent-2: var(--clr-yellow-200);
 	--clr-blue-3: #eceafe;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+
 	* {
 		font-family: var(--ff-regular);
 	}
 
 	h1 {
 		font-family: var(--ff-bold);
-		color: var(--color-primary);
-		font-size: var(--fs-xxl);
+		color: var(--clr-primary);
+		font-size: var(--fs-xl);
+	}
+
+	h3 {
+		font-family: var(--ff-bold);
+		font-size: var(--fs-l);
+		color: var(--clr-accent);
 	}
 	p {
+		color: var(--clr-secondary);
 		font-size: var(--fs-sm);
 	}
 
-	width: 100dvw;
-	height: 100dvh;
+	width: 60dvw;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
 	padding: 20px;
 	row-gap: 10px;
+	background-color: var(--clr-background);
 
 	ul {
 		list-style: none;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		column-gap: 20px;
+
+		li {
+			padding: 10px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+			width: clamp(100px, 20vw, 200px);
+			height: clamp(100px, 20vw, 200px);
+			border-radius: 10px;
+			background-color: var(--clr-blue-3);
+
+			border: 1px solid var(--clr-primary);
+
+			* {
+				color: var(--clr-accent);
+				font-size: var(--fs-xxl);
+			}
+
+			a {
+				text-decoration: none;
+				font-size: var(--fs-l);
+				color: var(--clr-primary);
+				font-family: var(--ff-bold);
+			}
+		}
+
+		li:hover {
+			outline: solid 3px var(--clr-accent-2);
+			outline-offset: 5px;
+		}
 	}
+}
+
+.title_wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+
+	margin-bottom: 100px;
 }

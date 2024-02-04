@@ -4,8 +4,10 @@
 	--color-background: var(--clr-white);
 	--color-accent: var(--clr-yellow-100);
 	--color-accent-2: var(--clr-yellow-200);
-	background-color: var(--color-background);
 
+	background-image: url('/bluecvsu.webp');
+	background-position: center;
+	background-size: cover;
 	* {
 		font-family: var(--ff-regular);
 	}

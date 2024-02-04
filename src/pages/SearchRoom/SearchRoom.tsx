@@ -35,7 +35,7 @@ export default function SearchRoom() {
 		<main className={style.main_wrapper}>
 			<section>
 				<h1>
-					Echoes: <span>Room</span>
+					ECHOES: <span>Room</span>
 				</h1>
 				<p>Search the room you want to issue </p>
 				<form className={style.form_wrapper} onSubmit={handleSubmit}>
