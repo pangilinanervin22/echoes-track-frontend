@@ -42,6 +42,7 @@
 }
 
 .selection_wrapper {
+	flex-direction: row;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
@@ -50,10 +51,14 @@
 
 	p {
 		font-size: var(--fs-xs);
+		word-break: normal;
+		margin: 0;
 	}
 }
 
 .selection {
+	width: clamp(100px, 2vw, 150px);
+	margin: 0;
 	border: 1px solid #7b92ff;
 	background-color: #e7efff;
 	border-radius: 5px;
@@ -90,6 +95,7 @@
 }
 
 .sort_wrapper {
+	flex-direction: row;
 	display: flex;
 	justify-content: center;
 	align-items: center;
