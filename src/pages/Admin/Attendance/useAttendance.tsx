@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from 'react';
-import { collection, deleteDoc, doc, getDoc, onSnapshot, updateDoc, DocumentReference, getDocs, where, query } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDoc, onSnapshot, updateDoc, DocumentReference, getDocs, where, query, Timestamp, addDoc } from 'firebase/firestore';
 import { firebaseDB } from '../../../config/firebase';
 import { User } from '../Users/useUsers';
 import { wait } from '../../../utils/wait';
@@ -8,7 +9,7 @@ export interface Attendance {
     studentId: string;
     room: string;
     subject: string;
-    timeIn: string;
+    date: Timestamp;
     id?: string;
     student_ref?: DocumentReference;
     student_rfid?: string;
@@ -20,7 +21,7 @@ export function useGetAttendance() {
     useEffect(() => {
         const unsubscribe = onSnapshot(collection(firebaseDB, "attendances"), async (snapshot) => {
             const data = await Promise.all(snapshot.docs.map(async (doc) => {
-                const attendanceData = doc.data() as Attendance;
+                const attendanceData = doc.data();
                 const studentSnap = await getDoc(attendanceData.student_ref!);
                 const studentData = studentSnap.data() as any;
 
@@ -30,9 +31,9 @@ export function useGetAttendance() {
                     student: studentData,
                     name: studentData?.name || "N/A",
                     role: studentData?.role || "N/A",
+                    date: attendanceData.date.toDate()
                 };
             }));
-            console.log(data);
 
             setAttendance(data as any[]);
         });
@@ -44,30 +45,30 @@ export function useGetAttendance() {
     return attendance;
 }
 
-export function useUpdateAttendance() {
-    const [status, setStatus] = useState("idle");
+// export function useUpdateAttendance() {
+//     const [status, setStatus] = useState("idle");
 
-    const updateAttendance = async (id: string, status: string) => {
-        setStatus("loading");
+//     const updateAttendance = async (id: string, status: string) => {
+//         setStatus("loading");
 
-        try {
-            const attendanceRef = doc(firebaseDB, "attendance", id);
-            await updateDoc(attendanceRef, { status });
+//         try {
+//             const attendanceRef = doc(firebaseDB, "attendances", id);
+//             await updateDoc(attendanceRef, {});
 
-            setStatus("success");
-        } catch (e) {
-            console.log(e);
-            setStatus("error");
-        }
-    };
+//             setStatus("success");
+//         } catch (e) {
+//             console.log(e);
+//             setStatus("error");
+//         }
+//     };
 
-    return { status, updateAttendance };
-}
+//     return { status, updateAttendance };
+// }
 
 export function useDeleteAttendance() {
     const deleteAttendance = async (id: string) => {
         try {
-            const ref = doc(firebaseDB, "attendance", id);
+            const ref = doc(firebaseDB, "attendances", id);
             await deleteDoc(ref);
 
             return { ok: true, message: "Attendance deleted successfully" };
@@ -88,10 +89,6 @@ export function useAddAttendance() {
     const addAttendance = async (data: Attendance, rfid: string) => {
         setLoading(0);
         try {
-            const attendanceRef = collection(firebaseDB, "attendances");
-            console.log(attendanceRef);
-            console.log(data, "wew");
-
             // find a one student with the rfid input
             const studentRef = query(collection(firebaseDB, "users"), where("rfid", "==", rfid));
             const studentSnapshot = await getDocs(studentRef);
@@ -99,28 +96,48 @@ export function useAddAttendance() {
             // if student is not found
             if (studentSnapshot.empty) {
                 setLoading(3);
-                setError("Student not found");
+                setError("Rfid not found");
             }
 
-            // get the first student found
-            const studentDoc = studentSnapshot.docs[0];
-
-
-
-            const studentData = studentDoc.data();
-            console.log(studentData, "studentData");
-
             //update student data
+            const studentDoc = studentSnapshot.docs[0];
             const currentStudent = doc(firebaseDB, "users", studentDoc.id);
-            await updateDoc(currentStudent, { room: data.room });
 
+            // get the first student found
+            const userDoc = studentSnapshot.docs[0];
+            const userData = userDoc.data() as User;
+
+            // validate if student is already in the room
+            if (userData.room === data.room) {
+                setLoading(3);
+                setError("Already in the room");
+                return;
+            } else {
+                await updateDoc(currentStudent, { room: data.room });
+
+                if ("student" !== userData.role) {
+                    setLoading(2);
+                    return;
+                }
+            }
+
+            const studentData = {
+                student_ref: userDoc.ref,
+                section: userData.section,
+                subject: data.subject,
+                room: data.room,
+                date: data.date,
+            };
+
+            // add attendance
+            await addDoc(collection(firebaseDB, "attendances"), { ...studentData });
             setLoading(2);
 
         } catch (e) {
             setLoading(3);
             console.log(e);
         } finally {
-            await wait(3000);
+            await wait(2000);
             setError("");
             setLoading(1);
         }
@@ -156,7 +173,7 @@ export function useGetUsersWithinRoom(room: string) {
 
 // non-react hooks
 export async function getAttendance(id: string) {
-    const docRef = doc(firebaseDB, "attendance", id || "");
+    const docRef = doc(firebaseDB, "attendances", id || "");
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {

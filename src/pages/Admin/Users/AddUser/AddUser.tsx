@@ -88,10 +88,16 @@ export default function AddUser() {
                 room: "",
             };
 
-            await addUser(newUser);
-            navigate("/admin/user");
-        } else {
+            const res = await addUser(newUser);
+            toast.success(res.message, {
+                type: res.ok ? "success" : "error",
+                isLoading: false,
+                autoClose: 2000,
+            });
 
+            if (res.ok)
+                navigate("/admin/user");
+        } else {
             // Call the addUser function to add the user
             const newUser: User = {
                 name: formData.get("name") as string,
@@ -102,15 +108,15 @@ export default function AddUser() {
                 section: formData.get("section") as string,
             };
 
-            addUser(newUser);
-            toast.success(newUser.name + " added succesfully", {
-                type: "success",
+            const res = await addUser(newUser);
+            toast.success(res.message, {
+                type: res.ok ? "success" : "error",
                 isLoading: false,
                 autoClose: 2000,
             });
 
-
-            navigate("/admin/user");
+            if (res.ok)
+                navigate("/admin/user");
         }
     };
 
@@ -151,8 +157,8 @@ export default function AddUser() {
                             required >
                             <option value="student">Student</option>
                             <option value="teacher">Teacher</option>
-                            <option value="employee">Employee </option>
                             <option value="visitor">Visitor</option>
+                            <option value="employee">Employee</option>
                         </select>
                     </div>
                     {role === "student" &&

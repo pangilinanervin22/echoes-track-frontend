@@ -9,7 +9,7 @@ interface thisProps {
     page: number,
     total: number;
     currentTotal: number;
-    handlePagination: Function;
+    handlePagination: (page: number) => void;
 }
 
 export default function PaginateTable({ page, size, total, currentTotal, handlePagination }: thisProps) {
@@ -25,6 +25,8 @@ export default function PaginateTable({ page, size, total, currentTotal, handleP
             <div className={pageEnd === total ? styles.disable : ""} onClick={() => handlePagination(page + 1)}>
                 <IconArrowRight_svg />
             </div>
+
+
         </section>
     )
 }

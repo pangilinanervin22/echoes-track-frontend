@@ -14,6 +14,7 @@ import {
 	useGetUsersWithinRoom,
 } from '../../Admin/Attendance/useAttendance';
 import ScanNoSched from '../../../Components/Scan/ScanNoSched/ScanNoSched';
+import { Timestamp } from 'firebase/firestore';
 
 
 export default function ScanRoom() {
@@ -68,7 +69,7 @@ export default function ScanRoom() {
 					{
 						room: room?.name || '',
 						studentId: arrString.join(''),
-						timeIn: new Date().toLocaleTimeString(),
+						date: Timestamp.now(),
 						subject: currentSchedule?.subject || '',
 					},
 					rfid

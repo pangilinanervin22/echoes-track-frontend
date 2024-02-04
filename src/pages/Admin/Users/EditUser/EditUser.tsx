@@ -17,12 +17,14 @@ export default function EditUser() {
     const [image, setImage] = useState<File | null>(null);
     const [imageUrl, setImageUrl] = useState<string>(import.meta.env.VITE_PROFILE_IMAGE);
     const [deleteImageUrl, setDeleteImageUrl] = useState<string>("");
+    const [oldRfid, setOldRfid] = useState("");
 
     useEffect(() => {
         if (user) {
             setName(user.name);
             setRole(user.role);
             setRfid(user.rfid);
+            setOldRfid(user.rfid);
             setImageUrl(user.image || import.meta.env.VITE_PROFILE_IMAGE);
             setSection(user.section || "");
             setDeleteImageUrl(user.image || "");
@@ -57,6 +59,8 @@ export default function EditUser() {
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
+
+        const toastForm = toast.loading("Updating user ...");
         const newUser: User = {
             id: params.id,
             name,
@@ -66,8 +70,6 @@ export default function EditUser() {
             image: imageUrl,
             room: "",
         };
-
-        console.log(newUser);
 
         if (image) {
             const uploadImage = toast.loading("Image uploading ...", { progress: 0, autoClose: false });
@@ -118,7 +120,17 @@ export default function EditUser() {
                 room: "",
             };
 
-            await updateUser({ ...user as User, ...newUser });
+            const res = await updateUser({ ...user as User, ...newUser }, oldRfid);
+            if (res.error) {
+                toast.update(toastForm, {
+                    render: res.message,
+                    type: "error",
+                    isLoading: false,
+                    autoClose: 2000,
+                });
+
+                return;
+            }
 
             if (deleteImageUrl !== import.meta.env.VITE_PROFILE_IMAGE) {
                 const deleteImageRef = ref(storage, deleteImageUrl);
@@ -128,22 +140,24 @@ export default function EditUser() {
                 await deleteObject(deleteImageRef);
             }
 
-            toast.update(uploadImage, {
-                render: "Image uploaded successfully",
-                type: "success",
-                autoClose: 2000,
-            });
-
-            navigate("/admin/user");
-        } else {
-            updateUser({ ...user as User, ...newUser });
-            toast.success(newUser.name + " edit succesfully", {
+            toast.update(toastForm, {
+                render: res.message,
                 type: "success",
                 isLoading: false,
                 autoClose: 2000,
             });
-
             navigate("/admin/user");
+        } else {
+            const res = await updateUser({ ...user as User, ...newUser }, oldRfid);
+            toast.update(toastForm, {
+                render: res.message,
+                type: res.error ? "error" : "success",
+                isLoading: false,
+                autoClose: 2000,
+            });
+
+            if (res.ok)
+                navigate("/admin/user");
         }
     };
 
@@ -189,8 +203,8 @@ export default function EditUser() {
                             required >
                             <option value="student">Student</option>
                             <option value="teacher">Teacher</option>
-                            <option value="employee">Employee </option>
                             <option value="visitor">Visitor</option>
+                            <option value="employee">Employee</option>
                         </select>
                     </div>
                     {role === "student" &&

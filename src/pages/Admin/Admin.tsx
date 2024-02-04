@@ -32,42 +32,41 @@ export default function Admin() {
         <main className={style.admin_container}>
             {isAuthorized &&
                 <nav className={style.admin_nav}>
-                <div className={style.titleContainer}>
-                    <img src={cvsulogo} alt="" />
-                    <h1>Echoes Tracker</h1>
-                </div>
-                <div className={style.second}>
-                    <div>
-
-                        <Link to="/admin/dashboard" className={`${style.iconCont} ${location.pathname.startsWith("/admin/dashboard") ? style.active : ''}`}>
+                    <div className={style.titleContainer}>
+                        <img src={cvsulogo} alt="" />
+                        <h1>Echoes Tracker</h1>
+                    </div>
+                    <div className={style.second}>
+                        <div>
+                            {/* <Link to="/admin/dashboard" className={`${style.iconCont} ${location.pathname.startsWith("/admin/dashboard") ? style.active : ''}`}>
                             <Icon icon="material-symbols:dashboard" color="white" width="35px" margin-top="70px" display="flex" align-items="center" justify-content="center" />
                             <button>Dashboard</button>
-                        </Link>
-                        <Link to="/admin/room" className={`${style.iconCont} ${location.pathname.startsWith("/admin/room") ? style.active : ''}`}>
-                            <Icon icon="cbi:roomsother" color="white" width="35px" margin-top="70px" display="flex" align-items="center" justify-content="center" />
-                            <button>Rooms</button>
-                        </Link>
-                        <Link to="/admin/schedule" className={`${style.iconCont} ${location.pathname.startsWith("/admin/schedule") ? style.active : ''}`}>
-                            <Icon icon="ant-design:schedule-filled" color="white" width="35px" margin-top="70px" display="flex" align-items="center" justify-content="center" />
-                            <button>Schedules</button>
-                        </Link>
-                        <Link to="/admin/user" className={`${style.iconCont} ${location.pathname.startsWith("/admin/user") ? style.active : ''}`}>
-                            <Icon icon="mdi:user" color="white" width="35px" margin-top="70px" display="flex" align-items="center" justify-content="center" />
-                            <button>Users</button>
-                        </Link>
-                        <Link to="/admin/attendance" className={`${style.iconCont} ${location.pathname.startsWith("/admin/attendance") ? style.active : ''}`}>
-                            <Icon icon="icon-park-solid:notes" color="white" width="35px" margin-top="70px" display="flex" align-items="center" justify-content="center" />
-                            <button>Attendance</button>
-                        </Link>
-                    </div>
+                            </Link> */}
+                            <Link to="/admin/schedule" className={`${style.iconCont} ${location.pathname.startsWith("/admin/schedule") ? style.active : ''}`}>
+                                <Icon icon="ant-design:schedule-filled" color="white" width="35px" margin-top="70px" display="flex" align-items="center" justify-content="center" />
+                                <button>Schedules</button>
+                            </Link>
+                            <Link to="/admin/user" className={`${style.iconCont} ${location.pathname.startsWith("/admin/user") ? style.active : ''}`}>
+                                <Icon icon="mdi:user" color="white" width="35px" margin-top="70px" display="flex" align-items="center" justify-content="center" />
+                                <button>Users</button>
+                            </Link>
+                            <Link to="/admin/room" className={`${style.iconCont} ${location.pathname.startsWith("/admin/room") ? style.active : ''}`}>
+                                <Icon icon="cbi:roomsother" color="white" width="35px" margin-top="70px" display="flex" align-items="center" justify-content="center" />
+                                <button>Rooms</button>
+                            </Link>
+                            <Link to="/admin/attendance" className={`${style.iconCont} ${location.pathname.startsWith("/admin/attendance") ? style.active : ''}`}>
+                                <Icon icon="icon-park-solid:notes" color="white" width="35px" margin-top="70px" display="flex" align-items="center" justify-content="center" />
+                                <button>Attendance</button>
+                            </Link>
+                        </div>
                         <div className="bttm">
                             <div className={style.iconContt}>
                                 <Icon icon="material-symbols:logout" color="white" width="25px" margin-top="70px" display="flex" align-items="center" justify-content="center" />
                                 <button onClick={() => firebaseAuth.signOut()}>Logout</button>
                             </div>
                         </div>
-                </div>
-            </nav>
+                    </div>
+                </nav>
             }
             <article className={style.admin_content}>
                 {isAuthorized ? <Outlet /> : <Login />}

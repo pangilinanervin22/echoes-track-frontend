@@ -24,3 +24,17 @@ p {
     background-color: white;
     border-radius: 25px;
 }
+
+.printContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+
+    .printButton {
+        display: flex;
+        justify-content: flex-end;
+        padding: 8px 16px;
+    }
+
+}

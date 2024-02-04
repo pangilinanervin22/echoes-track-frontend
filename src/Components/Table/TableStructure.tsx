@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
 import React, { useMemo, useState } from "react";
@@ -34,10 +35,10 @@ interface thisProps {
     data: Array<any>;
     isEditable: boolean;
     structure: TableStructure;
-    handleUpdate: Function;
-    handleDelete: Function;
-    handleAdd?: Function;
-    handleRefresh?: Function;
+    handleUpdate?: (arg: any) => void;
+    handleDelete?: (arg: any) => void;
+    handleAdd?: () => void;
+    handleRefresh?: () => void;
 }
 
 export default function MainTable({
@@ -102,17 +103,30 @@ export default function MainTable({
                 deleteColumn={onDelete}
                 updateColumn={handleUpdate}
             />
+            {/* <select value={page.size} onChange={(e) => onHanldePageChange(e.target.value)}>
+                <option value={5}>5</option>
+                <option value={10}>10</option>
+                <option value={20}>20</option>
+                <option value={100}>100</option>
+            </select> */}
             <PaginateTable page={page.current} size={page.size} currentTotal={sortedData.length} total={sizeData} handlePagination={onHandlePagination} />
         </section>
     );
 
     function onDelete(data: any) {
-        handleDelete(data);
+        if (handleDelete) {
+            handleDelete(data);
+        }
         // setPage(page => ({
         //     ...page,
         //     current: 0,
         // }));
     }
+
+    // function onHanldePageChange(inputValue: string) {
+    //     setPage({ current: 0, size: parseInt(inputValue) });
+    // }
+
 
     function onHandlePagination(inputValue: number) {
         const currentValue = inputValue * page.size;
@@ -131,6 +145,7 @@ export default function MainTable({
     }
 
     function onHandleSortColumn(path: string, order = true) {
+
         const temp = { order, path };
         if (temp.path == sortColumn.path)
             temp.order = temp.order ? false : true;

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
 import { Column, sortColumnProps, TableStructure } from "./TableStructure";
@@ -10,9 +11,9 @@ interface thisProps {
     tableProps: TableStructure;
     sortColumn: sortColumnProps;
     isEditable: boolean;
-    handleSortColumn: Function;
-    updateColumn: Function;
-    deleteColumn: Function;
+    handleSortColumn: (path: string, order: boolean) => void;
+    updateColumn?: (data: any) => void;
+    deleteColumn?: (data: any) => void;
 }
 
 export default function BodyTable({
@@ -31,8 +32,12 @@ export default function BodyTable({
                     {tableProps.structure.map((curBase: Column) => renderCellHeader(curBase, sortColumn))}
                     {isEditable &&
                         <>
-                            <th style={{ width: "110px", fontSize: "20px" }}>UPDATE</th>
-                            <th style={{ width: "110px", fontSize: "20px" }}>DELETE</th>
+                            {updateColumn && (
+                                <th style={{ width: "110px", fontSize: "20px" }}>UPDATE</th>
+                            )}
+                            {deleteColumn && (
+                                <th style={{ width: "110px", fontSize: "20px" }}>DELETE</th>
+                            )}
                         </>
                     }
                 </tr>
@@ -47,18 +52,23 @@ export default function BodyTable({
                         ))}
                         {isEditable &&
                             <>
-                                <td key={"edit"} style={{ width: "110px", fontSize: "20px" }}  >
-                                    <button className={styles.button_update} onClick={() => updateColumn(currentData)}>
-                                        EDIT
-                                    </button>
-                                </td>
-                                <td key={"delete"} style={{ width: "110px", fontSize: "20px" }}  >
-                                    <button className={styles.button_delete} onClick={() => {
-                                        deleteColumn(currentData);
-                                    }}>
-                                        DELETE
-                                    </button>
-                                </td>
+                                {updateColumn && (
+                                    <td key={"edit"} style={{ width: "110px", fontSize: "20px" }}  >
+                                        <button className={styles.button_update} onClick={() => updateColumn(currentData)}>
+                                            EDIT
+                                        </button>
+                                    </td>
+                                )}
+                                {deleteColumn && (
+                                    <td key={"delete"} style={{ width: "110px", fontSize: "20px" }}  >
+                                        <button className={styles.button_delete} onClick={() => {
+                                            deleteColumn(currentData);
+                                        }}>
+                                            DELETE
+                                        </button>
+                                    </td>
+                                )}
+
                             </>
                         }
                     </tr>
@@ -72,7 +82,7 @@ export default function BodyTable({
             return <th key={column.label} style={{ width: column.width }} > {column.label} </th>
 
         return <th key={column.label} style={{ width: column.width }}
-            onClick={() => { handleSortColumn(column.path, currentSort.order); }} >
+            onClick={() => { handleSortColumn(column.path ?? '', currentSort.order); }} >
             {column.label} {currentSort.path == column.path && renderIcon(currentSort.order)}
         </th>
     }

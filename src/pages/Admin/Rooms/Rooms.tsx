@@ -46,7 +46,7 @@ export default function Room() {
             }}>
                 <div>
                     <h4>Are you sure want to delete?</h4>
-                    <p>This will room will delete. You cannot undo this action.</p>
+                    <p>This room will delete. You cannot undo this action.</p>
                 </div>
             </Dialog>
             <div className={room.centered}>

@@ -11,9 +11,14 @@ const content: TableStructure = {
     title: "Users",
     searchPath: "name",
     structure: [
+        {
+            label: "", width: "120px", fontSize: "16px", element: (data: User) => {
+                return <img src={data.image} alt="user" style={{ width: "60px", height: "60px", borderRadius: "50%" }} />
+            }
+        },
         { label: "Rfid", path: "rfid", width: "100px", fontSize: "16px" },
-        { label: "Name ", path: "name", width: "300px", fontSize: "16px" },
-        { label: "Role", path: "role", width: "150px", fontSize: "16px" },
+        { label: "Name ", path: "name", width: "200px", fontSize: "16px" },
+        { label: "Role", path: "role", width: "100px", fontSize: "16px" },
     ]
 };
 
@@ -24,7 +29,6 @@ export default function Users() {
     const path = useLocation();
     const [currentDeleteId, setCurrentDeleteId] = useState("");
     const [currentDeleteImage, setCurrentDeleteImage] = useState("");
-
 
     if (loading) {
         return <div>Loading...</div>;
@@ -45,7 +49,7 @@ export default function Users() {
             }}>
                 <div>
                     <h4>Are you sure want to delete?</h4>
-                    <p>This will schedule will delete. You cannot undo this action.</p>
+                    <p>This user will delete. You cannot undo this action.</p>
                 </div>
             </Dialog>
             <div className={userStyle.centeredd}>

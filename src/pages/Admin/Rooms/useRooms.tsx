@@ -30,27 +30,36 @@ export function useGetRooms() {
 }
 
 export function useAddRoom() {
-  const [status, setStatus] = useState("idle");
 
   const addRoom = async (name: string) => {
-    setStatus("loading");
 
     try {
+
+      const check = await verifyRoomExists(name);
+      if (check) {
+        return { error: true, message: "Room name already exists" };
+      }
+
       await addDoc(collection(firebaseDB, "rooms"), { name });
-      setStatus("success");
+      return { ok: true, message: "Room added successfully" };
     } catch (e) {
       console.log(e);
-      setStatus("error");
+      return { error: true, message: "Error adding room" };
     }
   };
 
-  return { status, addRoom };
+  return { addRoom };
 }
 
 export function useUpdateRoom() {
   const updateRoom = async (updatedRoom: Room) => {
     if (!updatedRoom || !updatedRoom.id) {
       return { error: true, message: "Invalid room id" };
+    }
+
+    const check = await verifyRoomExists(updatedRoom.name);
+    if (check) {
+      return { error: true, message: "Room name already exists" };
     }
 
     try {
@@ -208,3 +217,14 @@ export async function getRoomByName(roomName: string): Promise<{ room: Room | nu
   }
 }
 
+export async function verifyRoomExists(roomName: string): Promise<boolean> {
+  try {
+    const snapshot = await getDocs(collection(firebaseDB, "rooms"));
+    const foundRoom = snapshot.docs.find((doc) => doc.data().name === roomName);
+
+    return !!foundRoom;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+}

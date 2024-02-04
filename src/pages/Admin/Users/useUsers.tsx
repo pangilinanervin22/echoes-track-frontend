@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { addDoc, collection, deleteDoc, doc, onSnapshot, updateDoc, DocumentReference } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, onSnapshot, updateDoc, DocumentReference, where, getDocs, query, writeBatch } from 'firebase/firestore';
 import { firebaseDB } from '../../../config/firebase';
 import { deleteObject, getStorage, ref } from 'firebase/storage';
 
@@ -36,36 +36,39 @@ export function useGetUsers() {
 }
 
 export function useAddUser() {
-    const [status, setStatus] = useState("idle");
-
     const addUser = async (user: User) => {
-        setStatus("loading");
+
+        // validate rfid if already exists
+        const check = await rfidAlreadyExist(user.rfid);
+        if (check) return { error: true, message: "RFID already exists" };
 
         try {
             await addDoc(collection(firebaseDB, "users"), user);
-            setStatus("success");
+            return { ok: true, message: user.name + " added succesfully" };
         } catch (e) {
-            console.log(e);
-            setStatus("error");
+            return { error: true, message: "Error adding user" };
         }
     };
 
-    return { status, addUser };
+    return { addUser };
 }
 
 export function useUpdateUser() {
+    const updateUser = async (data: User, rfid: string) => {
 
-    const updateUser = async (updatedUser: User) => {
-        console.log(updatedUser, "edt");
-
-        if (!updatedUser || !updatedUser.id) {
+        if (!data || !data.id) {
             console.error('User or user ID is undefined');
-            return;
+            return { error: true, message: "User or user ID is undefined" };
         }
 
+        const check = await rfidAlreadyExist(data.rfid);
+        if (check && rfid !== data.rfid)
+            return { error: true, message: "RFID already exists" };
+
         try {
-            const userRef = doc(firebaseDB, 'users', updatedUser.id);
-            await updateDoc(userRef, { ...updatedUser });
+            const userRef = doc(firebaseDB, 'users', data.id);
+            await updateDoc(userRef, { ...data });
+
             return { ok: true, message: "User updated successfully" };
         } catch (e) {
             console.log(e);
@@ -73,7 +76,7 @@ export function useUpdateUser() {
         }
     };
 
-    return { status, updateUser };
+    return { updateUser };
 }
 
 export function useGetUser(id: string) {
@@ -115,6 +118,18 @@ export function useDeleteUser() {
                 // Check if the file exists
                 await deleteObject(deleteImageRef);
             }
+
+            const attendanceRef = collection(firebaseDB, 'attendances');
+            const attendancesSnapShot = await getDocs(query(attendanceRef, where('student_ref', '==', userRef)));
+
+            const batch = writeBatch(firebaseDB);
+            attendancesSnapShot.docs.forEach((cur) => {
+                const scheduleRef = doc(firebaseDB, 'attendances', cur.id);
+                batch.delete(scheduleRef);
+            });
+
+            await batch.commit();
+
             return { ok: true, message: "User deleted successfully" };
         } catch (e) {
             console.log(e);
@@ -124,3 +139,16 @@ export function useDeleteUser() {
 
     return { deleteUser };
 }
+
+
+// non hooks function
+
+export async function rfidAlreadyExist(rfid: string) {
+    //Validate user rfid if already exists
+    const querySnapshot = await getDocs(query(collection(firebaseDB, "users"), where("rfid", "==", rfid)));
+    if (!querySnapshot.empty)
+        return true;
+
+    return false;
+}
+

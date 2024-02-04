@@ -151,6 +151,8 @@ export function isScheduleValid(schedule: Schedule) {
 
 export function useDeleteSchedule() {
   const deleteSchedule = async (id: string) => {
+    console.log(id);
+
     try {
       const ref = doc(firebaseDB, "schedules", id);
       await deleteDoc(ref);
