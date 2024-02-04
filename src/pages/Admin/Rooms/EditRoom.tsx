@@ -7,7 +7,7 @@ interface Props {
 }
 
 export default function EditRoom({ room, changeStatus }: Props) {
-    const { updateRoom, status } = useUpdateRoom();
+    const { updateRoom } = useUpdateRoom();
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -34,10 +34,12 @@ export default function EditRoom({ room, changeStatus }: Props) {
                         required
                         defaultValue={room.name} />
                         <div>
+                            <div className={addStylee.flex}>
                         <button className={addStylee.addBtn} type="submit">Update</button>
                         <button className={addStylee.backBtn} onClick={() => { changeStatus("all") }}>
                             back to rooms
                         </button>
+                            </div>
                         </div>
                 </form>
                 </div>
