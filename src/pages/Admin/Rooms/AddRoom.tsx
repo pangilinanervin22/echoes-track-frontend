@@ -31,7 +31,7 @@ export default function AddRoom({ changeStatus }: Props) {
                             <div className={addStylee.flex}>
                             <button className={addStylee.addBtn} type="submit">Confirm</button>
                             <button className={addStylee.backBtn} onClick={() => { changeStatus("all") }}>
-                                Back
+                                Back to room
                             </button>
                             </div>
                         </div>
