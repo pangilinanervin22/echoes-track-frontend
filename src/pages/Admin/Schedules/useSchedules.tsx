@@ -22,7 +22,7 @@ export function useGetSchedules() {
         id: doc.id,
         ...doc.data(),
       }));
-      
+
       setSchedules(data as Schedule[]);
     });
 
@@ -150,23 +150,19 @@ export function isScheduleValid(schedule: Schedule) {
 }
 
 export function useDeleteSchedule() {
-  const [status, setStatus] = useState("idle");
-
   const deleteSchedule = async (id: string) => {
-    setStatus("loading");
-
     try {
       const ref = doc(firebaseDB, "schedules", id);
       await deleteDoc(ref);
 
-      setStatus("success");
+      return { ok: true, message: "Schedule deleted successfully" };
     } catch (e) {
       console.log(e);
-      setStatus("error");
+      return { error: true, message: "Error deleting schedule" };
     }
   };
 
-  return { status, deleteSchedule };
+  return { deleteSchedule };
 }
 
 // non-react hooks
