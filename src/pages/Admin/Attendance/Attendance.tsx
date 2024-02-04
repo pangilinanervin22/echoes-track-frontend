@@ -7,14 +7,6 @@ import { toast } from "react-toastify";
 import { useGetAttendance } from "./useAttendance";
 import style from "./attendance.module.scss";
 
-interface Attendance {
-    studentId: string;
-    room: string;
-    section: string;
-    subject: string;
-    id?: string;
-    // student_ref?: DocumentReference;
-}
 
 const content: TableStructure = {
     id: "id",
@@ -31,14 +23,15 @@ const content: TableStructure = {
 
 export default function Schedule() {
     const navigate = useNavigate();
-    const [currentDeleteId, setCurrentDeleteId] = useState<any>("");
+    const [currentDeleteId, setCurrentDeleteId] = useState("");
     const attendance = useGetAttendance();
 
     return (
         <main className={style.mainContainer}>
             <Dialog onClose={() => { }} onOk={async () => {
-                const loading = toast("Deleting room...");
+                toast("Deleting room...");
                 //
+                console.log("delete", currentDeleteId);
 
                 // if (res.ok)
                 //     toast.update(loading, { type: "success", render: res.message });
@@ -71,9 +64,9 @@ export default function Schedule() {
         navigate("/admin/user?showDialog=y");
     }
 
-    function onHandleAdd() {
-        navigate("/admin/user/add");
-    }
+    // function onHandleAdd() {
+    //     navigate("/admin/user/add");
+    // }
 
     function onHandleUpdate(data: User) {
         navigate(`/admin/user/${data.id}`);

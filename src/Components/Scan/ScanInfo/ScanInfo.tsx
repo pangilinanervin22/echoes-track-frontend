@@ -1,4 +1,3 @@
-import { Room } from '../../../pages/Admin/Rooms/useRooms';
 import styles from './ScanInfo.module.scss';
 import { Icon } from '@iconify/react/dist/iconify.js';
 interface ScanInfoProps {

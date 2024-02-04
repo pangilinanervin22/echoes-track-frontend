@@ -15,18 +15,6 @@ import {
 } from '../../Admin/Attendance/useAttendance';
 import ScanNoSched from '../../../Components/Scan/ScanNoSched/ScanNoSched';
 
-interface ScanInfoProps {
-	course: string;
-	room: string;
-	student: number;
-	section: string;
-}
-interface ScanTableProps {
-	imgUrl: string;
-	name: string;
-	studentNo: number;
-	timeIn: string;
-}
 
 export default function ScanRoom() {
 	const params = useParams();
@@ -37,30 +25,6 @@ export default function ScanRoom() {
 	>();
 	const { addAttendance, loading, error } = useAddAttendance();
 	const students = useGetUsersWithinRoom(params?.id || '');
-
-	// const [roomInfo, setRoomInfo] = useState<ScanInfoProps>({
-	// 	course: 'COSC 85',
-	// 	room: '303',
-	// 	student: 20,
-	// 	section: 'CS 3-2',
-	// });
-
-	// const [students, setStudents] = useState<ScanTableProps[]>([
-	// 	{
-	// 		studentNo: 202111830,
-	// 		name: 'John Doe',
-	// 		imgUrl:
-	// 			'https://www.ripponmedicalservices.co.uk/images/easyblog_articles/89/b2ap3_large_ee72093c-3c01-433a-8d25-701cca06c975.jpg',
-	// 		timeIn: '12:00',
-	// 	},
-	// ]);
-
-	// DONT REMOVE
-	// function addStudent() {
-	// 	setRoomInfo((prev) => {
-	// 		return { ...prev, student: prev.student + 1 };
-	// 	});
-	// }
 
 	// Get room by name
 	useEffect(() => {
@@ -111,8 +75,8 @@ export default function ScanRoom() {
 				);
 
 				console.log('RFID Scanned:', scannedData, rfid);
+				// eslint-disable-next-line react-hooks/exhaustive-deps
 				arrString = [];
-				// Handle or process the scanned data as needed
 			}
 		};
 
@@ -127,13 +91,14 @@ export default function ScanRoom() {
 		return <SearchLoading />;
 	}
 
-	if (currentSchedule) {
-		console.log(currentSchedule);
-		console.log('present');
-	} else {
-		console.log('No current schedule');
-		return <ScanNoSched></ScanNoSched>;
+	if (!room) {
+		return <ScanNoSched message={`Room ${params.id} does not exist`} />
 	}
+	else if (!currentSchedule) {
+		console.log('No current schedule');
+		return <ScanNoSched message={"There are no schedules for this room"} />
+	}
+
 
 	return (
 		<main className={styles.wrapper_main}>

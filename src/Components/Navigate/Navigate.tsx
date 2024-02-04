@@ -1,7 +1,13 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import style from './Navigate.module.scss';
 import { Icon } from '@iconify/react/dist/iconify.js';
 export default function Navigate() {
+	const navigate = useNavigate();
+
+	const handleClick = (destination: string) => {
+		navigate(`/${destination}`);
+	}
+
 	return (
 		<div className={style.wrap}>
 			<main className={style.main}>
@@ -12,15 +18,15 @@ export default function Navigate() {
 				<p>select your destination</p>
 				<nav>
 					<ul>
-						<li>
+						<li onClick={() => handleClick("admin")}>
 							<Icon icon="ri:admin-line" />
 							<Link to="/admin">Admin</Link>
 						</li>
-						<li>
+						<li onClick={() => handleClick("room")}>
 							<Icon icon="ri:rfid-fill" />
 							<Link to="/room">Scan</Link>
 						</li>
-						<li>
+						<li onClick={() => handleClick("search")}>
 							<Icon icon="cil:search" />
 							<Link to="/search/home">Search</Link>
 						</li>

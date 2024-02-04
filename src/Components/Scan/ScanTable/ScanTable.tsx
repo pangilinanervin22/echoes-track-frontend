@@ -33,7 +33,7 @@ export default function ScanTable({
 						<th>Image</th>
 						<th>Name</th>
 						<th>Student #</th>
-						<th>time-in</th>
+						<th>Role</th>
 					</tr>
 					{tableRows(students)}
 				</tbody>

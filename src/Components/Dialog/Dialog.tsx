@@ -1,5 +1,5 @@
 "use client"
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import style from './Dialog.module.scss'
 import { useRef, useEffect } from 'react'
 

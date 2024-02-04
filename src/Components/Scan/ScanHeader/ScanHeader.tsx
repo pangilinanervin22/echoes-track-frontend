@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { format, getDay, isWithinInterval, parse } from 'date-fns';
+import { format } from 'date-fns';
 import styles from './ScanHeader.module.scss';
 import { Icon } from '@iconify/react/dist/iconify.js';
 

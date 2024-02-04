@@ -3,7 +3,6 @@ import { collection, deleteDoc, doc, getDoc, onSnapshot, updateDoc, DocumentRefe
 import { firebaseDB } from '../../../config/firebase';
 import { User } from '../Users/useUsers';
 import { wait } from '../../../utils/wait';
-import { set } from 'date-fns';
 
 export interface Attendance {
     studentId: string;

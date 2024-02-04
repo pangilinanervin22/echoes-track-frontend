@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { collection, addDoc, onSnapshot, deleteDoc, doc, query, where, getDocs, getDoc } from "firebase/firestore";
+import { collection, addDoc, onSnapshot, deleteDoc, doc, query, where, getDocs } from "firebase/firestore";
 import { firebaseDB } from '../../config/firebase';
 
 interface User {

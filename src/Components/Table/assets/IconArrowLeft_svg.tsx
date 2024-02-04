@@ -1,4 +1,3 @@
-import React from 'react'
 
 export default function IconArrowLeft_svg() {
     return (

@@ -4,7 +4,6 @@ import TimePicker from "../TimePicker";
 import { Schedule, isScheduleValid, useAddSchedule } from "../useSchedules";
 import { useNavigate } from "react-router-dom";
 import addschedStyle from './AddSchedule.module.scss'
-import { ClassNames } from "@emotion/react";
 
 function AddSchedule() {
   const navigate = useNavigate();
@@ -50,10 +49,10 @@ function AddSchedule() {
   return (
     <div className={addschedStyle.center}>
       <div className={addschedStyle.anotherCenter}>
-      
-      <h1>Add Schedule</h1>
-      <form onSubmit={handleSubmit}>
-      
+
+        <h1>Add Schedule</h1>
+        <form onSubmit={handleSubmit}>
+
           <select name="room" value={schedule.room} onChange={handleChange}
             required>
             <option value="" disabled> Select Room  </option>
@@ -61,14 +60,14 @@ function AddSchedule() {
               <option key={room.id} value={room.name}>{room.name}</option>
             ))}
           </select>
-       
-       
+
+
           <input type="text" placeholder="Subject" name="subject" value={schedule.subject} onChange={handleChange} required />
-       
-        
+
+
           <input type="text" placeholder="Section" name="section" value={schedule.section} onChange={handleChange} required />
 
-         
+
           <select name="day" value={schedule.day} onChange={handleChange} required>
             <option value="">Select a day</option>
             <option value="Monday">Monday</option>
@@ -79,21 +78,21 @@ function AddSchedule() {
             <option value="Saturday">Saturday</option>
             <option value="Sunday">Sunday</option>
           </select>
-        <TimePicker
-          changeInTime={(timeString: string) =>
-            setSchedule(prevSchedule => ({ ...prevSchedule, start: timeString }))
-          }
-          changeOutTime={(timeString: string) =>
-            setSchedule(prevSchedule => ({ ...prevSchedule, end: timeString }))
-          }
-          initialInTime={schedule.start}
-          initialOutTime={schedule.end}
-        />
-        <div className={addschedStyle.wow}>
-        <button className={addschedStyle.addBtn} type="submit">Add Schedule</button>
-        <button className={addschedStyle.backBtn} onClick={() => { navigate("/admin/schedule") }}>back to table</button>
-        </div>
-      </form>
+          <TimePicker
+            changeInTime={(timeString: string) =>
+              setSchedule(prevSchedule => ({ ...prevSchedule, start: timeString }))
+            }
+            changeOutTime={(timeString: string) =>
+              setSchedule(prevSchedule => ({ ...prevSchedule, end: timeString }))
+            }
+            initialInTime={schedule.start}
+            initialOutTime={schedule.end}
+          />
+          <div className={addschedStyle.wow}>
+            <button className={addschedStyle.addBtn} type="submit">Add Schedule</button>
+            <button className={addschedStyle.backBtn} onClick={() => { navigate("/admin/schedule") }}>back to table</button>
+          </div>
+        </form>
       </div>
     </div>
   );
