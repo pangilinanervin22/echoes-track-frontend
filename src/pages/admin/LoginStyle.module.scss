@@ -61,39 +61,6 @@
             border-radius: 25px;
             outline: none;
         }
-
-        .inputLogo,
-        .newinputLogo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: absolute;
-            width: 50px;
-            height: 42px;
-            background-color: var(--clr-bglogoColor);
-            border-bottom-left-radius: 25px;
-            border-top-left-radius: 25px;
-            border-right: 2px solid #D97807;
-
-            img {
-                width: 16px;
-            }
-
-            .lockIcon {
-                width: 21px;
-            }
-        }
-
-        .inputLogo {
-            top: 32.5px;
-            left: 20px;
-        }
-
-        .newinputLogo {
-            top: 87px;
-            left: 20px;
-        }
-
         button {
             margin-top: 20px;
             box-shadow: 0px 1px 0px 0px #f0f7fa;
@@ -114,11 +81,59 @@
     }
 }
 
-.person {
+.personone {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative;
     width: 100%;
-    height: 50%;
+
+    .inputLogo{
+        position: absolute;
+        top: 32%;
+        left: 6%;
+        position: absolute;
+        width: 50px;
+        height: 42px;
+        background-color: var(--clr-bglogoColor);
+        border-bottom-left-radius: 25px;
+        border-top-left-radius: 25px;
+        border-right: 2px solid #D97807;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    
+        .persIcon{
+            width: 18px;
+        }
+    }
+}
+
+
+.personN{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+
+.sampleLogo{
+    position: absolute;
+    top: 30%;
+    left: 6%;
+    position: absolute;
+    width: 50px;
+    height: 42px;
+    background-color: var(--clr-bglogoColor);
+    border-bottom-left-radius: 25px;
+    border-top-left-radius: 25px;
+    border-right: 2px solid #D97807;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .lockIcon{
+        width: 22px;
+        }
+    }
 }

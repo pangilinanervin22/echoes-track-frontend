@@ -4,7 +4,6 @@ import TimePicker from "../TimePicker";
 import { Schedule, isScheduleValid, useAddSchedule } from "../useSchedules";
 import { useNavigate } from "react-router-dom";
 import addschedStyle from './AddSchedule.module.scss'
-import { ClassNames } from "@emotion/react";
 
 function AddSchedule() {
   const navigate = useNavigate();
