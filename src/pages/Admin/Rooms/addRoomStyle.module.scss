@@ -61,3 +61,13 @@ input {
     cursor: pointer;
     padding: 10px 25px;
 }
+
+.flex{
+        display: flex;
+        gap: 10px;
+        button{
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: rgb(58, 53, 53);
+        }
+}
