@@ -29,7 +29,7 @@ export default function SearchNavBar() {
 	return (
 		<nav className={style.nav_wrapper}>
 			<ul>
-				<li>logo</li>
+				<li></li>
 				<li className={style.time_wrapper}>
 					<div>
 						<DateIcon /> {formatDate(time)}
