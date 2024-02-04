@@ -33,23 +33,7 @@ export function useGetSchedules() {
   return schedules;
 }
 
-export function useSchedule() {
-  const [status, setStatus] = useState("idle");
 
-  const addSchedule = async (name: string) => {
-    setStatus("loading");
-
-    try {
-      await addDoc(collection(firebaseDB, "schedules"), { name });
-      setStatus("success");
-    } catch (e) {
-      console.log(e);
-      setStatus("error");
-    }
-  };
-
-  return { status, addSchedule };
-}
 
 export function useAddSchedule() {
   const [status, setStatus] = useState("idle");
