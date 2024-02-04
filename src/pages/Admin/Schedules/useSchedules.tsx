@@ -22,7 +22,7 @@ export function useGetSchedules() {
         id: doc.id,
         ...doc.data(),
       }));
-      
+
       setSchedules(data as Schedule[]);
     });
 
@@ -33,23 +33,7 @@ export function useGetSchedules() {
   return schedules;
 }
 
-export function useSchedule() {
-  const [status, setStatus] = useState("idle");
 
-  const addSchedule = async (name: string) => {
-    setStatus("loading");
-
-    try {
-      await addDoc(collection(firebaseDB, "schedules"), { name });
-      setStatus("success");
-    } catch (e) {
-      console.log(e);
-      setStatus("error");
-    }
-  };
-
-  return { status, addSchedule };
-}
 
 export function useAddSchedule() {
   const [status, setStatus] = useState("idle");
@@ -150,23 +134,19 @@ export function isScheduleValid(schedule: Schedule) {
 }
 
 export function useDeleteSchedule() {
-  const [status, setStatus] = useState("idle");
-
   const deleteSchedule = async (id: string) => {
-    setStatus("loading");
-
     try {
       const ref = doc(firebaseDB, "schedules", id);
       await deleteDoc(ref);
 
-      setStatus("success");
+      return { ok: true, message: "Schedule deleted successfully" };
     } catch (e) {
       console.log(e);
-      setStatus("error");
+      return { error: true, message: "Error deleting schedule" };
     }
   };
 
-  return { status, deleteSchedule };
+  return { deleteSchedule };
 }
 
 // non-react hooks
