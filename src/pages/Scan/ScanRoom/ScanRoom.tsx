@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './ScanRoom.module.scss';
-import {
-	useGetRoomByNameRealTime,
-} from '../../Admin/Rooms/useRooms';
+import { useGetRoomByNameRealTime } from '../../Admin/Rooms/useRooms';
 
 import SearchLoading from '../../../Components/Search/SearchLoading/SearchLoading';
 import { Schedule } from '../../Admin/Schedules/useSchedules';
@@ -11,7 +9,11 @@ import { getDay, isWithinInterval, parse } from 'date-fns';
 import ScanStatus from '../../../Components/Scan/ScanStatus/ScanStatus';
 import ScanInfo from '../../../Components/Scan/ScanInfo/ScanInfo';
 import ScanTable from '../../../Components/Scan/ScanTable/ScanTable';
-import { useAddAttendance, useGetUsersWithinRoom } from '../../Admin/Attendance/useAttendance';
+import {
+	useAddAttendance,
+	useGetUsersWithinRoom,
+} from '../../Admin/Attendance/useAttendance';
+import ScanNoSched from '../../../Components/Scan/ScanNoSched/ScanNoSched';
 
 interface ScanInfoProps {
 	course: string;
@@ -28,8 +30,11 @@ interface ScanTableProps {
 
 export default function ScanRoom() {
 	const params = useParams();
-	const { getRoomByName, isLoading, schedules, room } = useGetRoomByNameRealTime();
-	const [currentSchedule, setCurrentSchedule] = useState<Schedule | undefined>();
+	const { getRoomByName, isLoading, schedules, room } =
+		useGetRoomByNameRealTime();
+	const [currentSchedule, setCurrentSchedule] = useState<
+		Schedule | undefined
+	>();
 	const { addAttendance, loading, error } = useAddAttendance();
 	const students = useGetUsersWithinRoom(params?.id || '');
 
@@ -95,12 +100,15 @@ export default function ScanRoom() {
 			// Assuming the Enter key indicates the end of an RFID scan
 			if (event.key === 'Enter' || !currentSchedule) {
 				const rfid = arrString.join('');
-				addAttendance({
-					room: room?.name || '',
-					studentId: arrString.join(''),
-					timeIn: new Date().toLocaleTimeString(),
-					subject: currentSchedule?.subject || '',
-				}, rfid);
+				addAttendance(
+					{
+						room: room?.name || '',
+						studentId: arrString.join(''),
+						timeIn: new Date().toLocaleTimeString(),
+						subject: currentSchedule?.subject || '',
+					},
+					rfid
+				);
 
 				console.log('RFID Scanned:', scannedData, rfid);
 				arrString = [];
@@ -124,21 +132,22 @@ export default function ScanRoom() {
 		console.log('present');
 	} else {
 		console.log('No current schedule');
-		return <div>No current schedule</div>;
+		return <ScanNoSched></ScanNoSched>;
 	}
 
 	return (
 		<main className={styles.wrapper_main}>
 			{/* first column */}
 			<div className={styles.col_wrapper}>
-				<ScanInfo roomInfo={{
-					name: room?.name || '',
-					total_student: students?.length || 0,
-					course: currentSchedule?.subject || 'N/A',
-					section: currentSchedule?.section || 'N/A',
-				}} />
-				<ScanStatus statusCode={loading} message={error
-				} />
+				<ScanInfo
+					roomInfo={{
+						name: room?.name || '',
+						total_student: students?.length || 0,
+						course: currentSchedule?.subject || 'N/A',
+						section: currentSchedule?.section || 'N/A',
+					}}
+				/>
+				<ScanStatus statusCode={loading} message={error} />
 			</div>
 			{/* second column */}
 			<section className={styles.table_wrapper}>
