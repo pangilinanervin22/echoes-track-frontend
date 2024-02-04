@@ -29,15 +29,17 @@
 
 .second {
     display: flex;
+    justify-content: space-between;
     flex-direction: column;
     width: 100%;
+    height: 100%;
     background: inherit;
     border: none;
     border-top: 2px solid #FFC727
 }
 
 .second button {
-    font-size: 1rem;
+    font-size: 1.4rem;
     border: none;
     color: white;
     background-color: transparent;
@@ -46,31 +48,30 @@
     padding: 20px 20px;
 }
 
-.wow {
+.titleContainer{
     display: flex;
     align-items: center;
-    justify-content: center;
-    height: 15%;
-    width: 100%;
+    justify-content: space-evenly;
+    height: 13%;
+    width: 77%;
     border: none;
-}
 
-.wow img {
-    width: 75px;
-    margin-right: 10px;
-}
+    img {
+        width: 90px;
+    }
 
-.wow h1 {
-    color: #FFC727;
-    font-size: 1.4rem;
+    h1 {
+        color: #FFC727;
+        font-size: 1.6  rem;
+    }
 }
-
 .iconCont {
     display: flex;
     align-items: center;
     padding: 10px 40px;
     text-decoration: none;
     transition: 0.3s;
+    
 
     &:hover {
         background-color: #788bea;
@@ -80,8 +81,21 @@
         }
     }
 }
+.iconContt {
+    display: flex;
+    align-items: center;
+    padding: 10px 40px;
+    text-decoration: none;
+    transition: 0.3s;
 
+    &:hover {
+        background-color: red;
 
+        &>button {
+            color: white;
+        }
+    }
+}
 
 .admin_content {
     height: 100%;

@@ -61,7 +61,6 @@
             border-radius: 25px;
             outline: none;
         }
-
         button {
             margin-top: 20px;
             box-shadow: 0px 1px 0px 0px #f0f7fa;
@@ -89,7 +88,7 @@
     position: relative;
     width: 100%;
 
-    .inputLogo {
+    .inputLogo{
         position: absolute;
         top: 32%;
         left: 6%;
@@ -103,38 +102,38 @@
         display: flex;
         align-items: center;
         justify-content: center;
-
-        .persIcon {
+    
+        .persIcon{
             width: 18px;
         }
     }
 }
 
 
-.personN {
+.personN{
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     width: 100%;
 
-    .sampleLogo {
-        position: absolute;
-        top: 30%;
-        left: 6%;
-        position: absolute;
-        width: 50px;
-        height: 42px;
-        background-color: var(--clr-bglogoColor);
-        border-bottom-left-radius: 25px;
-        border-top-left-radius: 25px;
-        border-right: 2px solid #D97807;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+.sampleLogo{
+    position: absolute;
+    top: 30%;
+    left: 6%;
+    position: absolute;
+    width: 50px;
+    height: 42px;
+    background-color: var(--clr-bglogoColor);
+    border-bottom-left-radius: 25px;
+    border-top-left-radius: 25px;
+    border-right: 2px solid #D97807;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-        .lockIcon {
-            width: 22px;
+    .lockIcon{
+        width: 22px;
         }
     }
 }

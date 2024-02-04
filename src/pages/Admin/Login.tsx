@@ -31,18 +31,19 @@ function Login() {
                 <h1 className={loginStyle.h1margin}>Admin</h1>
                 <form onSubmit={handleSubmit}>
 
-                    <div className={loginStyle.person}>
-
+                    <div className={loginStyle.personone}>
                         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required />
                         <div className={loginStyle.inputLogo}>
-                            <img src={personIcon} alt="" />
+                            <img src={personIcon} alt="" className={loginStyle.persIcon}/>
                         </div>
-
+                    </div>
+                    <div className={loginStyle.personN}>
                         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required />
-                        <div className={loginStyle.newinputLogo}>
+                        <div className={loginStyle.sampleLogo}>
                             <img src={lockIcon} alt="" className={loginStyle.lockIcon} />
                         </div>
                     </div>
+
                     <button type="submit">Login</button>
                 </form>
             </section>
