@@ -178,7 +178,6 @@ export function useGetRoomByNameRealTime() {
   // Call getRoomByName whenever roomName changes
   useEffect(() => {
     const unsubscribe = getRoomByName(room?.name || '');
-    console.log('useEffect', room?.name);
     return unsubscribe;
   }, [room?.name]);
 

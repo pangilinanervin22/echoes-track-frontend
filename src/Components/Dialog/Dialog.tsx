@@ -18,7 +18,7 @@ export default function Dialog({ onClose, onOk, children, buttonConfirm: buttonC
     const showDialog = params as string;
     const navigate = useNavigate();
 
-    console.log(params, url, 'showDialog');
+
 
     useEffect(() => {
         if (showDialog === 'y')
