@@ -23,6 +23,10 @@
 		color: var(--clr-primary);
 
 		* {
+			font-size: var(--fs-xxl);
+		}
+
+		p {
 			font-size: var(--fs-xl);
 		}
 	}
@@ -32,6 +36,11 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
+
+	aspect-ratio: 1/1;
+	padding: 50px;
+	border-radius: 50%;
+	border: 5px solid var(--clr-primary);
 }
 
 .no {

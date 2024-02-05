@@ -9,10 +9,7 @@ export default function Entrance() {
 					<p className={style.no}>21</p>
 					<Icon icon="mdi:account" />
 				</div>
-			</section>
-
-			<section className={style.students_wrapper}>
-				About lagay ng magic text
+				<p>Please insert your RFID Card</p>
 			</section>
 		</main>
 	);
