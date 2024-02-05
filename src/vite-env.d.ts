@@ -11,6 +11,7 @@ interface ImportMetaEnv {
     VITE_APP_ID: string;
     VITE_MEASUREMENT_ID: string;
     VITE_PROFILE_IMAGE: string;
+    VITE_RFID_ADMIN: string;
     // more env variables...
 }
 

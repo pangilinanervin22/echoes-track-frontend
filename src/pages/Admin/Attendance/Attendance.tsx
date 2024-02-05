@@ -6,11 +6,7 @@ import { User } from "../Users/useUsers";
 import { toast } from "react-toastify";
 import { useDeleteAttendance, useGetAttendance } from "./useAttendance";
 import style from "./attendance.module.scss";
-import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
-import { format } from "date-fns";
 
-const doc = new jsPDF();
 
 const content: TableStructure = {
     id: "id",

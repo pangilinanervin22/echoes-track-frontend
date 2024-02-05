@@ -51,6 +51,7 @@ export default function ScanRoom() {
 		return () => clearInterval(intervalId);
 	}, [schedules]);
 
+	// eslint-disable-next-line prefer-const
 	let arrString: string[] = [];
 	// RFID Scanner
 	useEffect(() => {
@@ -59,12 +60,17 @@ export default function ScanRoom() {
 			const scannedData: string = event.key;
 
 			if (scannedData !== 'Enter') {
-				arrString.push(scannedData);
+				arrString[arrString.length] = scannedData;
+
 			}
 
 			// Assuming the Enter key indicates the end of an RFID scan
 			if (event.key === 'Enter' || !currentSchedule) {
 				const rfid = arrString.join('');
+
+				if (rfid === import.meta.env.VITE_RFID_ADMIN)
+					return window.location.href = "/";
+
 				addAttendance(
 					{
 						room: room?.name || '',
@@ -75,9 +81,7 @@ export default function ScanRoom() {
 					rfid
 				);
 
-				console.log('RFID Scanned:', scannedData, rfid);
 				// eslint-disable-next-line react-hooks/exhaustive-deps
-				arrString = [];
 			}
 		};
 
@@ -96,7 +100,6 @@ export default function ScanRoom() {
 		return <ScanNoSched message={`Room ${params.id} does not exist`} />
 	}
 	else if (!currentSchedule) {
-		console.log('No current schedule');
 		return <ScanNoSched message={"There are no schedules for this room"} />
 	}
 

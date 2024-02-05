@@ -97,6 +97,7 @@ export function useAddAttendance() {
             if (studentSnapshot.empty) {
                 setLoading(3);
                 setError("Rfid not found");
+                return { error: true, message: "Rfid not found" };
             }
 
             //update student data
@@ -111,13 +112,12 @@ export function useAddAttendance() {
             if (userData.room === data.room) {
                 setLoading(3);
                 setError("Already in the room");
-                return;
+                return { error: true, message: "Already in the room" };
             } else {
                 await updateDoc(currentStudent, { room: data.room });
-
                 if ("student" !== userData.role) {
                     setLoading(2);
-                    return;
+                    return { ok: true, message: "User entered successfully" };
                 }
             }
 
@@ -132,6 +132,7 @@ export function useAddAttendance() {
             // add attendance
             await addDoc(collection(firebaseDB, "attendances"), { ...studentData });
             setLoading(2);
+            return { ok: true, message: "User entered successfully" };
 
         } catch (e) {
             setLoading(3);
@@ -169,6 +170,71 @@ export function useGetUsersWithinRoom(room: string) {
     }, [room]);
 
     return users;
+}
+
+export function useUpdateUserRoomByRFID() {
+    const updateUserRoom = async (rfid: string, newRoom: string) => {
+        try {
+            const q = query(collection(firebaseDB, "users"), where("rfid", "==", rfid));
+            const querySnapshot = await getDocs(q);
+
+            if (querySnapshot.empty) {
+                return { ok: false, message: "User not found" };
+            }
+
+            const userDoc = querySnapshot.docs[0];
+            const userRef = doc(firebaseDB, "users", userDoc.id);
+
+            //validate users if not already in a room
+            const userData = userDoc.data() as User;
+            if (userData.room === newRoom) {
+                return { error: true, message: "User already in the room" };
+            } else if (userData.room === "" && newRoom === "exit") {
+                return { error: true, message: "User not in the room" };
+            }
+
+            if (newRoom === "exit") {
+                await updateDoc(userRef, { room: "" });
+                return { ok: true, message: "User exited successfully" };
+            }
+
+            await updateDoc(userRef, { room: newRoom });
+            return { ok: true, message: "User entered successfully" };
+        } catch (e) {
+            console.log(e);
+            return { ok: false, message: "Failed to update user room" };
+        }
+    };
+
+    return { updateUserRoom };
+}
+
+// non-react hooks
+
+export function useGetAllUsersWithRoom() {
+    const [users, setUsers] = useState<User[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const q = query(collection(firebaseDB, "users"));
+
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const updatedUsers: User[] = [];
+
+            querySnapshot.forEach((doc) => {
+                if (doc.data().room)
+                    updatedUsers.push({ id: doc.id, ...doc.data() } as User);
+            });
+
+            setUsers(updatedUsers);
+            setLoading(false);
+        });
+
+        // Return the unsubscribe function to stop listening to changes
+        return () => unsubscribe();
+    }, []);
+
+    return { users, loading };
 }
 
 // non-react hooks
