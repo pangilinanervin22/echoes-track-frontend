@@ -8,6 +8,11 @@ import PaginateTable from "./PaginateTable";
 import paginate from "./utils/paginate";
 import sortPath from "./utils/sortPath";
 import styles from "./Table.module.scss";
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import { Icon } from '@iconify/react/dist/iconify.js';
+
+const doc = new jsPDF();
 
 export interface TableStructure {
     id: string
@@ -86,6 +91,22 @@ export default function MainTable({
 
     return (
         <section className={styles.container_table}>
+            {/*  */}
+            <div className={styles.printContainer}>
+
+                <button className={styles.printButton}
+                    onClick={() => {
+                        autoTable(doc, {
+                            head: [structure.structure.map((item: any) => item.label)],
+                            body: sortedData.map(item => [
+                                ...structure.structure.map((cur: any) => item[cur.path])
+                            ])
+                        });
+
+                        doc.save('attendance_report.pdf');
+                    }}><Icon icon="material-symbols:print" />Print</button>
+            </div>
+            {/*  */}
             <ToolTable
                 searchValue={searchQuery}
                 changeText={onChangeSearchQuery}

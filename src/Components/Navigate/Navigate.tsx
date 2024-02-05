@@ -20,6 +20,7 @@ export default function Navigate() {
 					<ul>
 						<li onClick={() => handleClick("admin")}>
 							<Icon icon="ri:admin-line" />
+
 							<Link to="/admin">Admin</Link>
 						</li>
 						<li onClick={() => handleClick("room")}>

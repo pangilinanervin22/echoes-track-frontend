@@ -2,6 +2,25 @@
     font-family: var(--ff-regular);
 }
 
+.printContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+
+    button {
+        padding: 5px 15px;
+        gap: 7px;
+        display: flex;
+        align-items: center;
+        background-color: #163aeb;
+        border: none;
+        color: white;
+        border-radius: 5px;
+        font-size: 18px;
+    }
+}
+
 .container_table {
     table {
         display: flex;

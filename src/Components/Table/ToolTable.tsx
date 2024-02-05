@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 "use client"
 
 import styles from './Table.module.scss'

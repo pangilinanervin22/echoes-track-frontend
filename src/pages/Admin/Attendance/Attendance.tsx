@@ -4,8 +4,13 @@ import Dialog from "../../../Components/Dialog/Dialog";
 import { useNavigate } from "react-router-dom";
 import { User } from "../Users/useUsers";
 import { toast } from "react-toastify";
-import { Attendance, useDeleteAttendance, useGetAttendance } from "./useAttendance";
+import { useDeleteAttendance, useGetAttendance } from "./useAttendance";
 import style from "./attendance.module.scss";
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import { format } from "date-fns";
+
+const doc = new jsPDF();
 
 const content: TableStructure = {
     id: "id",
@@ -60,22 +65,6 @@ export default function Schedule() {
                 </div>
             </Dialog>
             <div className={style.centered}>
-                <div className={style.printContainer}>
-                    <button className={style.printButton}
-                        onClick={() => {
-                            autoTable(doc, {
-                                head: [['Name', "Section", 'Date', 'Subject']],
-                                body: attendance.map(item => [
-                                    item.name,
-                                    item.section,
-                                    format(item.date, 'yyyy-MM-dd'),
-                                    item.subject
-                                ])
-                            });
-
-                            doc.save('attendance_report.pdf');
-                        }}>Print</button>
-                </div>
                 <MainTable
                     data={attendance}
                     isEditable={true}
@@ -102,10 +91,4 @@ export default function Schedule() {
     //     navigate(`/admin/user/${data.id}`);
     // }
 }
-
-import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
-import { format } from "date-fns";
-
-const doc = new jsPDF();
 
