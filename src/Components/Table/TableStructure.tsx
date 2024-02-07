@@ -66,6 +66,7 @@ export default function MainTable({
     });
 
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     let sortedData = [...data];
 
 
@@ -98,7 +99,7 @@ export default function MainTable({
                     onClick={() => {
                         autoTable(doc, {
                             head: [structure.structure.map((item: any) => item.label)],
-                            body: sortedData.map(item => [
+                            body: data.map(item => [
                                 ...structure.structure.map((cur: any) => item[cur.path])
                             ])
                         });

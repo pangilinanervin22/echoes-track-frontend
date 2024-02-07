@@ -77,6 +77,7 @@ export default function ScanRoom() {
 						studentId: arrString.join(''),
 						date: Timestamp.now(),
 						subject: currentSchedule?.subject || '',
+						section: currentSchedule?.section || '',
 					},
 					rfid
 				);

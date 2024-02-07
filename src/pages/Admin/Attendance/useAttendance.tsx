@@ -10,6 +10,7 @@ export interface Attendance {
     room: string;
     subject: string;
     date: Timestamp;
+    section: string;
     id?: string;
     student_ref?: DocumentReference;
     student_rfid?: string;
@@ -113,20 +114,25 @@ export function useAddAttendance() {
                 setLoading(3);
                 setError("Already in the room");
                 return { error: true, message: "Already in the room" };
-            } else {
+            } else if (userData.section !== data.section && "student" === userData.role) {
+                setLoading(3);
+                setError("Wrong section");
+                return { error: true, message: "Wrong section" };
+            }
+            else {
                 await updateDoc(currentStudent, { room: data.room });
                 if ("student" !== userData.role) {
                     setLoading(2);
                     return { ok: true, message: "User entered successfully" };
                 }
             }
-
+            // validate user if not same section
             const studentData = {
                 student_ref: userDoc.ref,
                 section: userData.section,
                 subject: data.subject,
                 room: data.room,
-                date: data.date,
+                date: data.date
             };
 
             // add attendance

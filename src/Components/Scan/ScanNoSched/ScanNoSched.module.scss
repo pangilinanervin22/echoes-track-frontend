@@ -26,6 +26,7 @@
 	from {
 		opacity: 0;
 	}
+
 	to {
 		opacity: 1;
 	}
@@ -35,7 +36,17 @@
 	from {
 		transform: translateY(10px);
 	}
+
 	to {
 		transform: translateY(0px);
 	}
+}
+
+.button {
+	color: white;
+	background: dodgerblue;
+	padding: 12px 24px;
+	border: none;
+	border-radius: 16px;
+	margin-top: 16px;
 }
