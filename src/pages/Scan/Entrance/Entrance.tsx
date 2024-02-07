@@ -2,7 +2,7 @@ import { toast } from 'react-toastify';
 import { useGetAllUsersWithRoom, useUpdateUserRoomByRFID } from '../../Admin/Attendance/useAttendance';
 import style from './Entrance.module.scss';
 import { Icon } from '@iconify/react/dist/iconify.js';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 export default function Entrance() {
 	const { users } = useGetAllUsersWithRoom();

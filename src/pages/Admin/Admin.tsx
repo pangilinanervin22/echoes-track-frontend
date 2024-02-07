@@ -1,6 +1,6 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { firebaseAuth, firebaseDB } from "../../config/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import Login from "./Login";
@@ -10,8 +10,7 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 
 export default function Admin() {
     const location = useLocation();
-    console.log(location.pathname, location);
-
+    const navigate = useNavigate();
     const [isAuthorized, setIsAuthorized] = useState(false);
 
     useEffect(() => {
@@ -32,16 +31,13 @@ export default function Admin() {
         <main className={style.admin_container}>
             {isAuthorized &&
                 <nav className={style.admin_nav}>
-                    <div className={style.titleContainer}>
+                    <div className={style.titleContainer} onClick={() => navigate("/")}>
+
                         <img src={cvsulogo} alt="" />
                         <h1>Echoes Tracker</h1>
                     </div>
                     <div className={style.second}>
                         <div>
-                            {/* <Link to="/admin/dashboard" className={`${style.iconCont} ${location.pathname.startsWith("/admin/dashboard") ? style.active : ''}`}>
-                            <Icon icon="material-symbols:dashboard" color="white" width="35px" margin-top="70px" display="flex" align-items="center" justify-content="center" />
-                            <button>Dashboard</button>
-                            </Link> */}
                             <Link to="/admin/schedule" className={`${style.iconCont} ${location.pathname.startsWith("/admin/schedule") ? style.active : ''}`}>
                                 <Icon icon="ant-design:schedule-filled" color="white" width="35px" margin-top="70px" display="flex" align-items="center" justify-content="center" />
                                 <button>Schedules</button>
