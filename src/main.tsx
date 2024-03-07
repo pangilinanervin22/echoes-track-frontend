@@ -31,6 +31,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import Entrance from './pages/Scan/Entrance/Entrance';
 import Exit from './pages/Scan/Entrance/Exit';
+import Account from './pages/Admin/Account/Account';
+import AddAccount from './pages/Admin/Account/AddAccount/AddAccount';
+import EditAccount from './pages/Admin/Account/EditAccount/EditAccount';
 
 const router = createBrowserRouter([
 	{
@@ -90,6 +93,14 @@ const router = createBrowserRouter([
 						children: [
 							{ path: 'add', element: <AddUser /> },
 							{ path: ':id', element: <EditUser /> },
+						],
+					},
+					{
+						path: 'account',
+						element: <Account />,
+						children: [
+							{ path: 'add', element: <AddAccount /> },
+							{ path: ':id', element: <EditAccount /> },
 						],
 					},
 				],

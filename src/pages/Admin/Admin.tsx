@@ -54,10 +54,14 @@ export default function Admin() {
                                 <Icon icon="icon-park-solid:notes" color="white" width="35px" margin-top="70px" display="flex" align-items="center" justify-content="center" />
                                 <button>Attendance</button>
                             </Link>
+                            <Link to="/admin/account" className={`${style.iconCont} ${location.pathname.startsWith("/admin/account") ? style.active : ''}`}>
+                                <Icon icon="eos-icons:admin" color="white" width="35px" margin-top="70px" display="flex" align-items="center" justify-content="center" />
+                                <button>Accounts</button>
+                            </Link>
                         </div>
-                        <div className="bttm">
+                        <div>
                             <div className={style.iconContt}>
-                                <Icon icon="material-symbols:logout" color="white" width="25px" margin-top="70px" display="flex" align-items="center" justify-content="center" />
+                                <Icon icon="material-symbols:logout" color="white" width="30px" margin-top="70px" display="flex" align-items="center" justify-content="center" />
                                 <button onClick={() => firebaseAuth.signOut()}>Logout</button>
                             </div>
                         </div>

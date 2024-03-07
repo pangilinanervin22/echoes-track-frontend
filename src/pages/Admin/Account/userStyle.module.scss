@@ -1,0 +1,26 @@
+* {
+    font-family: var(--ff-regular);
+}
+
+h1 {
+    font-family: var(--ff-bold);
+    color: var(--color-primary);
+}
+
+p {
+    font-size: var(--fs-sm);
+}
+
+.centered {
+    width: 90%;
+    padding: 50px;
+    background-color: white;
+    border-radius: 25px;
+}
+
+.mainContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 32px;
+}
