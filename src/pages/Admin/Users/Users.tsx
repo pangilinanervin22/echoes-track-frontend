@@ -28,7 +28,6 @@ export default function Users() {
     const { deleteUser } = useDeleteUser();
     const path = useLocation();
     const [currentDeleteId, setCurrentDeleteId] = useState("");
-    const [currentDeleteImage, setCurrentDeleteImage] = useState("");
 
     if (loading) {
         return <div>Loading...</div>;
@@ -38,7 +37,7 @@ export default function Users() {
         <div className={userStyle.mainContainer}>
             <Dialog onClose={() => { }} onOk={async () => {
                 const loading = toast("Deleting user...");
-                const res = await deleteUser(currentDeleteId, currentDeleteImage);
+                const res = await deleteUser(currentDeleteId);
 
                 if (res.ok)
                     toast.update(loading, { type: "success", render: res.message });
@@ -69,7 +68,6 @@ export default function Users() {
 
     function onHandleDelete(data: User) {
         setCurrentDeleteId(data.id || "");
-        setCurrentDeleteImage(data.image || "");
         navigate("/admin/user?showDialog=y");
     }
 

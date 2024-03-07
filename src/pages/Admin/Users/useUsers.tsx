@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { addDoc, collection, deleteDoc, doc, onSnapshot, updateDoc, DocumentReference, where, getDocs, query, writeBatch } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, onSnapshot, updateDoc, DocumentReference, where, getDocs, query, writeBatch, getDoc } from 'firebase/firestore';
 import { firebaseDB } from '../../../config/firebase';
 import { deleteObject, getStorage, ref } from 'firebase/storage';
 
@@ -8,9 +8,11 @@ export interface User {
     name: string;
     rfid: string;
     role: string;
-    section: string;
+    section?: string;
     room?: string;
     image?: string;
+    email?: string;
+    auth_id?: string;
     room_ref?: DocumentReference;
 }
 
@@ -55,6 +57,7 @@ export function useAddUser() {
 
 export function useUpdateUser() {
     const updateUser = async (data: User, rfid: string) => {
+        console.log(data);
 
         if (!data || !data.id) {
             console.error('User or user ID is undefined');
@@ -107,15 +110,17 @@ export function useGetUser(id: string) {
 }
 
 export function useDeleteUser() {
-    const deleteUser = async (id: string, imageUrl: string) => {
+    const deleteUser = async (id: string) => {
 
         try {
             const userRef = doc(firebaseDB, "users", id);
             await deleteDoc(userRef);
             const storage = getStorage();
-            if (imageUrl !== import.meta.env.VITE_PROFILE_IMAGE) {
+            const userSnapshot = await getDoc(userRef);
+            const imageUrl = userSnapshot.data()?.image;
+
+            if (imageUrl && imageUrl !== import.meta.env.VITE_PROFILE_IMAGE) {
                 const deleteImageRef = ref(storage, imageUrl);
-                // Check if the file exists
                 await deleteObject(deleteImageRef);
             }
 
