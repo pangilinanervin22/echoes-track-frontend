@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { firebaseAuth, firebaseDB } from "../../../config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { User, rfidAlreadyExist, useDeleteUser } from "../Users/useUsers";
-
 export interface Account {
     id?: string;
     auth_id?: string;
@@ -20,20 +19,20 @@ export function useGetAccounts() {
 
     useEffect(() => {
         const unsubscribe = onSnapshot(collection(firebaseDB, "accounts"), (snapshot) => {
-            const unsubscribes = snapshot.docs.map((doc) => {
-                const accountData = doc.data() as Account;
+            const unsubscribes = snapshot.docs.map((accountDoc) => {
+                const accountData = accountDoc.data() as Account;
 
                 // Listen for changes to user data
                 if (accountData.user_ref) {
                     return onSnapshot(accountData.user_ref, (userDoc: DocumentSnapshot<DocumentData>) => {
                         if (userDoc.exists()) {
-                            const userData: any = userDoc.data() as User;
-                            console.log(userData);
+                            const userData = userDoc.data() as User;
 
                             setAccounts((prevAccounts) => {
                                 const newAccount = {
                                     ...accountData,
-                                    id: doc.id,
+                                    ...userData,
+                                    id: accountDoc.id,
                                     email: accountData.email,
                                     name: userData.name,
                                     role: userData.role,
@@ -77,7 +76,7 @@ export function useGetAccounts() {
 }
 
 export function useAddAccount() {
-    const addUser = async (data: User, email: string, password: string) => {
+    const addAccount = async (data: User, email: string, password: string) => {
 
         try {
             const check = await rfidAlreadyExist(data.rfid);
@@ -87,10 +86,8 @@ export function useAddAccount() {
             const userCreate = await addDoc(collection(firebaseDB, "users"), data);
             await addDoc(collection(firebaseDB, "accounts"), {
                 auth_id: authCreate.user.uid,
-                user_ref: userCreate.id ? userCreate.id : null,
+                user_ref: userCreate,
                 email: email,
-                role: data.role,
-                name: data.name,
             });
 
             return { ok: true, message: data.name + " added successfully" };
@@ -100,7 +97,7 @@ export function useAddAccount() {
         }
     };
 
-    return { addUser };
+    return { addAccount };
 }
 
 export function useUpdateAccount() {
@@ -111,13 +108,24 @@ export function useUpdateAccount() {
         }
 
         try {
-            const userRef = doc(firebaseDB, 'users', data.id);
+            const accountRef = doc(firebaseDB, 'accounts', data.id);
+            await updateDoc(accountRef, {
+                name: data.name,
+                role: data.role,
+                rfid: data.rfid,
+                image: data.image ? data.image : import.meta.env.VITE_PROFILE_IMAGE,
+            });
+
+            //find user accountRef  by  and update
+            const resAccount = (await getDoc(accountRef)).data() as Account;
+            const userRef = resAccount.user_ref!;
             await updateDoc(userRef, {
                 name: data.name,
                 role: data.role,
                 rfid: data.rfid,
                 image: data.image ? data.image : import.meta.env.VITE_PROFILE_IMAGE,
             });
+
 
             return { ok: true, message: data.name + " updated successfully" };
         } catch (e) {
@@ -129,16 +137,15 @@ export function useUpdateAccount() {
     return { updateUser: updateAccount };
 }
 
-
 export function useDeleteAccount() {
     const { deleteUser } = useDeleteUser();
     const deleteAccount = async (id: string) => {
         try {
+
             const resAccount = await getDoc(doc(firebaseDB, "accounts", id));
             const dataAccount: Account = resAccount.data() as Account;
-            if (dataAccount === undefined) return { error: true, message: "User not found" };
+            if (dataAccount === undefined) return { error: true, message: "Account not found" };
 
-            // get user from account user_ref
             const resUser = await getDoc(dataAccount.user_ref!);
             const dataUser: User = resUser.data() as User;
             if (dataUser === undefined) return { error: true, message: "User not found" };

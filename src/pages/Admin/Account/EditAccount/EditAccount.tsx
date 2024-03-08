@@ -1,15 +1,16 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { User, useGetUser, useUpdateUser } from "../../Users/useUsers";
+import { User } from "../../Users/useUsers";
 import style from "./edituserStyle.module.scss"
 import { toast } from "react-toastify";
 import { deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
+import { useGetAccount, useUpdateAccount } from "../useAccount";
 
 export default function EditAccount() {
     const params = useParams();
     const navigate = useNavigate();
-    const { user, loading } = useGetUser(params.id || "");
-    const { updateUser } = useUpdateUser();
+    const { account, loading } = useGetAccount(params.id || "");
+    const { updateUser } = useUpdateAccount();
     const [name, setName] = useState("");
     const [role, setRole] = useState("");
     const [rfid, setRfid] = useState("");
@@ -18,23 +19,32 @@ export default function EditAccount() {
     const [imageUrl, setImageUrl] = useState<string>(import.meta.env.VITE_PROFILE_IMAGE);
     const [deleteImageUrl, setDeleteImageUrl] = useState<string>("");
     const [oldRfid, setOldRfid] = useState("");
+    const [email, setEmail] = useState("");
 
     useEffect(() => {
-        if (user) {
-            setName(user.name);
-            setRole(user.role);
-            setRfid(user.rfid);
-            setOldRfid(user.rfid);
-            setImageUrl(user.image || import.meta.env.VITE_PROFILE_IMAGE);
-            setSection(user.section || "");
-            setDeleteImageUrl(user.image || "");
+        if (account) {
+            setEmail(account.email);
+            setName(account.name);
+            setRole(account.role);
+            setRfid(account.rfid);
+            setOldRfid(account.rfid);
+            setImageUrl(account.image || import.meta.env.VITE_PROFILE_IMAGE);
+            setSection(account.section || "");
+            setDeleteImageUrl(account.image || "");
         }
-    }, [user, setName, setRole, setRfid]);
+    }, [account, setName, setRole, setRfid]);
 
     if (loading) {
         return <div>Loading...</div>;
-    } else if (!user) {
-        return <div>User not found</div>;
+    } else if (!account || ["student", "admin"].includes(account.role) === null) {
+        return (
+            <div>
+                <h1>User not found</h1>
+                <button onClick={() => { navigate("/admin/account"); }}>
+                    Back to table
+                </button>
+            </div>
+        );
     }
 
     const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -120,7 +130,7 @@ export default function EditAccount() {
                 room: "",
             };
 
-            const res = await updateUser({ ...user as User, ...newUser }, oldRfid);
+            const res = await updateUser({ ...newUser as User, ...newUser });
             if (res.error) {
                 toast.update(toastForm, {
                     render: res.message,
@@ -146,9 +156,9 @@ export default function EditAccount() {
                 isLoading: false,
                 autoClose: 2000,
             });
-            navigate("/admin/user");
+            navigate("/admin/account");
         } else {
-            const res = await updateUser({ ...user as User, ...newUser }, oldRfid);
+            const res = await updateUser({ ...newUser as User, ...newUser });
             toast.update(toastForm, {
                 render: res.message,
                 type: res.error ? "error" : "success",
@@ -157,7 +167,7 @@ export default function EditAccount() {
             });
 
             if (res.ok)
-                navigate("/admin/user");
+                navigate("/admin/account");
         }
     };
 
@@ -183,6 +193,11 @@ export default function EditAccount() {
                 </div>
                 <div className={style.input_information}>
                     <div>
+                        <label htmlFor="email">Email:</label>
+                        <input id="email" name="email" type="text" defaultValue={email} disabled
+                        />
+                    </div>
+                    <div>
                         <label htmlFor="name">Name:</label>
                         <input id="name" name="name" type="text" defaultValue={name} required
                             onChange={(e) => setName(e.target.value)}
@@ -201,24 +216,12 @@ export default function EditAccount() {
                             onChange={(e) => setRole(e.target.value)}
                             defaultValue={role}
                             required >
-                            <option value="student">Student</option>
                             <option value="teacher">Teacher</option>
-                            <option value="visitor">Visitor</option>
-                            <option value="employee">Employee</option>
+                            <option value="admin">Admin</option>
                         </select>
                     </div>
-                    {role === "student" &&
-                        <div>
-                            <label htmlFor="section">Section</label>
-                            <input id="section" name="section" type="string"
-                                value={section}
-                                onChange={(e) => setSection(e.target.value)}
-                                required
-                            />
-                        </div>
-                    }
                     <div className={style.submit}>
-                        <button onClick={() => navigate("/admin/user")}>Cancel</button>
+                        <button onClick={() => navigate("/admin/account")}>Cancel</button>
                         <button type="submit" >Update User</button>
                     </div>
                 </div>

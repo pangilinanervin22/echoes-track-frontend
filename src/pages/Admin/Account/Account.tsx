@@ -28,7 +28,6 @@ export default function Users() {
     const { accounts, loading } = useGetAccounts();
     const { deleteAccount } = useDeleteAccount();
     const path = useLocation();
-    const [currentDeleteId, setCurrentDeleteId] = useState("");
 
     if (loading) {
         return <div>Loading...</div>;
@@ -36,42 +35,21 @@ export default function Users() {
 
     return (
         <div className={userStyle.mainContainer}>
-            <Dialog onClose={() => { }} onOk={async () => {
-                const loading = toast("Deleting user...");
-                const res = await deleteAccount(currentDeleteId);
-                console.log(currentDeleteId);
-
-                if (res.ok)
-                    toast.update(loading, { type: "success", render: res.message });
-                else if (res.error)
-                    toast.update(loading, { type: "error", render: res.message });
-                else
-                    toast.update(loading, { type: "error", render: "Something went wrong!" });
-            }}>
-                <div>
-                    <h4>Are you sure want to delete?</h4>
-                    <p>This user will delete. You cannot undo this action.</p>
-                </div>
-            </Dialog>
             <div className={userStyle.centered}>
-                {path.pathname.endsWith("/admin/account") ? <MainTable
-                    data={accounts}
-                    isEditable={true}
-                    structure={content}
-                    handleUpdate={onHandleUpdate}
-                    handleDelete={onHandleDelete}
-                    handleAdd={onHandleAdd}
-                /> :
+                {path.pathname.endsWith("/admin/account") ?
+                    <MainTable
+                        data={accounts}
+                        isEditable={true}
+                        structure={content}
+                        handleUpdate={onHandleUpdate}
+                        handleAdd={onHandleAdd}
+                    /> :
                     <Outlet />
                 }
             </div>
         </div>
     );
 
-    function onHandleDelete(data: Account) {
-        setCurrentDeleteId(data.id || "");
-        navigate("/admin/account?showDialog=y");
-    }
 
     function onHandleAdd() {
         navigate("/admin/account/add");

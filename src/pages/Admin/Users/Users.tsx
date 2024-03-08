@@ -12,12 +12,12 @@ const content: TableStructure = {
     searchPath: "name",
     structure: [
         {
-            label: "", width: "120px", fontSize: "16px", element: (data: User) => {
-                return <img src={data.image} alt="user" style={{ width: "60px", height: "60px", borderRadius: "50%" }} />
+            label: "", width: "100px", fontSize: "16px", element: (data: User) => {
+                return <img src={data.image} alt="user" style={{ width: "56px", height: "56px", borderRadius: "50%" }} />
             }
         },
         { label: "Rfid", path: "rfid", width: "100px", fontSize: "16px" },
-        { label: "Name ", path: "name", width: "200px", fontSize: "16px" },
+        { label: "Name ", path: "name", width: "240px", fontSize: "16px" },
         { label: "Role", path: "role", width: "100px", fontSize: "16px" },
     ]
 };
