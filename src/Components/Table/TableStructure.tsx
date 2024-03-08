@@ -122,8 +122,8 @@ export default function MainTable({
                 tableProps={structure}
                 sortColumn={sortColumn}
                 handleSortColumn={onHandleSortColumn}
-                deleteColumn={onDelete}
-                updateColumn={handleUpdate}
+                deleteColumn={handleDelete ? onDelete : undefined}
+                updateColumn={handleUpdate ? handleUpdate : undefined}
             />
             {/* <select value={page.size} onChange={(e) => onHanldePageChange(e.target.value)}>
                 <option value={5}>5</option>
