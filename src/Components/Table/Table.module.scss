@@ -22,6 +22,7 @@
 }
 
 .container_table {
+
     table {
         display: flex;
         flex-direction: column;
@@ -62,8 +63,6 @@
         }
 
         tbody {
-            width: 100%;
-            margin-top: 8px;
 
             tr {
                 display: flex;
