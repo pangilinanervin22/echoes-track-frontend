@@ -34,7 +34,14 @@ export default function EditUser() {
     if (loading) {
         return <div>Loading...</div>;
     } else if (!user) {
-        return <div>User not found</div>;
+        return (
+            <div>
+                <h1>User not found</h1>
+                <button onClick={() => { navigate("/admin/user"); }}>
+                    Back to table
+                </button>
+            </div>
+        );
     }
 
     const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
